@@ -1,0 +1,163 @@
+{% block content %}
+
+<div class="container-fluid">
+<form action="{{ base_url }}index.php/accounting/debit_note/save" method="post" name="form1">
+<div class="row">    
+    <div class="col-xs-12 col-md-8">
+        <div class="form-group col-xs-12">
+                <label for="kode_vendor" class="col-xs-2 control-label">Branch</label>
+                <div class="col-xs-7">
+                    <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>                
+        </div>
+        
+        <div class="form-group col-xs-12">
+            <label for="dn_number" class="col-xs-2 control-label">DN Number</label>
+            <div class="col-md-4">    
+                <input class="form-control" id="dn_no" name="dn_number" type="text" value="{{ edit.dn_no }}" required/>                
+            </div>   
+            <div class="col-md-2">
+                <label>Transac No</label>
+            </div>
+            <div class="col-md-3">    
+                <input class="form-control" id="dn_no" name="dn_no" type="text" value="{{ edit.dn_no }}" required/>                
+            </div>
+        </div>
+        
+        <div class="form-group col-xs-12">
+                <label for="tanggal_transaksi" class="col-xs-2 control-label">Date</label>
+                <div class="col-xs-4">
+                    <div class="input-group date" id="datetimepicker">
+                        <input type="text" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi" value="{{ edit.tanggal_transaksi}}" placeholder="YYYY-MM-DD">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>    
+                </div>
+        </div>
+        
+        <div class="form-group col-xs-12">
+                <label for="kode_vendor" class="col-xs-2 control-label">DN Type</label>
+                <div class="col-xs-7">
+                    <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>                
+        </div>
+        
+        <div class="form-group col-xs-12">
+                <label for="kode_vendor" class="col-xs-2 control-label">Dept</label>
+                <div class="col-xs-7">
+                    <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>                
+        </div>
+        
+        
+        <div class="form-group col-xs-12">
+                <label for="kode_vendor" class="col-xs-2 control-label">Supplier</label>
+                <div class="col-xs-7">
+                    <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>                
+        </div>
+        
+        
+    </div> 
+    
+    <div class="col-lg-4">
+        <div class="form-group col-md-12">
+            <div class="col-md-6">
+                <label>Used SAP Amt</label>
+            </div>
+            <div class="col-md-6">    
+                <input class="form-control" id="used_sap_amt" name="used_sap_amt" type="text" value="{{ edit.used_sap_amt }}" required/>                
+            </div>     
+        </div>
+        <div class="form-group col-md-12">
+            <div class="col-md-6">
+                <label>Used Amt</label>
+            </div>
+            <div class="col-md-6">    
+                <input class="form-control" id="used_amount" name="used_amount" type="text" value="{{ edit.used_amount }}" required/>                
+            </div>     
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="form-group col-md-12">
+            <div class="col-md-6">
+                <label>Ccy</label>
+            </div>
+            <div class="col-md-6">    
+                <input class="form-control" id="ccy" name="ccy" type="text" value="{{ edit.ccy }}" required/>                
+            </div>     
+        </div>
+        <div class="form-group col-md-12">
+            <div class="col-md-6">
+                <label>Balance</label>
+            </div>
+            <div class="col-md-6">    
+                <input class="form-control" id="balance" name="balance" type="text" value="{{ edit.balance }}" required/>                
+            </div>     
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<div class="row">    
+    <div class="col-lg-12">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover table-striped">
+              <thead>
+                  <tr>
+                       <th nowrap="nowrap">Code</th>
+                       <th nowrap="nowrap">Ccy</th>
+                       <th nowrap="nowrap">Amount</th>
+                       <th nowrap="nowrap">Rate</th>
+                       <th nowrap="nowrap">Tax Refund</th>
+                       <th nowrap="nowrap">Cancel Fee</th>
+                       <th nowrap="nowrap">Adm Fee</th>
+                       <th nowrap="nowrap">Product</th>                       
+                  </tr>     
+                  <tr>
+                      <th nowrap="nowrap">&nbsp;</th>
+                      <th nowrap="nowrap" colspan="2">Airline Name</th>
+                      <th nowrap="nowrap">Invoice</th>
+                      <th nowrap="nowrap">Tour Code</th>
+                      <th nowrap="nowrap">Group No</th>
+                      <th nowrap="nowrap" colspan="2">Description</th>
+                  </tr>    
+              </thead>
+          </table>
+        </div>    
+    </div>    
+</div>
+<input type="submit" class="btn btn-default" value="Save">
+</form>  
+</div>
+
+{% endblock %}

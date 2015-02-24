@@ -1,0 +1,35 @@
+{% block content %}
+
+ <div class="row">  
+     <div class="box">
+         <div class="box-header">
+                 <h2 class="box-title">Credit Note</h2>
+         </div><!-- /.box-header -->
+     </div>
+     
+     <div class="table-responsive">
+         <div class="col-lg-12">
+          <a href="{{ site_url('accounting/credit_note/form') }}" class="add-btn btn btn-success">
+                <i class="fa fa-plus"></i> Add
+          </a>
+          <table id="table_credit_note" class="table table-bordered table-hover table-striped">
+               <thead>
+                   <tr>
+                       <th width="40" nowrap="nowrap">No</th>
+                       <th nowrap="nowrap">Branch</th>
+                       <th nowrap="nowrap">CN No</th>
+                       <th nowrap="nowrap">Transac No</th>                       
+                       <th nowrap="nowrap">Date</th>
+                       <th nowrap="nowrap">Type</th>
+                       <th nowrap="nowrap">Dept</th>
+                       <th nowrap="nowrap">Customer</th>
+                       <th nowrap="nowrap">Used Amount</th>
+                       <th width="120" nowrap="nowrap">Action</th>
+                   </tr>
+               </thead>               
+          </table>
+         </div>    
+     </div>
+</div>
+
+{% endblock %}

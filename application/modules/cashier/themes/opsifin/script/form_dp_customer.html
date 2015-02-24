@@ -1,0 +1,62 @@
+{% block content %}
+
+            $('#datetimepicker1').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+            
+            // currency typeahead
+            $('#currency.typeahead').typeahead({                
+                name: 'currency',
+                prefetch: '{{ base_url() }}index.php/cashier/ajax_data/currency',
+                limit: 20
+            });
+            
+            // vendor typeahead
+            $('#kode_vendor.typeahead').typeahead({
+                name: 'kode_vendor',
+                prefetch: '{{ base_url() }}index.php/cashier/ajax_data/vendor',
+                limit: 20
+            })
+            
+            // vendor typeahead
+            $('#id_dept.typeahead').typeahead({
+                name: 'id_dept',
+                prefetch: '{{ base_url() }}index.php/cashier/ajax_data/dept',
+                limit: 20
+            })
+            
+            // vendor typeahead
+            $('#lg_no.typeahead').typeahead({
+                name: 'kode_vendor',
+                prefetch: '{{ base_url() }}index.php/cashier/ajax_data/lg_no',
+                limit: 20
+            })
+             
+            
+            var selected = [];
+            var table = $('#table_dp_supplier_detail').dataTable( {    
+                    "searching": false,
+                    "ordering": false,    
+                    "bLengthChange" : false,
+                    "ajax": '{{ site_url() }}/cashier/ajax_data/getrecord_dpcustomer_detail',
+                    "columns": [
+                            { "data": "id_ref" },
+                            { "data": "no_ref" },
+                            { "data": "currency" },
+                            { "data": "amount" },
+                            { "data": "name" },
+                            { "data": "used_date" },                            
+                            { "mRender" : function ( data, type, full ) {
+                                FullData = full;
+                                return '{{ BUTTON_CRUD }} ';
+                              }
+                            },
+                        ], 
+                        "rowCallback": function( row, data ) {
+                            if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                                $(row).addClass('selected');
+                            }
+                        }   
+            });
+
+{% endblock %}            

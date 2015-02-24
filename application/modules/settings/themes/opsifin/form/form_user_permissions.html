@@ -1,0 +1,52 @@
+{% block content %}
+<div class="row">
+    <form class="form-horizontal" action="{{ site_url('settings/user_permissions/save') }}" method="post" role="form" name="form1">
+        <input id="user_id" name="user_id" type="hidden" value="{{ edit.user_id }}" />
+        
+        <div class="col-xs-12 col-md-12">
+            <div class="form-group col-xs-12">
+               <table id="table_group_accounts" class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th rowspan="2" width="40">No</th>
+                        <th rowspan="2" width="90">Group Name</th>
+                        <th rowspan="2">Menu Name</th>                        
+                        <th colspan="4" width="120">Action</th>
+                        <th rowspan="2" width="40">Approval</th>                        
+                        <th rowspan="2" width="40">Print</th>
+                    </tr> 
+                    <tr>
+                        <th width="40">C</th>
+                        <th width="40">R</th>
+                        <th width="40">U</th>
+                        <th width="40">D</th>
+                    </tr>    
+                </thead>
+                <tbody>
+                {% for data in permission %}
+                <tr>
+                        <th width="40">{{ data.nomor}}</th>
+                        <th>{{ data.group_name }}</th>  
+                        <th>{{ data.menu_name }}</th>  
+                        
+                        <th><input type="checkbox"></th>
+                        <th><input type="checkbox"></th>
+                        <th><input type="checkbox"></th>
+                        <th><input type="checkbox"></th>
+                        <th><input type="checkbox"></th>
+                        <th><input type="checkbox"></th>
+                        
+                </tr> 
+                {% endfor %} 
+                </tbody>    
+               </table> 
+            </div>
+        </div>
+        
+        <div class="form-group col-xs-12">        
+            <input type="submit" class="btn btn-default" name="btnupdate" id="btnupdate" value="Update">            
+        </div>
+    </form>
+</div>
+    
+{% endblock %}

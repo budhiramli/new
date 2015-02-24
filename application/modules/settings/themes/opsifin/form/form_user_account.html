@@ -1,0 +1,49 @@
+{% block content %}
+<div class="row">
+        <form class="form-horizontal" action="{{ site_url('settings/user_accounts/save') }}" method="post" role="form" name="form1">
+        <input id="user_id" name="user_id" type="hidden" value="{{ edit.user_id }}" />
+        
+        <div class="col-xs-12 col-md-8">
+            <div class="form-group col-xs-12">
+                <label for="user_login" class="col-xs-2 control-label">Login</label>
+                <div class="col-xs-4">
+                  <input type="text" class="form-control" id="user_login" name="user_login" value="{{ edit.user_login }}" placeholder="xxxxxxxx">
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xs-12 col-md-8">
+            <div class="form-group col-xs-12">
+                <label for="Password" class="col-xs-2 control-label">Password</label>
+                <div class="col-xs-4">
+                  <input type="text" class="form-control" id="user_password" name="user_password" value="{{ edit.user_password }}" placeholder="xxxxxxxx">
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xs-12 col-md-8">
+            <div class="form-group col-xs-12">
+                <label for="user_name" class="col-xs-2 control-label">User Name</label>
+                <div class="col-xs-4">
+                  <input type="text" class="form-control" id="user_name" name="user_name" value="{{ edit.user_name }}" placeholder="xxxxxxxx">
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xs-12 col-md-8">
+            <div class="form-group col-xs-12">
+                <label for="user_group_id" class="col-xs-2 control-label">User Group</label>
+                <div class="col-xs-4">
+                  
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group col-xs-12">        
+            <input type="submit" class="btn btn-default" name="btnsave" id="btnsave" value="Save">
+            <input type="submit" class="btn btn-default" name="btnupdate" id="btnupdate" value="Update">            
+        </div>
+        </form>
+    </div>
+    
+{% endblock %}
