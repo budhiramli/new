@@ -1,0 +1,26 @@
+#logindiv{
+	background-color:#eeeeee;
+	width:300px;
+	margin:auto;
+	position:absolute;
+	left:0px;
+	right:0px;
+	padding:10px;
+	border-radius: 10px 10px 10px 10px;
+	top:90px;
+}
+#toplogin{
+	width:324px;
+	margin:auto;
+	position:absolute;
+	left:0px;
+	right:0px;
+	padding:10px;
+	top:20px;
+}
+#logotop{
+	top:5px;
+	position:absolute;
+
+}
+
