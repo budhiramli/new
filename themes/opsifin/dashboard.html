@@ -1,0 +1,29 @@
+{% extends _layout %}
+
+{% block content %}
+<div id="wrapper">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+       <!-- Navigation -->
+       {% include 'toggle_header.html' %}
+       <!-- End Navigation -->
+        
+       <!-- Navigation -->
+       {% include 'menu_top.html' %}
+       <!-- End Navigation -->
+        
+       <!-- Navigation -->
+       {% include 'menu.html' %}
+       <!-- End Navigation -->
+       
+    </nav>
+    {{ window_page }}
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            
+         {{ content_page }}
+         
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

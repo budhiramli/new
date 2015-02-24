@@ -1,0 +1,18 @@
+<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+<ul class="nav navbar-nav side-nav">
+    {% for menu in menu_navigasi %}
+    <li>
+        <a href="{{ menu.menu_link }}" {{ menu.targetclass }}>
+             <i class="fa fa-fw {{ menu.menu_icon }}"></i> {{ menu.name }} {{ menu.iconarrow }}
+        </a>
+        {{ menu.CHILD_LIST }}
+    </li>
+    {% endfor %} 
+    
+    <li>
+        <a href="{{ site_url() }}/main/logout"><i class="fa fa-fw fa-sign-out fa-power-off"></i> Logout</a>
+    </li>
+</ul>
+</div>
+<!-- /.navbar-collapse -->
