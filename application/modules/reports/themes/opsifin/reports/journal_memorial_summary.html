@@ -1,0 +1,129 @@
+{% block content %}
+ <!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            journal_memorial_summary
+        </h1>
+
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i><a href="#"> Dashboard</a>
+            </li>
+
+            <li class="active">
+                <i class="fa fa-edit"></i> journal_memorial_summary
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-sm-9">
+        <h4>journal_memorial_summary</h4><br>
+       
+    </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Branch</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+    <div class="form-group col-lg-12">
+        <div class="col-md-2">
+            <label>JM No</label>
+        </div>
+        <div class="col-md-3">
+            
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+            <div class="col-md-2">
+                <label>From COA</label>
+            </div>
+            <div class="col-md-3">
+                
+            </div>
+        <div class="col-md-1">
+            
+        </div>
+        <div class="col-md-2">
+            <div class="checkbox-inline">
+                  <label><input type="checkbox" name="v_type" value="all_ccy"> All Ccy</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+            <div class="col-md-2">
+                <label>To COA</label>
+            </div>
+            <div class="col-md-3">
+                
+            </div>
+        <div class="col-md-1">
+            
+        </div>
+        </div>
+    <div class="form-group col-lg-12">
+       <div class="col-md-2">
+               <label>From</label>
+       </div>
+       <div class="col-md-3">
+               
+            </div>
+        <div class="col-md-2">
+            <div class="checkbox-inline">
+                  <label><input type="checkbox" name="v_type" value="invoce_date"> By Date</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+        <div class="col-md-2">
+            <label>to</label>
+        </div>
+            <div class="col-md-3">
+               
+            </div>
+        </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Status</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Sort</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+ </div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+              	<th>Branch</th>
+              	<th>JM No</th>
+                <th>From COA</th>
+                <th>To COA</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Status</th>
+                <th>Sort</th>
+            </tr>
+        </thead>
+        
+        
+    </table>
+    
+    {{links|raw}}
+    </div>
+{% endblock %}

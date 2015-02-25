@@ -1,0 +1,145 @@
+{% block content %}
+ <!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            List Of Invoice 
+        </h1>
+
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i><a href="#"> Dashboard</a>
+            </li>
+
+            <li class="active">
+                <i class="fa fa-edit"></i> List Of Invoice
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4>Invoice</h4><br>
+    
+    </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Branch</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Report Type</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Department</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+    <div class="form-group col-lg-12">
+       <div class="col-md-2">
+               <label>From</label>
+       </div>
+       <div class="col-md-3">
+               
+            </div>
+        <div class="col-md-2">
+            <div class="radio-inline">
+                  <label><input type="radio" name="v_type" value="invoce_date"> Invoice Date</label>
+            </div>
+        </div>
+    </div>
+        <div class="form-group col-lg-12">
+        <div class="col-md-2">
+            <label>to</label>
+        </div>
+            <div class="col-md-3">
+               
+            </div>
+        <div class="col-md-2">
+            <div class="radio-inline">
+                <label><input type="radio"  name="v_type" value="cute_date"> Cut. Date</label>
+            </div>      
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Printed/Not</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Status</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>User</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Costumer</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+    <div class="form-group col-lg-12">
+        <div class="col-md-2">
+            <div class="checkbox-inline">
+                <label><input type="checkbox" name="v_type" value="without_costumer"> Without Costumer</label>
+            </div>
+        </div>
+    <div class="form-group col-md-2">
+            <div class="checkbox-inline">
+                <label><input type="checkbox" name="v_type" value="add_invoice"> Incl. Additional Invoice</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+              	<th>Branch</th>
+              	<th>Report Type</th>
+                <th>Department</th>
+                <th>Product Type</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Printed/Not</th>
+                <th>Status</th>
+                <th>User</th>
+                <th>Costumer</th>
+            </tr>
+        </thead>
+        
+        
+    </table>
+    
+    {{links|raw}}
+    </div>
+{% endblock %}

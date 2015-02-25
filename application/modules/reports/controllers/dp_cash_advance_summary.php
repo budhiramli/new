@@ -1,13 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class cleraing_summary extends CI_Controller {	
+class DP_cash_advance_summary extends CI_Controller {	
 	public function __construct()
 	{
 		parent::__construct();
-	//	$this->load->model('Authentication');
+		//$this->load->model('Authentication');
 	}
 	
-	public function index(){
-		$this->load->library('menu');
+	public function index(){		
+            $this->load->library('menu');
             $menu = $this->menu->set_menu();
             $this->twiggy->set('menu_navigasi', $menu);
 

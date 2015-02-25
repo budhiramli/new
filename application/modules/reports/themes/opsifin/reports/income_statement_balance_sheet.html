@@ -1,0 +1,100 @@
+{% block content %}
+
+ <!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+           Income Statement Balance
+        </h1>
+
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i><a href="#"> Dashboard</a>
+            </li>
+
+            <li class="active">
+                <i class="fa fa-edit"></i> Income Statement Balance
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <h4>Financial Reports</h4><br>
+        
+    </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Branch</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Report Type</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Type</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+        </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>View</label>
+        </div>
+            <div class="col-md-3">
+                
+            </div>    
+    </div>
+    <div class="form-group col-lg-12">
+        <div class="col-md-2">
+            <label>Period</label>
+        </div>
+        <div class="col-md-3">
+            
+        </div>
+        <div class="col-md-2">
+            <h6>[MM/YYYY]</h6>
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+        <div class="col-md-2">
+        <div class="checkbox-inline">
+                  <label><input type="checkbox" name="v_type" value="show_percentage"> Show Percentage</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+        <div class="col-md-2">
+        <div class="checkbox-inline">
+                  <label><input type="checkbox" name="v_type" value="prev_month"> Show Prev Month</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+              	<th>Branch No</th>
+                <th>Report Type</th>
+              	<th>Type</th>
+                <th>View</th>
+                <th>Period</th>
+            </tr>
+        </thead>
+    </table>
+    
+    {{links|raw}}
+    </div>
+{% endblock %}

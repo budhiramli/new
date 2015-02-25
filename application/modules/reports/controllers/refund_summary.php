@@ -6,51 +6,20 @@ class refund_summary extends CI_Controller {
 		//$this->load->model('Authentication');
 	}
 	
-	public function home(){
-		
-                $this->load->model('modeldept_all');
-                $this->load->model('modelbranch_all');
-                $this->load->model('modelcompany_all');
-		$log = $this->session->all_userdata();
-		$userLogged = $this->session->userdata('userLogged');
-		$deptlist = $this->modeldept_all->getoption();
-                $branchlist = $this->modelbranch_all->getoption();
-                $complist = $this->modelcompany_all->getoption();
-                
-		if ($userLogged) {
-                    
-                    if (!empty($_POST)){
-                        print_r($_POST);
-                        // apabila tombol proses ditekan
-                        // for ! proses
-                        
-                        $content = array (
-                                "data_filter"  => $_POST,
-				"log" => $log,
-				"base_url" => base_url(),
-                                'deptlist'    => $deptlist,
-                                'branchlist'  => $branchlist,
-                                'complist'    => $complist,
-                                
-			);
-			$this->twig->display("reports/refund_summary", $content);
-                    }
-                    else {
-                        
-			// for ! proses
-                        $content = array (
-				"log" => $log,
-				"base_url" => base_url(),
-                                'deptlist'    => $deptlist,
-                                'branchlist'  => $branchlist,
-                                'complist'    => $complist,
-                            
-			);
-			$this->twig->display("refund_summary", $content);
-                    }    
-		}
+	public function index(){		
+            $this->load->library('menu');
+            $menu = $this->menu->set_menu();
+            $this->twiggy->set('menu_navigasi', $menu);
+
+            $this->twiggy->title('OPSIFIN')->prepend('Login');;
+            $this->twiggy->meta('keywords', 'twiggy, twig, template, layout, codeigniter');
+            $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
+            $data = array();
+
+            $content = $this->twiggy->template('reports/refund_summary')->render();                
+            $this->twiggy->set('content_page', $content);
+
+            $output = $this->twiggy->template('dashboard')->render();
+            $this->output->set_output($output);
 	}
-	
-		
 }
-?>

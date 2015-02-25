@@ -1,13 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class cleraing_summary extends CI_Controller {	
+class income_statement extends CI_Controller {	
 	public function __construct()
 	{
 		parent::__construct();
-	//	$this->load->model('Authentication');
+		//$this->load->model('Authentication');
 	}
 	
-	public function index(){
-		$this->load->library('menu');
+	public function index(){		
+            $this->load->library('menu');
             $menu = $this->menu->set_menu();
             $this->twiggy->set('menu_navigasi', $menu);
 
@@ -16,10 +16,10 @@ class cleraing_summary extends CI_Controller {
             $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
             $data = array();
 
-            $content = $this->twiggy->template('reports/refund_summary')->render();                
+            $content = $this->twiggy->template('reports/income_statement_balance_sheet')->render();                
             $this->twiggy->set('content_page', $content);
 
             $output = $this->twiggy->template('dashboard')->render();
             $this->output->set_output($output);
-	}
+	}	
 }

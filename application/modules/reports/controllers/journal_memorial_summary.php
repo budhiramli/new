@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class non_cash_transaction_summary extends CI_Controller {	
+class journal_memorial_summary extends CI_Controller {	
 	public function __construct()
 	{
 		parent::__construct();
-	//	$this->load->model('Authentication');
+		//$this->load->model('Authentication');
 	}
 	
 	public function index(){
@@ -16,7 +16,7 @@ class non_cash_transaction_summary extends CI_Controller {
                 $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
                 $data = array();
 
-                $content = $this->twiggy->template('reports/refund_summary')->render();                
+                $content = $this->twiggy->template('reports/journal_memorial_summary')->render();                
                 $this->twiggy->set('content_page', $content);
 
                 $output = $this->twiggy->template('dashboard')->render();
