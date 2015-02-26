@@ -1,0 +1,16 @@
+{% block content %}
+
+var selected = [];
+var table = $('#table_customer').dataTable( {    
+        "searching": true,
+        "ordering": false,    
+        "bLengthChange" : false,
+        "ajax": '{{ site_url() }}/configuration/ajax_data/getrecord_customer',
+        "columns": [
+                { "data": "nomor" },
+                { "data": "company_code" },
+            ], 
+            
+});
+
+{% endblock %}

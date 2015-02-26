@@ -1,0 +1,25 @@
+{% block content %}
+var selected = [];
+var table = $('#table_coa_account').dataTable( {    
+        "searching": true,
+        "ordering": false,    
+        "bLengthChange" : false,
+        "ajax": '{{ site_url() }}/configuration/ajax_data/getrecord_coa_account',
+        "columns": [
+                { "data": "account_code" },                
+                { "data": "account_name" },
+                { "data": "coa_group_name" },
+                { "data": "account_is_active" },
+                { "mRender" : function ( data, type, full ) {
+                    FullData = full;
+                    return '{{ BUTTON_CRUD }} ';
+                  }
+                },
+            ], 
+            "rowCallback": function( row, data ) {
+                if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                    $(row).addClass('selected');
+                }
+            }   
+});
+{% endblock %}

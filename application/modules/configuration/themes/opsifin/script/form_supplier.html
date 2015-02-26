@@ -1,2 +1,20 @@
 {% block content %}
+
+var selected = [];
+var table = $('#table_supplier').dataTable( {    
+        "searching": true,
+        "ordering": false,    
+        "bLengthChange" : false,
+        "ajax": '{{ site_url() }}/configuration/ajax_data/getrecord_supplier',
+        "columns": [
+                { "data": "nomor" },
+                { "data": "supplier_name" },
+            ], 
+            "rowCallback": function( row, data ) {
+                if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                    $(row).addClass('selected');
+                }
+            }   
+});
+
 {% endblock %}

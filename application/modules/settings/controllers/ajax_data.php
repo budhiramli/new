@@ -21,4 +21,20 @@ class Ajax_data extends CI_Controller {
         echo json_encode($data);
     }
     
+    function getrecord_fiscal_year()
+    {
+        $this->load->model('fiscal_year_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->fiscal_year_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->fiscal_year_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->fiscal_year_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
 }    

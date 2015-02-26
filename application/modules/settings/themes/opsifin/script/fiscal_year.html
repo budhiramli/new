@@ -1,0 +1,51 @@
+{% block content %}
+
+var selected = [];
+var table = $('#table_fiscal_year').dataTable( {    
+        "searching": true,
+        "ordering": false,    
+        "bLengthChange" : false,
+        "ajax": '{{ site_url() }}/settings/ajax_data/getrecord_fiscal_year',
+        "columns": [
+                { "data": "nomor" },
+                { "data": "fiscal_year_start" },                
+                { "data": "fiscal_year_end" },
+                { "data": "fiscal_year_is_active" },
+                { "mRender" : function ( data, type, full ) {
+                    FullData = full;
+                    return '{{ BUTTON_CRUD }} ';
+                  }
+                },
+            ], 
+            "rowCallback": function( row, data ) {
+                if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                    $(row).addClass('selected');
+                }
+            }   
+});
+
+// Edit record
+$('#table_fiscal_year').on( 'click', 'a.edit-btn', function (e) {
+        e.preventDefault();    
+        var editId = $(this).data('edit-id');
+        window.location.href='{{ site_url() }}/settings/fiscal_year/form/' + editId;	
+        
+} );
+ 
+// Delete a record
+$('#table_fiscal_year').on( 'click', 'a.del-btn', function (e) {
+        e.preventDefault();
+        if(confirm("Are you sure?")) {
+                var delId = $(this).data('delete-id');  
+		window.location='{{ site_url() }}/settings/fiscal_year/delete/' + delId;	
+	}
+	else
+		return false;
+                
+        
+} );
+    
+$('body').on('show.bs.modal', '.modal',function (e) {
+    
+});
+{% endblock %}

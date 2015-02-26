@@ -1,0 +1,31 @@
+{% block content %}
+
+var selected = [];
+var table = $('#table_bank_account').dataTable( {    
+        "searching": true,
+        "ordering": false,    
+        "bLengthChange" : false,
+        "ajax": '{{ site_url() }}/configuration/ajax_data/getrecord_bank_account',
+        "columns": [
+                { "data": "bank_account_name" },                
+                { "data": "bank_account_type_name" },
+                { "data": "currency" },
+                { "data": "account_code" },
+                { "data": "bank_account_bank_name" },
+                { "data": "bank_account_bank_number" },
+                { "data": "bank_account_bank_address" },
+                { "data": "bank_account_is_default" },
+                { "mRender" : function ( data, type, full ) {
+                    FullData = full;
+                    return '{{ BUTTON_CRUD }} ';
+                  }
+                },
+            ], 
+            "rowCallback": function( row, data ) {
+                if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                    $(row).addClass('selected');
+                }
+            }   
+});
+
+{% endblock %}

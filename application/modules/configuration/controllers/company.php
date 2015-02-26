@@ -36,7 +36,7 @@ class Company extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_company');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.kode_customer');
+        $this->twiggy->set('FORM_IDKEY', 'full.id_company');
         $this->twiggy->set('FORM_LINK', site_url('configuration/company/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -51,7 +51,7 @@ class Company extends CI_Controller {
         // end        
         $this->twiggy->set('window_page', $window_page);
         
-        $script_page = $this->twiggy->template('script/form_company')->render();         
+        $script_page = $this->twiggy->template('script/form_customer')->render();         
         //$script_page .= $this->twiggy->template('script/script_all')->render();         
         
         $this->twiggy->set('SCRIPTS', $script_page);
