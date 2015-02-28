@@ -10,6 +10,12 @@ class Credit_note extends CI_Controller {
         $this->twiggy->title('OPSIFIN')->prepend('Credit Note');;
         $this->twiggy->meta('keywords', 'twiggy, twig, template, layout, codeigniter');
         $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
+        // create content page fo dp supplier
+        $this->twiggy->set('BREADCRUMBS_TITLE', 'Credit Note');
+        $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Accounting');
+        $this->twiggy->set('LIST_TITLE', 'Credit Note');
+        
+        
         
     }
     

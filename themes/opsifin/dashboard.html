@@ -2,7 +2,8 @@
 
 {% block content %}
 <div id="wrapper">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
        <!-- Navigation -->
        {% include 'toggle_header.html' %}
        <!-- End Navigation -->
@@ -16,14 +17,18 @@
        <!-- End Navigation -->
        
     </nav>
-    {{ window_page }}
+    
+    <!-- Page Content -->
     <div id="page-wrapper">
-        <div class="container-fluid">
-            
-         {{ content_page }}
-         
-        </div>
+            <div class="container-fluid">
+                {{ window_page }}
+                
+                {{ content_page }}
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
     </div>
+    <!-- /#page-wrapper -->
     
 </div>
 {% endblock %}
