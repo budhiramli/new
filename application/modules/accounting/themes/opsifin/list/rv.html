@@ -1,27 +1,34 @@
 {% block content %}
- <div class="row">  
-    <div class="table-responsive">
-        <div class="col-lg-12">
-        <a href="{{ site_url('accounting/rv/form') }}" class="add-btn btn btn-success">
-                <i class="fa fa-plus"></i> Add
-        </a>
-        <table id="table_rv" class="table table-bordered table-hover table-striped">
-             <thead>
-                 <tr>
-                     <th nowrap="nowrap">No</th>
-                     <th nowrap="nowrap">RV Number</th>
-                     <th nowrap="nowrap">Receipt Type</th>
-                     <th nowrap="nowrap">Invoice Number</th>
-                     <th nowrap="nowrap">Total</th>
-                     <th nowrap="nowrap">Pay Method</th>
-                     <th nowrap="nowrap">Discount (%)</th>
-                     <th nowrap="nowrap">Pay Ammount</th>
-                     <th nowrap="nowrap">Currency</th>
-                     <th nowrap="nowrap">Action</th>
-                 </tr>
-             </thead>
-         </table>
-        </div>  
-    </div>    
+<div class="panel panel-default">
+        <div class="panel-heading">
+            {{ BREADCRUMBS_TITLE }}
+        </div>
+        <div class="panel-body">
+        <div class="row">  
+           <div class="table-responsive">
+               <div class="col-lg-12">
+               <a href="{{ site_url('accounting/rv/form') }}" class="add-btn btn btn-success">
+                       <i class="fa fa-plus"></i> Add
+               </a>
+               <table id="table_rv" class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th nowrap="nowrap">No</th>
+                            <th nowrap="nowrap">RV Number</th>
+                            <th nowrap="nowrap">Receipt Type</th>
+                            <th nowrap="nowrap">Invoice Number</th>
+                            <th nowrap="nowrap">Total</th>
+                            <th nowrap="nowrap">Pay Method</th>
+                            <th nowrap="nowrap">Discount (%)</th>
+                            <th nowrap="nowrap">Pay Ammount</th>
+                            <th nowrap="nowrap">Currency</th>
+                            <th nowrap="nowrap">Action</th>
+                        </tr>
+                    </thead>
+                </table>
+               </div>  
+           </div>
+        </div>    
+        </div>
 </div>    
 {% endblock %}

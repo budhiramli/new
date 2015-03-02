@@ -1,42 +1,56 @@
 {% block content %}
 <form class="form-horizontal" action="{{ site_url('settings/fiscal_year/save') }}" method="post" role="form" name="form1">
 <input id="fiscal_year_id" name="fiscal_year_id" type="hidden" value="{{ edit.fiscal_year_id }}" /> 
-<div class="row">
-        <div class="col-xs-12 col-md-8">
-            <div class="form-group col-xs-12">
-                <label for="fiscal_year_start" class="col-xs-4 control-label">Fiscal Year Start</label>
-                <div class="col-xs-5">
-                    <div class='input-group date' id='datetimepicker1'>
-                        <input type="text" class="form-control" id="fiscal_year_start" name="fiscal_year_start" value="{{ edit.fiscal_year_start }}" placeholder="YYYY-MM-DD">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+<div class="panel panel-default">
+        <div class="panel-heading">
+            {{ BREADCRUMBS_TITLE }}
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                    <div class="col-xs-12 col-md-8">
+                        <div class="form-group col-xs-12">
+                            <label for="fiscal_year_start" class="col-xs-4 control-label">Fiscal Year Start</label>
+                            <div class="col-xs-5">
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input type="text" class="form-control" id="fiscal_year_start" name="fiscal_year_start" value="{{ edit.fiscal_year_start }}" placeholder="DD-MM-YYYY">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-8">
+                        <div class="form-group col-xs-12">
+                            <label for="fiscal_year_end" class="col-xs-4 control-label">Fiscal Year End</label>
+                            <div class="col-xs-5">
+                                <div class='input-group date' id='datetimepicker2'>
+                                    <input type="text" class="form-control" id="fiscal_year_end" name="fiscal_year_end" value="{{ edit.fiscal_year_end }}" placeholder="DD-MM-YYYY">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-8">
+                        <div class="form-group col-xs-12">
+                            <label for="fiscal_year_is_active" class="col-xs-4 control-label">Fiscal Year Status</label>
+                            <div class="col-xs-5">
+                            <label>
+                                    <input type="checkbox" id="fiscal_year_is_active" name="fiscal_year_is_active" value="{{ edit.fiscal_year_is_active }}">
+                            </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-8">
+                        <div class="form-group col-xs-12">
+                            <label for="button" class="col-xs-4 control-label">&nbsp;</label>
+                            <div class="col-xs-5">
+                                <input type="submit" class="btn btn-default" name="btnsave" id="btnsave" value="Save">
+                            </div>
+                        </div>
                     </div>    
-                </div>
             </div>
         </div>
-        <div class="col-xs-12 col-md-8">
-            <div class="form-group col-xs-12">
-                <label for="fiscal_year_end" class="col-xs-4 control-label">Fiscal Year End</label>
-                <div class="col-xs-5">
-                    <div class='input-group date' id='datetimepicker2'>
-                        <input type="text" class="form-control" id="fiscal_year_end" name="fiscal_year_end" value="{{ edit.fiscal_year_end }}" placeholder="YYYY-MM-DD">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>    
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-8">
-            <div class="form-group col-xs-12">
-                <label for="fiscal_year_is_active" class="col-xs-4 control-label">Fiscal Year Status</label>
-                <div class="col-xs-5">
-                  <input type="checkbox" class="form-control" id="fiscal_year_is_active" name="fiscal_year_is_active" value="{{ edit.fiscal_year_is_active }}">
-                </div>
-            </div>
-        </div>
-        <div class="form-group col-xs-12">        
-            <input type="submit" class="btn btn-default" name="btnsave" id="btnsave" value="Save">            
-        </div>
-</div>
+</div>    
 </form>    
 {% endblock %}

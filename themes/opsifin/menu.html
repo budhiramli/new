@@ -4,7 +4,7 @@
                     <ul class="nav" id="side-menu">
                         {% for menu in menu_navigasi %}
                         <li>
-                            <a href="{{ menu.menu_link }}" {{ menu.targetclass }}>
+                            <a href="{{ menu.menu_link }}">
                                  <i class="fa fa-fw {{ menu.menu_icon }}"></i> {{ menu.name }} {{ menu.iconarrow }}
                             </a>
                             {{ menu.CHILD_LIST }}

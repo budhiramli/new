@@ -31,9 +31,9 @@ class Menu_mdl extends CI_Model {
             $child = $this->getchild($row->menu_id);     
             if (count($child)>0){                
                 $link = 'javascript:;';
-                $targetclass   = 'data-toggle="collapse" data-target="#'.strtolower($row->menu_name).'child"';
+                $targetclass   = '';//'data-toggle="collapse" data-target="#'.strtolower($row->menu_name).'child"';
                 $targetid       = strtolower($row->menu_name).'child';
-                $iconarrow      = '<i class="fa fa-fw fa-caret-down"></i>';
+                $iconarrow      = '<i class="fa fa-fw arrow"></i>';
                 $this->twiggy->set('targetid', $targetid);
                 $this->twiggy->set('menuchild', $child);
                 $child_list     = $this->twiggy->template('menu_child')->render();
@@ -84,11 +84,67 @@ class Menu_mdl extends CI_Model {
        $data = array();
        foreach($query->result() as $row):
             $menu_name = $row->menu_name;
+            $child = $this->get_third($row->menu_id);
+            
+            if (count($child)>0){                
+                $link = 'javascript:;';
+                $targetclass   = '';//'data-toggle="collapse" data-target="#'.strtolower($row->menu_name).'child"';
+                $targetid       = strtolower($row->menu_name).'child';
+                $iconarrow      = '<i class="fa fa-fw arrow"></i>';
+                $this->twiggy->set('targetid', $targetid);
+                $this->twiggy->set('menuchild', $child);
+                $child_list     = $this->twiggy->template('menu_third_child')->render();
+            }
+            else {
+                $link           = site_url($row->menu_link);
+                $targetclass    = ''; 
+                $targetid       = '';
+                $iconarrow      = '';
+                $child_list     = '';
+            };
+            
             $data[] = array(
                 'child_id'            => $row->menu_id,
                 'child_name'          => $menu_name,
                 'child_link'          => site_url($row->menu_link),
                 'child_icon'          => $row->menu_icon,  
+                'iconarrow'             => $iconarrow,
+                'CHILD_THIRD_LIST'    => $child_list
+                //'child_css_class'     => $row->menu_css_class,                
+            );    
+        endforeach;
+        return $data;
+    }
+    
+    
+    function get_third($parentid)
+    {
+       
+       $groupid = $this->session->userdata('user_group_id');
+       $fields = array(
+           'user_permission.menu_id',
+           'menu_name',
+           'menu_icon',
+           'menu_link'
+       );
+       $this->db->select($fields);
+       $this->db->join('menu', 'menu.menu_id=user_permission.menu_id', 'left');
+       $this->db->where('menu_parent_id', $parentid);
+       $this->db->where('user_group_id', $groupid);
+       $this->db->where('menu_is_active', 'TRUE');       
+       $this->db->order_by('menu_position asc');
+       $this->db->order_by('menu_id asc');
+       $query = $this->db->get('user_permission');
+       
+       $data = array();
+       foreach($query->result() as $row):
+            $menu_name = $row->menu_name;
+            
+            $data[] = array(
+                'child_third_id'            => $row->menu_id,
+                'child_third_name'          => $menu_name,
+                'child_third_link'          => site_url($row->menu_link),
+                'child_third_icon'          => $row->menu_icon,  
                 //'child_css_class'     => $row->menu_css_class,                
             );    
         endforeach;

@@ -18,8 +18,8 @@ class Fiscal_year_mdl extends CI_Model {
             $data = array();
             $fields = array(
                 'fiscal_year_id',
-                'fiscal_year_start',
-                'fiscal_year_end',
+                "(DATE_FORMAT(fiscal_year_start, '%d-%m-%Y')) as fiscal_year_start",
+                "(DATE_FORMAT(fiscal_year_end, '%d-%m-%Y')) as fiscal_year_end",
                 'fiscal_year_is_active',
             );
             
