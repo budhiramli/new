@@ -16,31 +16,38 @@ class modeldpsupplier extends CI_Model {
         function getdatalist()
         {
             $fields = array(
-                'id_dp_supplier',
-                'dp_number',
-                'transaksi_no',
-                'tanggal_transaksi',
-                'kode_vendor',
+                'ds_transaction_id',
+                'ds_no',
+                'transaction_no',
+                "(DATE_FORMAT(transaction_date, '%d-%m-%Y')) as transaction_date",
+                'dp_supplier.supplier_code',
+                'supplier_name',
                 'cp',
                 'lg_no',
-                'amount',
+                'currency',
+                '(FORMAT(amount, 2)) as amount',
                 'note',
             );
             $this->db->select($fields);
-            $this->db->order_by('id_dp_supplier desc');
+            $this->db->join('supplier', 'supplier.supplier_code=dp_supplier.supplier_code', 'left');
+            $this->db->order_by('ds_transaction_id desc');
             $query = $this->db->get('dp_supplier');
+            //echo $this->db->last_query();
             $nomor = 1;
+            $data = array();
             foreach($query->result() as $row):
                 $data[] = array(
-                    'nomor'             => $nomor,
-                    'DT_RowId'          => $row->id_dp_supplier,
-                    'id_dp_supplier'    => $row->id_dp_supplier,
-                    'dp_number'         => $row->dp_number,
-                    'transaksi_no'      => $row->transaksi_no,
-                    'tanggal_transaksi' => $row->tanggal_transaksi,
-                    'kode_vendor'       => $row->kode_vendor,
-                    'cp'                => $row->cp,
+                    'nomor'                 => $nomor,
+                    'DT_RowId'              => $row->ds_transaction_id,
+                    'ds_transaction_id'     => $row->ds_transaction_id,
+                    'ds_no'                 => $row->ds_no,
+                    'transaction_no'        => $row->transaction_no,
+                    'transaction_date'      => $row->transaction_date,
+                    'supplier_code'         => $row->supplier_name,
+                    'cp'                    => $row->cp,
                     'lg_no'             => $row->lg_no,
+                    'currency'            => $row->currency,
+                    
                     'amount'            => $row->amount,
                     'note'              => $row->note,
                 );
@@ -53,31 +60,35 @@ class modeldpsupplier extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_dp_supplier',
-                'dp_number',
-                'transaksi_no',
-                'tanggal_transaksi',
-                'kode_vendor',
+                'ds_transaction_id',
+                'ds_no',
+                'dept_id',
+                'transaction_no',
+                'transaction_date',
+                'supplier_code',
                 'cp',
                 'lg_no',
+                'currency',
                 'amount',
                 'note',
             );
             $this->db->select($fields);
-            $this->db->where('id_dp_supplier', $id);
+            $this->db->where('ds_transaction_id', $id);
             $query = $this->db->get('dp_supplier');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
-                    'id_dp_supplier'    => $row->id_dp_supplier,
-                    'dp_number'         => $row->dp_number,
-                    'transaksi_no'      => $row->transaksi_no,
-                    'tanggal_transaksi' => $row->tanggal_transaksi,
-                    'kode_vendor'       => $row->kode_vendor,
-                    'cp'                => $row->cp,
-                    'lg_no'             => $row->lg_no,
-                    'amount'            => $row->amount,
-                    'note'              => $row->note,
+                    'ds_transaction_id'     => $row->ds_transaction_id,
+                    'ds_no'                 => $row->ds_no,
+                    'dept_id'               => $row->dept_id,
+                    'transaction_no'        => $row->transaction_no,
+                    'transaction_date'      => $row->transaction_date,
+                    'supplier_code'         => $row->supplier_code,
+                    'cp'                    => $row->cp,
+                    'lg_no'                 => $row->lg_no,
+                    'currency'              => $row->currency,                    
+                    'amount'                => $row->amount,
+                    'note'                  => $row->note,
                 );
             }
             return $data;
@@ -86,16 +97,22 @@ class modeldpsupplier extends CI_Model {
         function save($params)
         {
             $valid = true;
+            $amount = str_replace(',','', $params->amount);
+            
+            $used_amount = str_replace(',','', $params->used_amount);
+            
             $fields = array(
-                'dp_number'         => $params->dp_number,
-                'transaksi_no'      => $params->transaksi_no,
-                'tanggal_transaksi' => $params->tanggal_transaksi,
-                'kode_vendor'       => $params->kode_vendor,
-                'cp'                => $params->cp,
-                'lg_no'             => $params->lg_no,
-                'currency'          => $params->currency,
-                'amount'            => $params->amount,
-                'note'              => $params->note,
+                'ds_no'                 => trim($params->ds_no),
+                'transaction_no'        => trim($params->transaction_no),
+                'transaction_date'      => $params->transaction_date,
+                'dept_id'               => $params->dept_id,
+                'supplier_code'         => trim($params->supplier_code),
+                'cp'                    => $params->cp,
+                'lg_no'                 => $params->lg_no,
+                'currency'              => trim($params->currency),
+                'amount'                => $amount,
+                'used_amount'           => $used_amount,
+                'note'                  => $params->note,
             );
             
             $this->db->set($fields);
@@ -105,8 +122,8 @@ class modeldpsupplier extends CI_Model {
             }
             
             if (!empty($params->btnupdate)){
-                $id = $params->id_dp_supplier;
-                $this->db->where('id_dp_supplier', $id);
+                $id = $params->ds_transaction_id;
+                $this->db->where('ds_transaction_id', $id);
                 $valid = $this->db->update('dp_supplier');
             }
             return $valid;
@@ -115,10 +132,10 @@ class modeldpsupplier extends CI_Model {
         function delete($id)
         {
             // remove detail transaksi 1
-            $this->db->where('id_dp_supplier', $id);
+            $this->db->where('ds_transaction_id', $id);
             $valid = $this->db->delete('dp_supplier_detail');
             if ($valid) {
-                $this->db->where('id_dp_supplier', $id);
+                $this->db->where('ds_transaction_id', $id);
                 $valid = $this->db->delete('dp_supplier');
             }
             return $valid;

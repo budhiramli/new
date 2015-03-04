@@ -25,9 +25,7 @@ class Dp_supplier extends CI_Controller {
     
     function index()
     {
-        
         $data = array();
-        
         
         // create content page fo dp supplier
         $content = $this->twiggy->template('breadcrumbs')->render();
@@ -39,7 +37,7 @@ class Dp_supplier extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_dp_supplier');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.id_dp_supplier');
+        $this->twiggy->set('FORM_IDKEY', 'full.ds_transaction_id');
         $this->twiggy->set('FORM_LINK', site_url('cashier/dp_supplier/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -89,7 +87,7 @@ class Dp_supplier extends CI_Controller {
         $this->twiggy->set('window_page', $window_page);
         
         $script_page = $this->twiggy->template('script/form_dp_supplier')->render();         
-        //$script_page .= $this->twiggy->template('script/script_all')->render();         
+        $script_page .= $this->twiggy->template('script/script_all')->render();         
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
@@ -102,6 +100,8 @@ class Dp_supplier extends CI_Controller {
         $this->load->model('modeldpsupplierdetail');
         $params = (object) $this->input->post();
         $valid = $this->modeldpsupplier->save($params);	       
+        //print_r($params);
+        //echo $this->db->last_query();
         redirect(site_url('cashier/dp_supplier/index'), 'refresh');
     }   
     
@@ -113,7 +113,7 @@ class Dp_supplier extends CI_Controller {
 	$valid = false;
 	
 	$valid = $this->modeldpsupplier->delete($id);
-		
+	//echo $this->db->last_query();	
 	if ($valid)
             redirect(site_url('cashier/dp_supplier/index'), "refresh");	
     }

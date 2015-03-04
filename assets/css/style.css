@@ -1,3 +1,23 @@
+body,html {
+    background-color: #222;
+}
+
+.navbar {
+    background-color: #222;
+}
+
+.sidebar {
+    background-color: #222;
+}
+
+.sidebar ul.navbar-nav li.a {
+    background-color: #222;
+}
+
+.sidebar li.active,.sidebar ul.navbar-nav li.a:hover  {
+    background-color: #000;
+}
+
 #logindiv{
 	background-color:#eeeeee;
 	width:300px;
@@ -9,6 +29,7 @@
 	border-radius: 10px 10px 10px 10px;
 	top:90px;
 }
+
 #toplogin{
 	width:324px;
 	margin:auto;
@@ -18,10 +39,10 @@
 	padding:10px;
 	top:20px;
 }
+
 #logotop{
 	top:5px;
 	position:absolute;
-
 }
 
 .header-row {margin-top:20px;}
@@ -58,6 +79,7 @@
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
+    margin-top:-1px;
 }
 
 
@@ -96,3 +118,7 @@ label {
     margin-bottom: 6px;
 }
 
+.modal-dialog {width:70%;}
+
+.table tbody td.dt-body-right {text-align:right;}
+.table tbody td.dt-body-center {text-align:center;}

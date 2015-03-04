@@ -10,34 +10,34 @@
                 <div class="panel-body">
                 <div class="row">
                     <form class="form-horizontal" action="{{ site_url('cashier/dp_supplier/save') }}" method="post" role="form" name="form1">
-                    <input id="id_dp_supplier" name="id_dp_supplier" type="hidden" value="{{ edit.id_dp_supplier }}" />    
+                    <input id="ds_transaction_id" name="ds_transaction_id" type="hidden" value="{{ edit.ds_transaction_id }}" />    
                     <div class="col-xs-12 col-md-8">
                         <div class="form-group col-xs-12">
-                            <label for="dp_number" class="col-xs-2 control-label">DS Number</label>
-                            <div class="col-xs-4">
-                              <input type="text" class="form-control" id="dp_number" name="dp_number" value="{{ edit.dp_number }}" placeholder="xxxxxxxx">
-                            </div>
-                            <label for="ds_number" class="col-xs-3 control-label">No Transaksi</label>
+                            <label for="ds_no" class="col-xs-3 control-label">DS Number</label>
                             <div class="col-xs-3">
-                              <input type="text" class="form-control" id="transaksi_no" name="transaksi_no" value="{{ edit.transaksi_no }}" placeholder="xxxxxxxx">
+                              <input type="text" class="form-control" id="ds_no" name="ds_no" value="{{ edit.ds_no }}" placeholder="xxxxxxxx">
+                            </div>
+                            <label for="ds_number" class="col-xs-3 control-label">Transaction No</label>
+                            <div class="col-xs-3">
+                              <input type="text" class="form-control" id="transaction_no" name="transaction_no" value="{{ edit.transaction_no }}" placeholder="xxxxxxxx">
                             </div>
                         </div>
                         <div class="form-group col-xs-12">
-                            <label for="tanggal_transaksi" class="col-xs-2 control-label">Tanggal</label>
+                            <label for="transaction_date" class="col-xs-3 control-label">Date</label>
                             <div class="col-xs-4">
                                 <div class='input-group date' id='datetimepicker1'>
-                                    <input type="text" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi" value="{{ edit.tanggal_transaksi }}" placeholder="YYYY-MM-DD">
+                                    <input type="text" class="form-control" id="transaction_date" name="transaction_date" value="{{ edit.transaction_date }}" placeholder="YYYY-MM-DD">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>    
                             </div>
 
-                            <label for="dept" class="col-xs-3 control-label">Dept</label>
+                            <label for="dept" class="col-xs-2 control-label">Dept</label>
                             <div class="col-xs-3">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="id_dept" name="id_dept" value="{{ edit.id_dept }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                    <input type="text" class="form-control typeahead tt-query" id="dept_id" name="dept_id" value="{{ edit.dept_id }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:30px;" placeholder="xxxxxxxx">
                                     <span class="input-group-btn">
-                                        <button type="button" data-toggle="modal" data-target="#window-dept" class="btn btn-primary" style="cursor:pointer;">
+                                        <button type="button" data-toggle="modal" data-target="#window-dept" class="btn-find btn btn-primary" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-search"></span>
                                         </button>
                                     </span>
@@ -46,12 +46,12 @@
                         </div>    
 
                         <div class="form-group col-xs-12">
-                            <label for="kode_vendor" class="col-xs-2 control-label">Supplier</label>
+                            <label for="supplier_code" class="col-xs-3 control-label">Supplier</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                    <input type="text" class="form-control typeahead tt-query" id="kode_vendor" name="supplier_code" value="{{ edit.supplier_code }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:30px;" placeholder="xxxxxxxx">
                                     <span class="input-group-btn">
-                                        <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn btn-primary" style="cursor:pointer;">
+                                        <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn-find btn btn-primary" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-search"></span>
                                         </button>
                                     </span>
@@ -60,19 +60,19 @@
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="cp" class="col-xs-2 control-label">CP</label>
+                            <label for="cp" class="col-xs-3 control-label">CP</label>
                             <div class="col-xs-7">
                                 <input type="text" class="form-control" id="cp" name="cp" value="{{ edit.cp }}" placeholder="xxxxxxxx">  
                             </div>                
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="lg_no" class="col-xs-2 control-label">LG No</label>
+                            <label for="lg_no" class="col-xs-3 control-label">LG No</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="lg_no" name="lg_no" value="{{ edit.lg_no }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                    <input type="text" class="form-control typeahead tt-query" id="lg_no" name="lg_no" value="{{ edit.lg_no }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:30px;" placeholder="xxxxxxxx">
                                     <span class="input-group-btn">
-                                        <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn btn-primary" style="cursor:pointer;">
+                                        <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn-find btn btn-primary" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-search"></span>
                                         </button>
                                     </span>
@@ -81,24 +81,24 @@
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="amount" class="col-xs-2 control-label">Amount</label>
+                            <label for="amount" class="col-xs-3 control-label">Amount</label>
                             <div class="col-xs-3">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" id="currency" name="currency" value="{{ edit.currency }}" placeholder="xxx">
+                                    <input type="text" class="form-control typeahead tt-query" style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:30px;" id="currency_id" name="currency" value="{{ edit.currency }}" placeholder="xxx">
                                     <span class="input-group-btn">
-                                        <button type="button" data-toggle="modal" data-target="#window-currency" class="btn btn-primary" style="cursor:pointer;"><span class="glyphicon glyphicon-search"></span>
+                                        <button type="button" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#window-currency" class="btn-find btn btn-primary" style="cursor:pointer;"><span class="glyphicon glyphicon-search"></span>
                                         </button>
                                     </span>    
                                 </div>
                             </div>
                             <div class="col-xs-4">
-                                <input type="text" class="form-control" id="amount" name="amount" value="{{ edit.amount }}" placeholder="0.000.000,00">
+                                <input type="text" class="form-control" id="amount" name="amount" value="{{ edit.amount }}" placeholder="0.000,00" required="" data-bind="value:amount">
                             </div>
 
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="cp" class="col-xs-2 control-label">Note</label>
+                            <label for="cp" class="col-xs-3 control-label">Note</label>
                             <div class="col-xs-7">
                                 <textarea class="form-control" id="note" name="note">{{ edit.note }}</textarea>  
                             </div>                
@@ -108,29 +108,29 @@
                     <!----- begin RIGHT SECTION ------>
                     <div class="col-xs-6 col-md-4">
                         <div class="form-group col-xs-12">
-                            <label for="cp" class="col-xs-5 control-label">Used Amount</label>
-                            <div class="col-xs-7">
-                                <input type="text" class="form-control" id="amount" name="amount" value="{{ edit.ussed_amount }}" placeholder="0.000.000,00">  
+                            <label for="cp" class="col-xs-6 control-label">Used Amount</label>
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control" id="used_amount" name="used_amount" value="{{ edit.used_amount }}" placeholder="0.000.000,00">  
                             </div>                
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="cp" class="col-xs-5 control-label">Clearing Out</label>
-                            <div class="col-xs-7">
+                            <label for="cp" class="col-xs-6 control-label">Clearing Out</label>
+                            <div class="col-xs-6">
                                 <input type="text" class="form-control" id="clearing_out" name="clearing_out" value="{{ edit.clearing_out }}" placeholder="0.000.000,00"> 
                             </div>                
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="cp" class="col-xs-5 control-label">Clearing In</label>
-                            <div class="col-xs-7">
+                            <label for="cp" class="col-xs-6 control-label">Clearing In</label>
+                            <div class="col-xs-6">
                                 <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" placeholder="0.000.000,00">
                             </div>                
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="cp" class="col-xs-5 control-label">&nbsp;</label>
-                            <div class="col-xs-7">
+                            <label for="cp" class="col-xs-6 control-label">&nbsp;</label>
+                            <div class="col-xs-6">
                                 <div class="checkbox">
                                     <label>
                                       <input type="checkbox" name="is_balance" {{ edit.check_balance }}> Begin Balance
@@ -143,7 +143,7 @@
         </div>   
     </div>                         
                     <!----- end RIGHT SECTION ------>
-<div class="panel panel-default">
+    <div class="panel panel-default">
             <div class="panel-body">
             <div class="row">
                     <div class="form-group col-xs-12"> 
@@ -177,7 +177,6 @@
                         <div class="form-group col-xs-12">        
                             <input type="submit" class="btn btn-default" name="btnsave" id="btnsave" value="Save">
                             <input type="submit" class="btn btn-default" name="btnupdate" id="btnupdate" value="Update">
-
                         </div>
             </div>    
             </div>

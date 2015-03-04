@@ -7,6 +7,12 @@ class modeldpsupplierdetail extends CI_Model {
             $this->load->model('logUpdate');
 	}
         
+        function getrecordcount()
+        {
+            $data = $this->db->count_all_results('dp_supplier_detail');
+            return $data;
+        }
+        
         function getdatalist($id)
         {
             $fields = array(

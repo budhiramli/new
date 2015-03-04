@@ -20,10 +20,10 @@ class Ajax_data extends CI_Controller {
     function vendor()
     {
         //$this->db->like('currency', $currency);
-        $this->db->order_by('vendor_nama asc');
-        $query = $this->db->get('mst_vendor');
+        $this->db->order_by('supplier_name asc');
+        $query = $this->db->get('supplier');
         foreach($query->result() as $row):
-            $data[] = $row->currency; 
+            $data[] = $row->supplier_code . ' ' . $row->supplier_name; 
         endforeach;
         
         echo json_encode($data);
@@ -32,10 +32,10 @@ class Ajax_data extends CI_Controller {
     function dept()
     {
         //$this->db->like('currency', $currency);
-        $this->db->order_by('dept asc');
+        $this->db->order_by('dept_name asc');
         $query = $this->db->get('mst_dept');
         foreach($query->result() as $row):
-            $data[] = $row->currency; 
+            $data[] = $row->dept_name; 
         endforeach;
         
         echo json_encode($data);

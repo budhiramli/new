@@ -1,4 +1,92 @@
 {% block content %}
 
+    var selected = [];
+        var table = $('#table_window_currency').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_currency',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "currency" },
+                    { "data": "symbol" },
+                    //{ "data": "currency_name" },
+                    { "data": "currency_country" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-curr-select btn btn-default btn-circle" data-curr-id=" ' + full.currency + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    
+    $('#table_window_currency tbody').on( 'click', '.btn-curr-select', function () {
+        var currId = $(this).data('curr-id');
+        $('#currency_id').val(currId);
+    });
+    
+    var table = $('#table_window_dept').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_dept',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "dept_name" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-dept-select btn btn-default btn-circle" data-dept-id=" ' + full.dept_id + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    
+    $('#table_window_dept tbody').on( 'click', '.btn-dept-select', function () {
+        var deptId = $(this).data('dept-id');
+        $('#dept_id').val(deptId);
+    });
+    
+    
+    var table = $('#table_window_supplier').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_supplier',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "supplier_code" },
+                    { "data": "supplier_name" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-supplier-select btn btn-default btn-circle" data-supplier-id=" ' + full.supplier_code + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    
+    $('#table_window_supplier tbody').on( 'click', '.btn-supplier-select', function () {
+        var supplierId = $(this).data('supplier-id');
+        $('#kode_vendor').val(supplierId);
+    });
+    
+    
+    $('body').on('show.bs.modal', '#window-dept',function (e) {
+
+    });
   
 {% endblock %}

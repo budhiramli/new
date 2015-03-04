@@ -17,12 +17,12 @@ class modeldpcustomer extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_dp_customer', 
-                'dp_number', 
-                'transaksi_no', 
-                "(DATE_FORMAT(tanggal_transaksi, '%d-%m-%Y')) as tanggal_transaksi" ,
-                'id_dept',                
-                'kode_customer', 
+                'dc_transaction_id',
+                'dc_no', 
+                'transaction_no', 
+                "(DATE_FORMAT(transaction_date, '%d-%m-%Y')) as transaction_date" ,
+                'dept_id',                
+                'company_code', 
                 'cp', 
                 'currency',
                 'amount',
@@ -33,17 +33,17 @@ class modeldpcustomer extends CI_Model {
             $nomor = 1;
             foreach($query->result() as $row):                
                 $data[] = array(
-                    'nomor'                 => $nomor,
-                    'id_dp_customer'        => $row->id_dp_customer, 
-                    'dp_number'             => $row->dp_number, 
-                    'transaksi_no'          => $row->transaksi_no, 
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
-                    'id_dept'               => $row->id_dept,                     
-                    'kode_customer'         => $row->kode_customer, 
-                    'cp'                    => $row->cp, 
-                    'currency'              => $row->currency,
-                    'amount'                => number_format($row->amount, 2, '.', ','),
-                    'note'                  => $row->note,
+                    'nomor'                     => $nomor,
+                    'dc_transaction_id'         => $row->dc_transaction_id, 
+                    'dc_no'                     => $row->dc_no, 
+                    'transaction_no'            => $row->transaction_no, 
+                    'transaction_date'          => $row->transaction_date,
+                    'dept_id'                   => $row->dept_id,                     
+                    'company_code'              => $row->company_code, 
+                    'cp'                        => $row->cp, 
+                    'currency'                  => $row->currency,
+                    'amount'                    => number_format($row->amount, 2, '.', ','),
+                    'note'                      => $row->note,
                 );
                 $nomor++;
             endforeach;
@@ -55,33 +55,33 @@ class modeldpcustomer extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_dp_customer', 
-                'dp_number', 
-                'transaksi_no', 
-                "tanggal_transaksi" ,
-                'id_dept',                
-                'kode_customer', 
+                'dc_transaction_id',
+                'dc_no', 
+                'transaction_no', 
+                "transaction_date" ,
+                'dept_id',                
+                'company_code', 
                 'cp', 
                 'currency',
                 'amount',
                 'note',
             );
             $this->db->select($fields);
-            $this->db->where('id_dp_customer', $id);
+            $this->db->where('dc_transaction_id', $id);
             $query = $this->db->get('dp_customer');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
-                    'id_dp_customer'    => $row->id_dp_customer,
-                    'dp_number'         => $row->dp_number,
-                    'transaksi_no'      => $row->transaksi_no,
-                    'tanggal_transaksi' => $row->tanggal_transaksi,
-                    'id_dept'           => $row->id_dept,
-                    'kode_customer'     => $row->kode_customer,
-                    'cp'                => $row->cp,
-                    'currency'             => $row->currency,
-                    'amount'            => $row->amount,
-                    'note'              => $row->note,
+                    'dc_transaction_id'         => $row->dc_transaction_id, 
+                    'dc_no'                     => $row->dc_no, 
+                    'transaction_no'            => $row->transaction_no, 
+                    'transaction_date'          => $row->transaction_date,
+                    'dept_id'                   => $row->dept_id,                     
+                    'company_code'              => $row->company_code, 
+                    'cp'                        => $row->cp, 
+                    'currency'                  => $row->currency,
+                    'amount'                    => number_format($row->amount, 2, '.', ','),
+                    'note'                      => $row->note,
                 );
             }
             return $data;
@@ -93,23 +93,28 @@ class modeldpcustomer extends CI_Model {
 		$valid = false;
                 
                 $fields = array(
-                    "dp_number"         => $params->dp_number,
-                    "transaksi_no"      => $params->transaksi_no,
-                    "tanggal_transaksi" => $params->tanggal_transaksi,		
-                    "id_customer"       => $params->id_customer,
-                    "cp"                => $params->cp,
-                    "amount"            => $params->amount,
-                    "note"              => $params->note,
+                    'dc_no'                     => trim($params->dc_no), 
+                    'transaction_no'            => trim($params->transaction_no), 
+                    'transaction_date'          => $params->transaction_date,
+                    'dept_id'                   => $params->dept_id,                     
+                    'company_code'              => trim($params->company_code), 
+                    'cp'                        => trim($params->cp), 
+                    'currency'                  => trim($params->currency),
+                    'amount'                    => $params->amount,
+                    'note'                      => $params->note,
                 );
                         
 		if (!empty($params->id_dp_customer)) {
-			$this->db->where("id_dp_customer", $params->id);
+			$this->db->where("dc_transaction_id", $params->id);
+                        $this->db->set($fields);
 			$valid = $this->db->update("dp_customer");
                         
 			$valid = $this->logUpdate->addLog("update", "dp_customer", $params);
 		}
 		else {
-			$valid = $this->db->insert('dp_customer');
+                        $this->db->set($fields);
+                        $valid = $this->db->insert('dp_customer');
+                        
                         $valid = $this->logUpdate->addLog("insert", "dp_customer", $params);
 		}
 		
@@ -119,12 +124,13 @@ class modeldpcustomer extends CI_Model {
         public function delete($id)
 	{	
 		$log = $this->session->all_userdata();
-		$valid = false;		
-		$valid = $this->logUpdate->addLog("delete", "dp_customer", array("id_dp_customer" => $id));	
+                $valid = true;
+		//$valid = $this->logUpdate->addLog("delete", "dp_customer", array("dc_transaction_id" => $id, $log));	
 		
 		if ($valid){
-			$this->db->where('id_dp_customer', $id);
+			$this->db->where('dc_transaction_id', $id);
 			$valid = $this->db->delete('dp_customer');
+                        //echo $this->db->last_query();
 		}
 		
 		return $valid;		
