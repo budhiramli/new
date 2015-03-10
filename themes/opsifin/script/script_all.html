@@ -1,5 +1,16 @@
 {% block content %}
 
+    $('#datetimepicker1').datetimepicker({
+                format: 'DD-MM-YYYY'
+    });
+            
+    // currency typeahead
+    $('#currency_id.typeahead').typeahead({                
+                name: 'currency',
+                prefetch: '{{ site_url() }}/ajax_master_data/currency',
+                limit: 20
+    });
+
     var selected = [];
         var table = $('#table_window_currency').dataTable( {    
             "searching": true,
@@ -30,6 +41,14 @@
         $('#currency_id').val(currId);
     });
     
+    
+    // vendor typeahead
+            $('#dept_id.typeahead').typeahead({
+                name: 'dept_name',
+                prefetch: '{{ site_url() }}/ajax_master_data/dept',
+                limit: 20
+            })
+            
     var table = $('#table_window_dept').dataTable( {    
             "searching": true,
             "ordering": false,    
@@ -84,6 +103,27 @@
         $('#kode_vendor').val(supplierId);
     });
     
+    var table = $('#table_window_customer').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_customer',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "company_code" },
+                    { "data": "company_name" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-supplier-select btn btn-default btn-circle" data-supplier-id=" ' + full.supplier_code + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
     
     $('body').on('show.bs.modal', '#window-dept',function (e) {
 
