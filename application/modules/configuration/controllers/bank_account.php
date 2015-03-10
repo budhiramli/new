@@ -3,7 +3,10 @@
 class Bank_account extends CI_Controller {
     function __construct() {
         parent::__construct();   
-        
+        $username = $this->session->userdata('username');
+        if (empty($username)){
+            redirect(site_url('main/index'), 'refresh');
+        };
         $this->load->library('menu');
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
@@ -59,9 +62,13 @@ class Bank_account extends CI_Controller {
     {
         $data = array();
         
+        if (!empty($id)){
+            $this->load->model('coa_class_mdl');
+            $data = $this->coa_class_mdl->getdataid($id);
+            $this->twiggy->set('edit', $data); 
+        };
         // create content page fo dp supplier
-        $content = $this->twiggy->template('breadcrumbs')->render();
-        $content .= $this->twiggy->template('form/form_bank_account')->render();
+        $content = $this->twiggy->template('form/form_bank_account')->render();
         
         // end        
         $this->twiggy->set('content_page', $content);
@@ -91,5 +98,33 @@ class Bank_account extends CI_Controller {
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);
     }
+    
+    function save()
+    {
+        $this->load->model('bank_account_mdl');
+        $params = (object) $this->input->post();
+        $btnsave = $this->input->post('btnsave');
+        if (!empty($btnsave))
+        {
+            $this->bank_account_mdl->add($params);
+        }    
+        
+        $btnedit = $this->input->post('btnedit');
+        if (!empty($btnedit))
+        {
+            $id = $this->input->post('account_code');
+            $this->bank_account_mdl->edit($params, $id);
+        }
+        echo $this->db->last_query();
+        //redirect(site_url('configuration/bank_account/index'), 'refresh');
+    }
+    
+    function del($id)
+    {
+        $this->load->model('bank_account_mdl');
+        $this->bank_account_mdl->del($id);
+        redirect(site_url('configuration/bank_account/index'), 'refresh');
+    }
+    
     
 }    

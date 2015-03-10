@@ -3,6 +3,10 @@
 class Currency extends CI_Controller {
     function __construct() {
         parent::__construct();
+        $username = $this->session->userdata('username');
+        if (empty($username)){
+            redirect(site_url('main/index'), 'refresh');
+        };
         $this->load->library('menu');
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
@@ -30,7 +34,7 @@ class Currency extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_currency');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.id_currency');
+        $this->twiggy->set('FORM_IDKEY', 'full.currency_id');
         $this->twiggy->set('FORM_LINK', site_url('configuration/currency/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -57,8 +61,7 @@ class Currency extends CI_Controller {
         };
         
         // create content page fo dp supplier
-        $content = $this->twiggy->template('breadcrumbs')->render();
-        $content .= $this->twiggy->template('form/form_currency')->render();        
+        $content = $this->twiggy->template('form/form_currency')->render();        
         // end        
         $this->twiggy->set('content_page', $content);
         
@@ -91,24 +94,23 @@ class Currency extends CI_Controller {
     function save()
     {
         $params = (object) $this->input->post();   
+        $this->load->model('currency_mdl');
+        $valid = $this->currency_mdl->save($params);
         
-        $valid = $this->modeldpcustomer->save($params);
-        echo $this->db->last_query();
-        
-        die();
         if (empty($valid))
-            $this->owner->alert("Please complete the form", "../index.php/cashier/dp_customer/form");
+            $this->owner->alert("Please complete the form", site_url('configuration/currency/form'));
 	else
-            redirect("../index.php/cashier/dp_customer/form");
+            redirect(site_url('configuration/currency/index'), "refresh");
     }   
     
-    public function delete()
+    function delete($id)
 	{		
 		$valid = false;
-		$id = $this->input->get('id');
-		$valid = $this->modeldpcustomer->delete($id);
+		
+                $this->load->model('currency_mdl');
+		$valid = $this->currency_mdl->delete($id);
 		
 		if ($valid)
-			redirect("../index.php/cashier/dp_customer/form");	
+			redirect(site_url('configuration/currency/index'), "refresh");
 	}
 }

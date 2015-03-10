@@ -21,6 +21,22 @@ class Ajax_data extends CI_Controller {
         echo json_encode($data);
     }
     
+    function getrecord_class_type()
+    {
+        $this->load->model('class_type_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->class_type_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->class_type_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->class_type_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
     function getrecord_coa_class()
     {
         $this->load->model('coa_class_mdl');
@@ -82,6 +98,13 @@ class Ajax_data extends CI_Controller {
         $data['aaData']                 = $this->bank_account_mdl->getdatalist();
         $data['iTotalRecords']          = $this->bank_account_mdl->getrecordcount();
         $data['iTotalDisplayRecords']   = $this->bank_account_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
+    function get_supplier($supplier_code)
+    {
+        $this->load->model('supplier_mdl');
+        $data = $this->supplier_mdl->getdataid($supplier_code);
         echo json_encode($data);
     }
     

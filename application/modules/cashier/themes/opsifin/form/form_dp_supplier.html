@@ -26,22 +26,19 @@
                             <label for="transaction_date" class="col-xs-3 control-label">Date</label>
                             <div class="col-xs-4">
                                 <div class='input-group date' id='datetimepicker1'>
-                                    <input type="text" class="form-control" id="transaction_date" name="transaction_date" value="{{ edit.transaction_date }}" placeholder="YYYY-MM-DD">
+                                    <input type="text" class="form-control" id="transaction_date" name="transaction_date" value="{{ edit.transaction_date }}" placeholder="DD-MM-YYYY">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>    
                             </div>
 
-                            <label for="dept" class="col-xs-2 control-label">Dept</label>
+                            <label for="dept_id" class="col-xs-2 control-label">Dept</label>
                             <div class="col-xs-3">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="dept_id" name="dept_id" value="{{ edit.dept_id }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:30px;" placeholder="xxxxxxxx">
-                                    <span class="input-group-btn">
-                                        <button type="button" data-toggle="modal" data-target="#window-dept" class="btn-find btn btn-primary" style="cursor:pointer;">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
+                                    <input type="text" class="form-control" id="dept_id" name="dept_id" value="{{ edit.dept_id }}" placeholder="type or Browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-dept"><span class="glyphicon glyphicon-search"></span>
                                     </span>
-                                </div>
+                                </div>    
                             </div>
                         </div>    
 
@@ -49,7 +46,7 @@
                             <label for="supplier_code" class="col-xs-3 control-label">Supplier</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="kode_vendor" name="supplier_code" value="{{ edit.supplier_code }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:30px;" placeholder="xxxxxxxx">
+                                    <input type="text" class="form-control typeahead tt-query" id="supplier_code" name="supplier_code" value="{{ edit.supplier_code }}"  placeholder="type here or browse">
                                     <span class="input-group-btn">
                                         <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn-find btn btn-primary" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-search"></span>
@@ -62,7 +59,7 @@
                         <div class="form-group col-xs-12">
                             <label for="cp" class="col-xs-3 control-label">CP</label>
                             <div class="col-xs-7">
-                                <input type="text" class="form-control" id="cp" name="cp" value="{{ edit.cp }}" placeholder="xxxxxxxx">  
+                                <input type="text" class="form-control" id="cp" name="cp" value="{{ edit.cp }}" placeholder="type here or browse">  
                             </div>                
                         </div>
 
@@ -70,7 +67,7 @@
                             <label for="lg_no" class="col-xs-3 control-label">LG No</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="lg_no" name="lg_no" value="{{ edit.lg_no }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:30px;" placeholder="xxxxxxxx">
+                                    <input type="text" class="form-control typeahead tt-query" id="lg_no" name="lg_no" value="{{ edit.lg_no }}"  placeholder="type here or browse">
                                     <span class="input-group-btn">
                                         <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn-find btn btn-primary" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-search"></span>
@@ -81,15 +78,13 @@
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="amount" class="col-xs-3 control-label">Amount</label>
+                            <label for="currency_id" class="col-xs-3 control-label">Amount</label>
                             <div class="col-xs-3">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:30px;" id="currency_id" name="currency" value="{{ edit.currency }}" placeholder="xxx">
-                                    <span class="input-group-btn">
-                                        <button type="button" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#window-currency" class="btn-find btn btn-primary" style="cursor:pointer;"><span class="glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </span>    
-                                </div>
+                                    <input type="text" class="form-control" id="currency_id" name="currency" value="{{ edit.currency }}" placeholder="type or Browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-currency"><span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                </div>    
                             </div>
                             <div class="col-xs-4">
                                 <input type="text" class="form-control" id="amount" name="amount" value="{{ edit.amount }}" placeholder="0.000,00" required="" data-bind="value:amount">

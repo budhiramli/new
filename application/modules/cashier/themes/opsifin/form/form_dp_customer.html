@@ -26,7 +26,7 @@
                                 <label for="transaction_date" class="col-xs-3 control-label">Date</label>
                                 <div class="col-xs-4">
                                     <div class='input-group date' id='datetimepicker1'>
-                                        <input type="text" class="form-control" id="transaction_date" name="transaction_date" value="{{ edit.transaction_date }}" placeholder="YYYY-MM-DD">
+                                        <input type="text" class="form-control" id="transaction_date" name="transaction_date" value="{{ edit.transaction_date }}" placeholder="DD-MM-YYYY">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>    
@@ -36,12 +36,9 @@
                             <div class="form-group col-xs-12">
                                 <label for="dept_id" class="col-xs-3 control-label">Dept</label>
                                 <div class="col-xs-4">
-                                    <div class='input-group'>
-                                        <input type="text" class="form-control typeahead tt-query"id="dept_id" name="dept_id" value="{{ edit.dept_id }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:30px;" placeholder="xxxxxxxx">
-                                        <span class="input-group-btn">
-                                            <button type="button" data-toggle="modal" data-target="#window-dept" class="btn-find btn btn-primary" style="cursor:pointer;">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
+                                    <div class='input-group date' id='dept_select'>
+                                        <input type="text" class="form-control" id="dept_id" name="dept_id" value="{{ edit.dept_id }}" placeholder="type or Browse">
+                                        <span class="input-group-addon" data-toggle="modal" data-target="#window-dept"><span class="glyphicon glyphicon-search"></span>
                                         </span>
                                     </div>
                                 </div>
@@ -50,12 +47,9 @@
                             <div class="form-group col-xs-12">
                                 <label for="company_code" class="col-xs-3 control-label">Customer</label>
                                 <div class="col-xs-7">
-                                    <div class='input-group'>
-                                        <input type="text" class="form-control typeahead tt-query" id="company_code" name="company_code" value="{{ edit.company_code }}" style="margin-top:1px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:30px;" placeholder="xxxxxxxx">
-                                        <span class="input-group-btn">
-                                            <button type="button" data-toggle="modal" data-target="#window-customer" class="btn-find btn btn-primary" style="cursor:pointer;">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
+                                    <div class='input-group date' id='customer_select'>
+                                        <input type="text" class="form-control" id="company_code" name="company_code" value="{{ edit.company_code }}" placeholder="type or browse">
+                                        <span class="input-group-addon" data-toggle="modal" data-target="#window-customer"><span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
                                 </div>                
@@ -69,18 +63,16 @@
                             </div>
 
                             <div class="form-group col-xs-12">
-                                <label for="amount" class="col-xs-3 control-label">Amount</label>
+                                <label for="currency_id" class="col-xs-3 control-label">Amount</label>
                                 <div class="col-xs-3">
                                     <div class='input-group'>
-                                        <input type="text" class="form-control typeahead tt-query" style="margin-top:1px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:30px;" id="currency_id" name="currency" value="{{ edit.currency }}" placeholder="xxx">
-                                        <span class="input-group-btn">
-                                            <button type="button" data-toggle="modal" data-target="#window-currency" class="btn-find btn btn-primary" style="cursor:pointer;"><span class="glyphicon glyphicon-search"></span>
-                                            </button>
-                                        </span>    
-                                    </div>
+                                        <input type="text" class="form-control" id="currency_id" name="currency" value="{{ edit.currency }}" placeholder="type or Browse">
+                                        <span class="input-group-addon" data-toggle="modal" data-target="#window-currency"><span class="glyphicon glyphicon-search"></span>
+                                        </span>
+                                    </div>    
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="amount" name="amount" value="{{ edit.amount }}" placeholder="0.000.000,00">
+                                    <input type="text" class="form-control" id="amount" name="amount" value="{{ edit.amount }}" placeholder="0,000.00" required="" data-bind="value:amount">
                                 </div>
 
                             </div>
@@ -96,36 +88,36 @@
                         <!----- begin RIGHT SECTION ------>
                         <div class="col-xs-6 col-md-4">
                             <div class="form-group col-xs-12">
-                                <label for="used_amount" class="col-xs-5 control-label">Used Amount</label>
-                                <div class="col-xs-7">
-                                    <input type="text" class="form-control" id="used_amount" name="used_amount" value="{{ edit.used_amount }}" placeholder="0.000.000,00">  
+                                <label for="used_amount" class="col-xs-6 control-label">Used Amount</label>
+                                <div class="col-xs-6">
+                                    <input type="text" class="form-control" id="used_amount" name="used_amount" value="{{ edit.used_amount }}" placeholder="0,000.00">  
                                 </div>                
                             </div>
 
                             <div class="form-group col-xs-12">
-                                <label for="cp" class="col-xs-5 control-label">Old Ref No</label>
-                                <div class="col-xs-7">
-                                    <input type="text" class="form-control" id="old_ref_no" name="old_ref_no" value="{{ edit.old_ref_no }}" placeholder="0.000.000,00"> 
+                                <label for="cp" class="col-xs-6 control-label">Old Ref No</label>
+                                <div class="col-xs-6">
+                                    <input type="text" class="form-control" id="old_ref_no" name="old_ref_no" value="{{ edit.old_ref_no }}" placeholder="xxxxx"> 
                                 </div>                
                             </div>
 
                             <div class="form-group col-xs-12">
-                                <label for="cp" class="col-xs-5 control-label">Tour Code</label>
-                                <div class="col-xs-7">
-                                    <input type="text" class="form-control" id="tour_code" name="tour_code" value="{{ edit.tour_code }}" placeholder="0.000.000,00">
+                                <label for="cp" class="col-xs-6 control-label">Tour Code</label>
+                                <div class="col-xs-6">
+                                    <input type="text" class="form-control" id="tour_code" name="tour_code" value="{{ edit.tour_code }}" placeholder="xxxxx">
                                 </div>                
                             </div>
 
                             <div class="form-group col-xs-12">
-                                <label for="cp" class="col-xs-5 control-label">Book Code</label>
-                                <div class="col-xs-7">
-                                    <input type="text" class="form-control" id="book_code" name="book_code" value="{{ edit.book_code }}" placeholder="0.000.000,00">
+                                <label for="cp" class="col-xs-6 control-label">Book Code</label>
+                                <div class="col-xs-6">
+                                    <input type="text" class="form-control" id="book_code" name="book_code" value="{{ edit.book_code }}" placeholder="xxxxx">
                                 </div>                
                             </div>
 
                             <div class="form-group col-xs-12">
-                                <label for="cp" class="col-xs-5 control-label">&nbsp;</label>
-                                <div class="col-xs-7">
+                                <label for="cp" class="col-xs-6 control-label">&nbsp;</label>
+                                <div class="col-xs-6">
                                     <div class="checkbox">
                                         <label>
                                           <input type="checkbox" name="is_amount_idr"> Amount IDR

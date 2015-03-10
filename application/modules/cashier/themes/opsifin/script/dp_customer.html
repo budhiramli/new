@@ -8,14 +8,14 @@ var table = $('#table_dp_customer').dataTable( {
         "ajax": '{{ site_url() }}/cashier/ajax_data/getrecord_dpcustomer',
         "columns": [
                 { "data": "nomor" },
-                { "data": "dp_number" },
-                { "data": "transaksi_no" },
-                { "data": "tanggal_transaksi" },
-                { "data": "id_dept" },                
-                { "data": "kode_customer" },
+                { "data": "dc_no" },
+                { "data": "transaction_no" },
+                { "className":"dt-body-center", "data": "transaction_date" },
+                { "data": "dept_id" },                
+                { "data": "company_code" },
                 { "data": "cp" },
-                { "data": "currency" },                
-                { "data": "amount" },
+                { "className":"dt-body-center", "data": "currency" },                
+                { "className":"dt-body-right", "data": "amount" },
                 { "mRender" : function ( data, type, full ) {
                     FullData = full;
                     return '{{ BUTTON_CRUD }} ';

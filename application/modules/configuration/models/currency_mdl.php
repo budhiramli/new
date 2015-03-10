@@ -16,7 +16,7 @@ class Currency_mdl extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_currency', 
+                'currency_id',
                 'currency',
                 'symbol',
                 'currency_name',
@@ -29,7 +29,7 @@ class Currency_mdl extends CI_Model {
             foreach($query->result() as $row):
                 $data[] = array(
                     'nomor'                 => $nomor,
-                    'id_currency'          => $row->id_currency, 
+                    'currency_id'           => $row->currency_id,
                     'currency'             => $row->currency,
                     'symbol'               => $row->symbol,
                     'currency_name'        => $row->currency_name,
@@ -44,7 +44,7 @@ class Currency_mdl extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_currency', 
+                'currency_id', 
                 'currency',
                 'symbol',
                 'currency_name',
@@ -52,12 +52,12 @@ class Currency_mdl extends CI_Model {
             );
             
             $this->db->select($fields);
-            $this->db->where('id_currency', $id);
+            $this->db->where('currency_id', $id);
             $query = $this->db->get('mst_currency');
             if ($query->num_rows() > 0){
                 $row = $query->row();
                     $data = array(
-                        'id_currency'          => $row->id_currency, 
+                        'currency_id'          => $row->currency_id, 
                         'currency'             => $row->currency,
                         'symbol'               => $row->symbol,
                         'currency_name'        => $row->currency_name,
@@ -65,5 +65,32 @@ class Currency_mdl extends CI_Model {
                     );
             }
             return $data;
+        }
+        
+        function save($params)
+        {
+            $fields = array(
+                'currency'             => $params->currency,
+                'symbol'               => $params->symbol,
+                'currency_name'        => $params->currency_name,
+                'currency_country'     => $params->currency_country,
+            );
+            $this->db->set($fields);
+            
+            if (!empty($params->btnsave)){
+                $this->db->insert('mst_currency');
+            }
+            
+            if (!empty($params->btnupdate)){
+                $id = $params->currency_id;
+                $this->db->where('currency_id', $id);
+                $this->db->update('mst_currency');
+            }
+            return true;
+        }
+        
+        function delete()
+        {
+            
         }
 }

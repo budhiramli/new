@@ -1,27 +1,11 @@
 {% block content %}
 
-            $('#datetimepicker1').datetimepicker({
-                format: 'YYYY-MM-DD'
-            });
             
-            // currency typeahead
-            $('#currency.typeahead').typeahead({                
-                name: 'currency',
-                prefetch: '{{ base_url() }}index.php/cashier/ajax_data/currency',
-                limit: 20
-            });
             
             // vendor typeahead
             $('#kode_vendor.typeahead').typeahead({
                 name: 'kode_vendor',
                 prefetch: '{{ base_url() }}index.php/cashier/ajax_data/vendor',
-                limit: 20
-            })
-            
-            // vendor typeahead
-            $('#id_dept.typeahead').typeahead({
-                name: 'id_dept',
-                prefetch: '{{ base_url() }}index.php/cashier/ajax_data/dept',
                 limit: 20
             })
             

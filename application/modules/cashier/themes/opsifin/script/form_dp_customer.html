@@ -1,5 +1,28 @@
 {% block content %}
 
+            $("#amount").maskMoney();
+            $("#used_amount").maskMoney();
+            
+            $("#amount").keypress(function (e) {
+                //if the letter is not digit then display error and don't type anything
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                   //display error message
+                   $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                          return false;
+               }
+            });
+            
+            var dcId = '{{ edit.dc_transaction_id}}';
+           
+            if (!!dcId){                
+                $('#btnupdate').removeClass('hide');
+                $('#btnsave').addClass('hide');
+            }
+            else {
+                $('#btnupdate').addClass('hide');
+                $('#btnsave').removeClass('hide');
+            }
+
             $('#datetimepicker1').datetimepicker({
                 format: 'YYYY-MM-DD'
             });

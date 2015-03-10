@@ -4,7 +4,10 @@ class Coa_account extends CI_Controller {
     
     function __construct() {
         parent::__construct();   
-        
+        $username = $this->session->userdata('username');
+        if (empty($username)){
+            redirect(site_url('main/index'), 'refresh');
+        };
         $this->load->library('menu');
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
@@ -33,7 +36,7 @@ class Coa_account extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_coa_account');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.class_id');
+        $this->twiggy->set('FORM_IDKEY', 'full.account_code');
         $this->twiggy->set('FORM_LINK', site_url('settings/coa_account/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -56,13 +59,18 @@ class Coa_account extends CI_Controller {
         $this->output->set_output($output);
     }
     
-    function form()
+    function form($id='')
     {
         $data = array();
         
+        if (!empty($id)){
+            $this->load->model('coa_account_mdl');
+            $data = $this->coa_account_mdl->getdataid($id);
+            
+            $this->twiggy->set('edit', $data); 
+        };
         // create content page fo dp supplier
-        $content = $this->twiggy->template('breadcrumbs')->render();
-        $content .= $this->twiggy->template('form/form_coa_account')->render();
+        $content = $this->twiggy->template('form/form_coa_account')->render();
         
         // end        
         $this->twiggy->set('content_page', $content);
@@ -70,7 +78,7 @@ class Coa_account extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_coa_account');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.class_id');
+        $this->twiggy->set('FORM_IDKEY', 'full.account_code');
         $this->twiggy->set('FORM_LINK', site_url('settings/coa_account/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -78,9 +86,6 @@ class Coa_account extends CI_Controller {
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
         $window_page = $this->twiggy->template('window/window_currency')->render();
-        $window_page .= $this->twiggy->template('window/window_dept')->render();
-        $window_page .= $this->twiggy->template('window/window_vendor')->render();
-        $window_page .= $this->twiggy->template('window/window_lg')->render();
         
         // end        
         $this->twiggy->set('window_page', $window_page);
@@ -91,6 +96,32 @@ class Coa_account extends CI_Controller {
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);
+    }
+    
+    function save()
+    {
+        $this->load->model('coa_account_mdl');
+        $params = (object) $this->input->post();
+        $btnsave = $this->input->post('btnsave');
+        if (!empty($btnsave))
+        {
+            $this->coa_account_mdl->add($params);
+        }    
+        
+        $btnedit = $this->input->post('btnedit');
+        if (!empty($btnedit))
+        {
+            $id = $this->input->post('account_code');
+            $this->coa_account_mdl->edit($params, $id);
+        }
+        //echo $this->db->last_query();
+        redirect(site_url('configuration/coa_account/index'), 'refresh');
+    }
+    
+    function del($id)
+    {
+        $this->load->model('coa_account_mdl');
+        $this->coa_account_mdl->del($id);
     }
     
 }    

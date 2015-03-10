@@ -3,7 +3,10 @@
 class Cheque_bg extends CI_Controller {
     function __construct() {
         parent::__construct();
-        
+        $username = $this->session->userdata('username');
+        if (empty($username)){
+            redirect(site_url('main/index'), 'refresh');
+        };
 	$this->load->model('modeldpcustomer');
         $this->load->model('modelnumtrans');
         $this->load->library('menu');

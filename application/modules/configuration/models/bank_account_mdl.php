@@ -88,18 +88,51 @@ class bank_account_mdl extends CI_Model {
             return $data;
         }
         
-        function save($params)
+        function add($params)
         {
+            $fields = array(
+                'bank_account_name'         => $params->bank_account_name,
+                'bank_account_type_id'      => $params->bank_account_type_id,                
+                'bank_account_is_default'   => $params->bank_account_is_default,
+                'currency'                  => $params->currency,
+                'account_code'              => $params->account_code,
+                'account_name'              => $params->account_name,
+                'bank_account_bank_name'    => $params->bank_account_bank_name,
+                'bank_account_bank_number'  => $params->bank_account_bank_number,
+                'bank_account_bank_address' => $params->bank_account_bank_address
+                                    
+            );
+            $this->db->set($fields);
+            $this->db->insert('bank_account');
+            
             return true;
         }
         
         function update($params, $id)
         {
+             $fields = array(
+                'bank_account_name'         => $params->bank_account_name,
+                'bank_account_type_id'      => $params->bank_account_type_id,                
+                'bank_account_is_default'   => $params->bank_account_is_default,
+                'currency'                  => $params->currency,
+                'account_code'              => $params->account_code,
+                'account_name'              => $params->account_name,
+                'bank_account_bank_name'    => $params->bank_account_bank_name,
+                'bank_account_bank_number'  => $params->bank_account_bank_number,
+                'bank_account_bank_address' => $params->bank_account_bank_address
+                                    
+            );
+            $this->db->set($fields);
+            $this->db->where('bank_account_id', $id);            
+            $this->db->insert('bank_account');
             return true;
         }
         
         function delete($id)
         {
+            $this->db->where('bank_account_id', $id);            
+            $this->db->insert('bank_account');
+            
             return true;
         }
 }        

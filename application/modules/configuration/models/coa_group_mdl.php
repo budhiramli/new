@@ -70,18 +70,37 @@ class coa_group_mdl extends CI_Model {
             return $data;
         }
         
-        function save($params)
+        function add($params)
         {
+            $fields = array(
+                'coa_group_id'      => $params->coa_group_id, 
+                'coa_group_name'    => $params->coa_group_name,
+                'coa_parent_id'     => $params->coa_parent_id,
+                'class_id'          => $params->class_id
+            );
+            $this->db->set($fields);
+            $this->db->insert('coa_class_group');
             return true;
         }
         
         function update($params, $id)
         {
+            $fields = array(
+                'coa_group_id'      => $params->coa_group_id, 
+                'coa_group_name'    => $params->coa_group_name,
+                'coa_parent_id'     => $params->coa_parent_id,
+                'class_id'          => $params->class_id
+            );
+            $this->db->set($fields);
+            $this->db->where('coa_group_id', $id);            
+            $this->db->update('coa_class_group');
             return true;
         }
         
         function delete($id)
         {
+            $this->db->where('coa_group_id', $id);            
+            $this->db->delete('coa_class_group');
             return true;
         }
 }        

@@ -3,28 +3,28 @@
 class Journal extends CI_Controller {
     function __construct() {
         parent::__construct();  
+        $username = $this->session->userdata('username');
+        if (empty($username)){
+            redirect(site_url('main/index'), 'refresh');
+        };
         $this->load->library('menu');
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
-    }
-    
-    function index()
-    {
         
         $this->twiggy->title('OPSIFIN')->prepend('DP To Supplier');;
         $this->twiggy->meta('keywords', 'twiggy, twig, template, layout, codeigniter');
         $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
-        $data = array();
-        
         // create content page fo dp supplier
         $this->twiggy->set('BREADCRUMBS_TITLE', 'Journal');
         $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Accounting');
         $this->twiggy->set('LIST_TITLE', 'Journal');
-        
+    }
+    
+    function index()
+    {
+        $data = array();
         // create content page fo dp supplier
-        $content = $this->twiggy->template('breadcrumbs')->render();
-        //$content .= $this->twiggy->template('form/filter_dp_supplier')->render();        
-        $content .= $this->twiggy->template('list/journal')->render();
+        $content = $this->twiggy->template('list/journal')->render();
         // end        
         $this->twiggy->set('content_page', $content);
         
@@ -48,15 +48,9 @@ class Journal extends CI_Controller {
     
     function form()
     {
-        $this->twiggy->title('OPSIFIN')->prepend('Journal');;
-        $this->twiggy->meta('keywords', 'twiggy, twig, template, layout, codeigniter');
-        $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
-        $data = array();
+        $data = array();        
         
-        // create content page fo dp supplier
-        $content = $this->twiggy->template('breadcrumbs')->render();
-        $content .= $this->twiggy->template('form/form_journal')->render();        
-        // end        
+        $content = $this->twiggy->template('form/form_journal')->render();
         $this->twiggy->set('content_page', $content);
         
         $this->twiggy->set('FORM_NAME', 'form_journal');
@@ -87,25 +81,26 @@ class Journal extends CI_Controller {
         
     function save()
     {
+        $this->load->model('journal_mdl');
         $params = (object) $this->input->post();   
+        //print_r($params);
+        $valid = $this->journal_mdl->save($params);
+        //echo $this->db->last_query();
         
-        $valid = $this->modeldpcustomer->save($params);
-        echo $this->db->last_query();
-        
-        die();
         if (empty($valid))
-            $this->owner->alert("Please complete the form", "../index.php/cashier/dp_customer/form");
+            $this->owner->alert("Please complete the form", site_url('accounting/journal/form'));
 	else
-            redirect("../index.php/cashier/dp_customer/form");
+            redirect(site_url("accounting/journal/form"));
+        
     }   
     
-    public function delete()
-	{		
-		$valid = false;
-		$id = $this->input->get('id');
-		$valid = $this->modeldpcustomer->delete($id);
+    public function delete($id)
+	{	
+            $this->load->model('journal_mdl');
+            $valid = false;
+            $valid = $this->modeldpcustomer->delete($id);
 		
-		if ($valid)
-			redirect("../index.php/cashier/dp_customer/form");	
+            if ($valid)
+                redirect(site_url("accounting/journal/form"));	
 	}
 }

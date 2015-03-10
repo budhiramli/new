@@ -5,41 +5,7 @@ class Ajax_data extends CI_Controller {
         parent::__construct();
     }
     
-    function currency()
-    {
-        //$this->db->like('currency', $currency);
-        $this->db->order_by('currency asc');
-        $query = $this->db->get('mst_currency');
-        foreach($query->result() as $row):
-            $data[] = $row->currency; 
-        endforeach;
-        
-        echo json_encode($data);
-    }
     
-    function vendor()
-    {
-        //$this->db->like('currency', $currency);
-        $this->db->order_by('supplier_name asc');
-        $query = $this->db->get('supplier');
-        foreach($query->result() as $row):
-            $data[] = $row->supplier_code . ' ' . $row->supplier_name; 
-        endforeach;
-        
-        echo json_encode($data);
-    }
-    
-    function dept()
-    {
-        //$this->db->like('currency', $currency);
-        $this->db->order_by('dept_name asc');
-        $query = $this->db->get('mst_dept');
-        foreach($query->result() as $row):
-            $data[] = $row->dept_name; 
-        endforeach;
-        
-        echo json_encode($data);
-    }
     
     function getrecord_dpsupplier()
     {

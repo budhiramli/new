@@ -1,163 +1,223 @@
 {% block content %}
-
-<div class="container-fluid">
-<form action="{{ base_url }}index.php/accounting/debit_note/save" method="post" name="form1">
-<div class="row">    
-    <div class="col-xs-12 col-md-8">
-        <div class="form-group col-xs-12">
-                <label for="kode_vendor" class="col-xs-2 control-label">Branch</label>
-                <div class="col-xs-7">
-                    <div class='input-group'>
-                        <input type="text" class="form-control typeahead tt-query" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
-                        <span class="input-group-btn">
-                            <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn btn-primary" style="cursor:pointer;">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                </div>                
-        </div>
-        
-        <div class="form-group col-xs-12">
-            <label for="dn_number" class="col-xs-2 control-label">DN Number</label>
-            <div class="col-md-4">    
-                <input class="form-control" id="dn_no" name="dn_number" type="text" value="{{ edit.dn_no }}" required/>                
-            </div>   
-            <div class="col-md-2">
-                <label>Transac No</label>
-            </div>
-            <div class="col-md-3">    
-                <input class="form-control" id="dn_no" name="dn_no" type="text" value="{{ edit.dn_no }}" required/>                
-            </div>
-        </div>
-        
-        <div class="form-group col-xs-12">
-                <label for="tanggal_transaksi" class="col-xs-2 control-label">Date</label>
-                <div class="col-xs-4">
-                    <div class="input-group date" id="datetimepicker">
-                        <input type="text" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi" value="{{ edit.tanggal_transaksi}}" placeholder="YYYY-MM-DD">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>    
-                </div>
-        </div>
-        
-        <div class="form-group col-xs-12">
-                <label for="kode_vendor" class="col-xs-2 control-label">DN Type</label>
-                <div class="col-xs-7">
-                    <div class='input-group'>
-                        <input type="text" class="form-control typeahead tt-query" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
-                        <span class="input-group-btn">
-                            <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn btn-primary" style="cursor:pointer;">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                </div>                
-        </div>
-        
-        <div class="form-group col-xs-12">
-                <label for="kode_vendor" class="col-xs-2 control-label">Dept</label>
-                <div class="col-xs-7">
-                    <div class='input-group'>
-                        <input type="text" class="form-control typeahead tt-query" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
-                        <span class="input-group-btn">
-                            <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn btn-primary" style="cursor:pointer;">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                </div>                
-        </div>
-        
-        
-        <div class="form-group col-xs-12">
-                <label for="kode_vendor" class="col-xs-2 control-label">Supplier</label>
-                <div class="col-xs-7">
-                    <div class='input-group'>
-                        <input type="text" class="form-control typeahead tt-query" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" style="margin-top:4px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
-                        <span class="input-group-btn">
-                            <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn btn-primary" style="cursor:pointer;">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                </div>                
-        </div>
-        
-        
-    </div> 
-    
-    <div class="col-lg-4">
-        <div class="form-group col-md-12">
-            <div class="col-md-6">
-                <label>Used SAP Amt</label>
-            </div>
-            <div class="col-md-6">    
-                <input class="form-control" id="used_sap_amt" name="used_sap_amt" type="text" value="{{ edit.used_sap_amt }}" required/>                
-            </div>     
-        </div>
-        <div class="form-group col-md-12">
-            <div class="col-md-6">
-                <label>Used Amt</label>
-            </div>
-            <div class="col-md-6">    
-                <input class="form-control" id="used_amount" name="used_amount" type="text" value="{{ edit.used_amount }}" required/>                
-            </div>     
-        </div>
-    </div>
-    
-    <div class="col-lg-4">
-        <div class="form-group col-md-12">
-            <div class="col-md-6">
-                <label>Ccy</label>
-            </div>
-            <div class="col-md-6">    
-                <input class="form-control" id="ccy" name="ccy" type="text" value="{{ edit.ccy }}" required/>                
-            </div>     
-        </div>
-        <div class="form-group col-md-12">
-            <div class="col-md-6">
-                <label>Balance</label>
-            </div>
-            <div class="col-md-6">    
-                <input class="form-control" id="balance" name="balance" type="text" value="{{ edit.balance }}" required/>                
-            </div>     
-        </div>
-    </div>
-</div>
-<br>
-<br>
-<div class="row">    
+<div class="row">
     <div class="col-lg-12">
-        <div class="table-responsive">
-          <table class="table table-bordered table-hover table-striped">
-              <thead>
-                  <tr>
-                       <th nowrap="nowrap">Code</th>
-                       <th nowrap="nowrap">Ccy</th>
-                       <th nowrap="nowrap">Amount</th>
-                       <th nowrap="nowrap">Rate</th>
-                       <th nowrap="nowrap">Tax Refund</th>
-                       <th nowrap="nowrap">Cancel Fee</th>
-                       <th nowrap="nowrap">Adm Fee</th>
-                       <th nowrap="nowrap">Product</th>                       
-                  </tr>     
-                  <tr>
-                      <th nowrap="nowrap">&nbsp;</th>
-                      <th nowrap="nowrap" colspan="2">Airline Name</th>
-                      <th nowrap="nowrap">Invoice</th>
-                      <th nowrap="nowrap">Tour Code</th>
-                      <th nowrap="nowrap">Group No</th>
-                      <th nowrap="nowrap" colspan="2">Description</th>
-                  </tr>    
-              </thead>
-          </table>
-        </div>    
+        <div class="header-row"></div>
+        
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ BREADCRUMBS_TITLE }}
+                </div>
+                <div class="panel-body">
+                <div class="row">
+                    <form class="form-horizontal" action="{{ site_url('cashier/dp_supplier/save') }}" method="post" role="form" name="form1">
+                    <input id="ds_transaction_id" name="ds_transaction_id" type="hidden" value="{{ edit.ds_transaction_id }}" />    
+                    <div class="col-xs-12 col-md-8">
+                        <div class="form-group col-xs-12">
+                            <label for="supplier_code" class="col-xs-3 control-label">Branch</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="supplier_code" name="supplier_code" value="{{ edit.supplier_code }}"  placeholder="type here or browse">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>                
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label for="ds_no" class="col-xs-3 control-label">CN No</label>
+                            <div class="col-xs-3">
+                              <input type="text" class="form-control" id="ds_no" name="ds_no" value="{{ edit.ds_no }}" placeholder="xxxxxxxx">
+                            </div>
+                            <label for="ds_number" class="col-xs-3 control-label">Transaction No</label>
+                            <div class="col-xs-3">
+                              <input type="text" class="form-control" id="transaction_no" name="transaction_no" value="{{ edit.transaction_no }}" placeholder="xxxxxxxx">
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label for="transaction_date" class="col-xs-3 control-label">Date</label>
+                            <div class="col-xs-4">
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input type="text" class="form-control" id="transaction_date" name="transaction_date" value="{{ edit.transaction_date }}" placeholder="DD-MM-YYYY">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>    
+                            </div>
+
+                            
+                        </div>    
+
+                        <div class="form-group col-xs-12">
+                            <label for="supplier_code" class="col-xs-3 control-label">Type</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="supplier_code" name="supplier_code" value="{{ edit.supplier_code }}"  placeholder="type here or browse">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>                
+                        </div>
+
+                        <div class="form-group col-xs-12">
+                            <label for="lg_no" class="col-xs-3 control-label">Department</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="lg_no" name="lg_no" value="{{ edit.lg_no }}"  placeholder="type here or browse">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>                
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="lg_no" class="col-xs-3 control-label">Customer</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="lg_no" name="lg_no" value="{{ edit.lg_no }}"  placeholder="type here or browse">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>                
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="cp" class="col-xs-3 control-label">CP</label>
+                            <div class="col-xs-7">
+                                <input type="text" class="form-control" id="cp" name="cp" value="{{ edit.cp }}" placeholder="type here or browse">  
+                            </div>                
+                        </div>
+                        
+                        
+
+                    </div>
+                    <!----- begin RIGHT SECTION ------>
+                    <div class="col-xs-6 col-md-4">
+                        <div class="panel panel-default">
+                        
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group col-xs-12">
+                                    <label for="cp" class="col-xs-6 control-label">Used Amount</label>
+                                    <div class="col-xs-6">
+                                        <input type="text" class="form-control" id="used_amount" name="used_amount" value="{{ edit.used_amount }}" placeholder="0.000.000,00">  
+                                    </div>                
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        
+                        <div class="panel panel-default">
+                        
+                        <div class="panel-body">
+                        <div class="row">
+                        <div class="form-group col-xs-12">
+                            <label for="cp" class="col-xs-6 control-label">Clearing Out</label>
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control" id="clearing_out" name="clearing_out" value="{{ edit.clearing_out }}" placeholder="0.000.000,00"> 
+                            </div>                
+                        </div>
+
+                        <div class="form-group col-xs-12">
+                            <label for="cp" class="col-xs-6 control-label">Clearing In</label>
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" placeholder="0.000.000,00">
+                            </div>                
+                        </div>
+                            
+                        <div class="form-group col-xs-12">
+                            <label for="cp" class="col-xs-6 control-label">Clearing Out</label>
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control" id="clearing_out" name="clearing_out" value="{{ edit.clearing_out }}" placeholder="0.000.000,00"> 
+                            </div>                
+                        </div>
+
+                        <div class="form-group col-xs-12">
+                            <label for="cp" class="col-xs-6 control-label">Clearing In</label>
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" placeholder="0.000.000,00">
+                            </div>                
+                        </div>    
+                        </div>
+                        </div>
+                        </div>    
+                        
+                    </div>  
+            </div>
+        </div>   
+    </div>                         
+                    <!----- end RIGHT SECTION ------>
+    <div class="panel panel-default">
+            <div class="panel-body">
+            <div class="row">
+                    <div class="form-group col-xs-12"> 
+                        <div class="table-responsive">
+                          <div class="col-md-12">  
+                          <table id="table_dp_supplier_detail" class="table table-bordered table-hover table-striped">
+                              <thead>
+                                  <tr>
+                                       <th nowrap="nowrap">Invoice</th>
+                                       <th nowrap="nowrap">Ccy</th>
+                                       <th nowrap="nowrap">Amount</th>
+                                       <th nowrap="nowrap">Rate</th>
+                                       <th nowrap="nowrap">Adjust Product</th>    
+                                       <th nowrap="nowrap">Airline</th>
+                                       <th nowrap="nowrap">TourCode</th>
+                                       <th nowrap="nowrap">User</th>                                       
+                                  </tr>
+                                  <tr>
+                                       <th nowrap="nowrap">Group No</th>
+                                       <th nowrap="nowrap" colspan="7">Desc</th>                                       
+                                  </tr>
+                              </thead>
+
+                          </table>
+                          </div>    
+                        </div> 
+                    </div>    
+            </div>
+        </div>   
+    </div>        
+    <div class="panel panel-default">
+            <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-8">        
+                    <div class="form-group col-xs-12">
+                        <div class="col-xs-1">
+                                <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" placeholder="0.000.000,00">
+                        </div>
+                        <div class="col-xs-4">
+                                <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" placeholder="0.000.000,00">
+                        </div>
+                        <div class="col-xs-4">
+                                <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" placeholder="0.000.000,00">
+                        </div>
+                        <div class="col-xs-3">
+                                <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" placeholder="0.000.000,00">
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="col-lg-4">        
+                    <textarea class="form-control"></textarea>
+                </div>
+            </div>    
+            </div>
+    </div>                 
+                    
+    <div class="panel panel-default">
+            <div class="panel-body">
+            <div class="row">
+                        <div class="form-group col-xs-12">        
+                            <input type="submit" class="btn btn-default" name="btnsave" id="btnsave" value="Save">
+                            <input type="submit" class="btn btn-default" name="btnupdate" id="btnupdate" value="Update">
+                        </div>
+            </div>    
+            </div>
+    </div>
+    </form>
+                
     </div>    
 </div>
-<input type="submit" class="btn btn-default" value="Save">
-</form>  
-</div>
+
+
 
 {% endblock %}

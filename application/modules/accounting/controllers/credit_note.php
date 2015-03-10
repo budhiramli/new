@@ -3,6 +3,10 @@
 class Credit_note extends CI_Controller {
     function __construct() {
         parent::__construct();
+        $username = $this->session->userdata('username');
+        if (empty($username)){
+            redirect(site_url('main/index'), 'refresh');
+        };
         $this->load->library('menu');
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
@@ -14,9 +18,6 @@ class Credit_note extends CI_Controller {
         $this->twiggy->set('BREADCRUMBS_TITLE', 'Credit Note');
         $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Accounting');
         $this->twiggy->set('LIST_TITLE', 'Credit Note');
-        
-        
-        
     }
     
     function index()
@@ -52,15 +53,14 @@ class Credit_note extends CI_Controller {
         $data = array();
         
         // create content page fo dp supplier
-        $content = $this->twiggy->template('breadcrumbs')->render();
-        $content .= $this->twiggy->template('form/form_credit_note')->render();        
+        $content = $this->twiggy->template('form/form_credit_note')->render();        
         // end        
         $this->twiggy->set('content_page', $content);
         
-        $this->twiggy->set('FORM_NAME', 'form_dp_customer');
+        $this->twiggy->set('FORM_NAME', 'form_credit_note');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.id_dp_customer');
+        $this->twiggy->set('FORM_IDKEY', 'full.cn_no');
         $this->twiggy->set('FORM_LINK', site_url('accounting/credit_note/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         

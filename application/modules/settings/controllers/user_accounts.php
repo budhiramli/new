@@ -3,7 +3,10 @@
 class User_accounts extends CI_Controller {
     function __construct() {
         parent::__construct();
-        
+        $username = $this->session->userdata('username');
+        if (empty($username)){
+            redirect(site_url('main/index'), 'refresh');
+        };
         $this->twiggy->title('OPSIFIN')->prepend('User Accounts');;
         $this->twiggy->meta('keywords', 'twiggy, twig, template, layout, codeigniter');
         $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');

@@ -1,17 +1,14 @@
 {% block content %}
-    
+
 var selected = [];
-var table = $('#table_currency').dataTable( {    
+var table = $('#table_class_type').dataTable( {    
         "searching": true,
         "ordering": false,    
         "bLengthChange" : false,
-        "ajax": '{{ site_url() }}/configuration/ajax_data/getrecord_currency',
+        "ajax": '{{ site_url() }}/configuration/ajax_data/getrecord_class_type',
         "columns": [
-                { "data": "nomor" },
-                { "data": "currency" },                
-                { "data": "symbol" },
-                { "data": "currency_name" },
-                { "data": "currency_country" },
+                { "data": "class_type_id" },                
+                { "data": "class_type_name" },
                 { "mRender" : function ( data, type, full ) {
                     FullData = full;
                     return '{{ BUTTON_CRUD }} ';
@@ -26,18 +23,18 @@ var table = $('#table_currency').dataTable( {
 });
 
 
-$('#table_currency').on('click', 'a.edit-btn', function (e) {
+$('#table_class_type').on('click', 'a.edit-btn', function (e) {
     e.preventDefault(); 
     var editId = $(this).data('edit-id');
-    window.location.href='{{ site_url() }}/configuration/currency/form/' + editId;
+    window.location.href='{{ site_url() }}/configuration/coa_type/form/' + editId;
 });
 
 // Delete a record
-$('#table_currency').on( 'click', 'a.del-btn', function (e) {
+$('#table_class_type').on( 'click', 'a.del-btn', function (e) {
         e.preventDefault();
         if(confirm("Are you sure?")) {
                 var delId = $(this).data('delete-id');  
-		window.location='{{ site_url() }}/configuration/currency/delete/' + delId;	
+		window.location='{{ site_url() }}/configuration/coa_type/delete/' + delId;	
 	}
 	else
 		return false;

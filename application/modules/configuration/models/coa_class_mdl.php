@@ -64,18 +64,34 @@ class coa_class_mdl extends CI_Model {
             return $data;
         }
         
-        function save($params)
+        function add($params)
         {
+            $fields = array(
+                'class_id'                  => $params->class_id, 
+                'class_name'                => $params->class_name,
+                'class_type_id'             => $params->class_type_id,
+            );
+            $this->db->set($fields);
+            $this->db->insert('coa_class');
             return true;
         }
         
         function update($params, $id)
         {
+            $fields = array(
+                'class_name'                => $params->class_name,
+                'class_type_id'             => $params->class_type_id,
+            );
+            $this->db->set($fields);
+            $this->db->where('class_id', $id);            
+            $this->db->update('coa_class');
             return true;
         }
         
-        function delete($id)
+        function del($id)
         {
+            $this->db->where('class_id', $id);            
+            $this->db->delete('coa_class');
             return true;
         }
 }        

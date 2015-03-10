@@ -64,18 +64,39 @@ class coa_account_mdl extends CI_Model {
             return $data;
         }
         
-        function save($params)
+        function add($params)
         {
+            $fields = array(
+                'account_code'  => $params->account_code, 
+                'account_name'  => $params->account_name,
+                'coa_group_id'  => $params->coa_group_id,
+                'account_is_active'  => $params->account_is_active
+            );
+            $this->db->set($fields);
+            $this->db->insert('coa_account');
             return true;
         }
         
-        function update($params, $id)
+        function edit($params, $id)
         {
+            $fields = array(
+                'account_code'  => $params->account_code, 
+                'account_name'  => $params->account_name,
+                'coa_group_id'  => $params->coa_group_id,
+                'account_is_active'  => $params->account_is_active
+            );
+            $this->db->set($fields);
+            $this->db->where('account_code', $params->account_code);
+            $this->db->update('coa_account');
+            
             return true;
         }
         
         function delete($id)
         {
+            $this->db->where('account_code', $params->account_code);
+            $this->db->delete('coa_account');
+            
             return true;
         }
 }        
