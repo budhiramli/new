@@ -27,52 +27,60 @@
             <label>Branch</label>
         </div>
             <div class="col-md-3">
-                <select class="form-control" id="id_branch">
-                    <option value=""></option>
-                     {% for data in branchlist %}
-                    <option value="{{ data.id_branch }}">{{ data.nama_branch }}</option>
-                     {% endfor %}
-                </select>
-            </div>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Find</button>
-                </span>    
+                <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="id_branch" name="id_branch" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-branch" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                  </div>
+            </div>    
         </div>
     <div class="form-group col-lg-12">
          <div class="col-md-2">
             <label>Report Type</label>
         </div>
-            <div class="col-md-3">
-                <select class="form-control" id="id_report_type">
-                </select>
+        <div class="col-md-3">
+            <div class='input-group'>
+                   <input type="text" class="form-control typeahead tt-query" id="id_report_type" name="id_report_type" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-report_type" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                      </span>
+                </div>
             </div>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Find</button>
-                </span>    
         </div>
     <div class="form-group col-lg-12">
          <div class="col-md-2">
             <label>Type</label>
         </div>
             <div class="col-md-3">
-                <select class="form-control" id="id_type">
-                </select>
-            </div>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Find</button>
-                </span>    
-        </div>
+                <div class='input-group'>
+                    <input type="text" class="form-control typeahead tt-query" id="id_type" name="id_type" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-type" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                     </span>
+               </div>
+         </div>
+    </div>
     <div class="form-group col-lg-12">
-         <div class="col-md-2">
+       <div class="col-md-2">
             <label>View</label>
         </div>
             <div class="col-md-3">
-                <select class="form-control" id="id_view">
-                </select>
-            </div>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Find</button>
-                </span>    
+               <div class='input-group'>
+                 <input type="text" class="form-control typeahead tt-query" id="id_view" name="id_view" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                     <span class="input-group-btn">
+                        <button type="button" data-toggle="modal" data-target="#window-view" class="btn btn-primary" style="cursor:pointer;">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+               </div>
+        </div>
     </div>
     <div class="form-group col-lg-12">
         <div class="col-md-2">

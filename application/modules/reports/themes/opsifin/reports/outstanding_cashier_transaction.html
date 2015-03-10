@@ -1,160 +1,164 @@
 {% block content %}
-
- <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
-       <h1 class="page-header">
-            Outstanding Cashier Transaction 
-        </h1>
-
-        <ol class="breadcrumb">
-            <li>
-                <i class="fa fa-dashboard"></i><a href="#"> Dashboard</a>
-            </li>
-
-            <li class="active">
-                <i class="fa fa-edit"></i> Home
-            </li>
-        </ol>
+        <div class="header-row"></div>
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{ BREADCRUMBS_TITLE }}
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="row">
+                        <form action="{{ base_url }}index.php/reports/outstanding_transaction/home" method="post" name="form1">
+                            <div class="form-group col-lg-12">
+                                <div class="col-md-2">
+                                    <label>Branch</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class='input-group'>
+                                        <input type="text" class="form-control typeahead tt-query" id="id_branch" name="id_branch" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                            <span class="input-group-btn">
+                                                <button type="button" data-toggle="modal" data-target="#window-branch" class="btn btn-primary" style="cursor:pointer;">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <div class="col-md-2">
+                                    <label>Type</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class='input-group'>
+                                        <input type="text" class="form-control typeahead tt-query" id="id_type" name="id_type" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                            <span class="input-group-btn">
+                                                <button type="button" data-toggle="modal" data-target="#window-type" class="btn btn-primary" style="cursor:pointer;">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <div class="col-md-2">
+                                    <label>Date</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class='input-group date' id='datetimepicker1'>
+                                        <input type="text" class="form-control" id="tanggal_collect" name="tanggal_collect" value="{{ edit.tanggal_collect }}" placeholder="YYYY-MM-DD">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <h4>View Option</h4><br>
+                                <div class="col-md-2">
+                                    <label>Department</label>
+                                </div>
+                                <div class="col-md-3">
+                                        <div class='input-group'>
+                                            <input type="text" class="form-control typeahead tt-query" id="id_dept" name="id_dept" value="{{ edit.id_dept }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                            <span class="input-group-btn">
+                                                <button type="button" data-toggle="modal" data-target="#window-dept" class="btn btn-primary" style="cursor:pointer;">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Dealer</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class='input-group'>
+                                        <input type="text" class="form-control typeahead tt-query" id="dealer" name="dealer" value="{{ edit.id_dept }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                            <span class="input-group-btn">
+                                                <button type="button" data-toggle="modal" data-target="#window-dealer" class="btn btn-primary" style="cursor:pointer;">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <div class="col-md-2">
+                                    <label>Status</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class='input-group'>
+                                        <input type="text" class="form-control typeahead tt-query" id="status" name="status" value="{{ edit.id_dept }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                        <span class="input-group-btn">
+                                            <button type="button" data-toggle="modal" data-target="#window-status" class="btn btn-primary" style="cursor:pointer;">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Costumer</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class='input-group'>
+                                        <input type="text" class="form-control typeahead tt-query" id="id_cust" name="id_cust" value="{{ edit.id_dept }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                            <span class="input-group-btn">
+                                                <button type="button" data-toggle="modal" data-target="#window-cust" class="btn btn-primary" style="cursor:pointer;">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <div class="col-md-2">
+                                    <label>Report Type</label>
+                                </div>
+                                    <div class="col-md-3">
+                                        <div class='input-group'>
+                                            <input type="text" class="form-control typeahead tt-query" id="id_report_type" name="id_report_type" value="{{ edit.id_dept }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                                <span class="input-group-btn">
+                                                    <button type="button" data-toggle="modal" data-target="#window-report_type" class="btn btn-primary" style="cursor:pointer;">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                <div class="col-md-2">
+                                    <label>Currency</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class='input-group'>
+                                        <input type="text" class="form-control typeahead tt-query" id="id_currency" name="id_currency" value="{{ edit.id_dept }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                        <span class="input-group-btn">
+                                            <button type="button" data-toggle="modal" data-target="#window-currency" class="btn btn-primary" style="cursor:pointer;">
+                                             <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <div class="col-md-2">
+                                    <label>User</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class='input-group'>
+                                        <input type="text" class="form-control typeahead tt-query" id="id_user" name="id_user" value="{{ edit.id_user }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                        <span class="input-group-btn">
+                                                <button type="button" data-toggle="modal" data-target="#window-user" class="btn btn-primary" style="cursor:pointer;">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                               </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-default" value="Proses">
     </div>
 </div>
-<!-- /.row -->
-
-<div class="row">
-    <form action="{{ base_url }}index.php/reports/outstanding_transaction/home" method="post" name="form1">
-        <div class="col-lg-12">
-        <h4>Refund Summary</h4><br>        
-    </div>
-    <div class="form-group col-lg-12">
-         <div class="col-md-2">
-            <label>Branch</label>
-        </div>
-            <div class="col-md-3">
-                <select class="form-control" id="id_branch">
-                    <option value=""></option>
-                     {% for data in branchlist %}
-                    <option value="{{ data.id_branch }}">{{ data.nama_branch }}</option>
-                     {% endfor %}
-                </select>
-            </div>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Find</button>
-                </span>
-        </div>
-    <div class="form-group col-lg-12">
-         <div class="col-md-2">
-            <label>Type</label>
-        </div>
-            <div class="col-md-3">
-                <select class="form-control" id="id_type">
-                </select>
-            </div>
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Find</button>
-            </span>
-        </div>
-    <div class="form-group col-lg-12">
-       <div class="col-md-2">
-               <label>Date</label>
-       </div>
-       <div class="col-md-3">
-               <input onfocus="gfPop.fPopCalendar(this);" class="form-control" id="trans_date" name="trans_date" type="text" value="{{ main.trans_date }}" required>
-            </div>
-    </div> 
-    <div class="form-group col-lg-12">
-        <h4>View Option</h4><br>
-        <div class="col-md-2">
-            <label>Department</label>
-        </div>
-            <div class="col-md-3">
-                <select class="form-control" id="id_dept"> 
-                 <option value=""></option>
-                     {% for data in deptlist %}
-                    <option value="{{ data.id_dept }}">{{ data.nama_dept }}</option>
-                     {% endfor %}
-                </select>
-            </div>
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Find</button>
-            </span>
-        </div>
-    <div class="form-group col-lg-12">
-         <div class="col-md-2">
-            <label>Status</label>
-        </div>
-            <div class="col-md-3">
-                <select class="form-control" id="id_status">
-                </select>
-            </div>    
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Find</button>
-            </span>
-        </div>
-    <div class="form-group col-lg-12">
-        <div class="col-md-2">
-            <label>Currency</label>
-        </div>
-            <div class="col-md-3">
-                <select class="form-control" id="id_curreny">
-                    {% for data in currencylist %}
-                    <option value="{{ data.id_currency }}">{{ data.currency }}</option>
-                     {% endfor %}
-                </select>
-            </div>    
-        </div>
-    <div class="form-group col-lg-12">
-         <div class="col-md-2">
-            <label>User</label>
-        </div>
-            <div class="col-md-3">
-                <select class="form-control" id="id_user">
-                </select>
-            </div>    
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Find</button>
-            </span>
-        </div>
-    <div class="form-group col-lg-12">
-         <div class="col-md-2">
-            <label>Dealer</label>
-        </div>
-            <div class="col-md-3">
-                <select class="form-control" id="id_dealer">
-                </select>
-            </div>
-            <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Find</button>
-            </span>
-        </div>
-    <div class="form-group col-lg-12">
-         <div class="col-md-2">
-            <label>Costumer</label>
-        </div>
-            <div class="col-md-3">
-                <select class="form-control" id="id_costumer">
-                    <option value=""></option>
-                     {% for data in complist %}
-                    <option value="{{ data.id_company }}">{{ data.nama_company }}</option>
-                     {% endfor %}
-                </select>
-            </div>
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Find</button>
-            </span>
-        </div>
-    <div class="form-group col-lg-12">
-         <div class="col-md-2">
-            <label>Report Type</label>
-        </div>
-            <div class="col-md-3">
-                <select class="form-control" id="id_report_type">
-                </select>
-            </div>    
-            <span class="input-group-btn">
-                 <button class="btn btn-default" type="button">Find</button>
-            </span>
-        </div>
-    <input type="submit" class="btn btn-default" value="Proses">
-    </form>  
-</div>
-    {% endblock %}
+{% endblock %}

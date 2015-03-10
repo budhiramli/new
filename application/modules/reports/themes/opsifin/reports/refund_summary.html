@@ -30,48 +30,45 @@
             <label>Branch</label>
         </div>
             <div class="col-md-2">
-                <select class="form-control" name="nama_branch" id="nama_branch" >
-                    <option value=""></option>
-                     {% for data in branchlist %}
-                    <option value="{{ data.id_branch }}">{{ data.nama_branch }}</option>
-                     {% endfor %} 
-                </select>
+                <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="id_branch" name="id_branch" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-branch" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                  </div>
             </div>
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Find</button>
-            </span>
         </div>
     <div class="form-group col-lg-12">
          <div class="col-md-2">
             <label>Department</label>
         </div>
             <div class="col-md-3">
-                <select class="form-control" name="nama_department" id="nama_dept"> 
-                    <option value=""></option>
-                     {% for data in deptlist %}
-                    <option value="{{ data.id_dept }}">{{ data.nama_dept }}</option>
-                     {% endfor %} 
-                </select>
+              <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="id_dept" name="id_dept" value="{{ edit.id_dept }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-dept" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                  </div> 
             </div>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Find</button>
-                </span>
         </div>
     <div class="form-group col-lg-12">
          <div class="col-md-2">
             <label>Costumer</label>
         </div>
             <div class="col-md-3">
-                <select class="form-control" name="nama_costumer" id="nama_customer">
-                     <option value=""></option>
-                     {% for data in complist %}
-                    <option value="{{ data.id_company }}">{{ data.nama_company }}</option>
-                     {% endfor %}
-                </select>
+                <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="id_company" name="id_company" value="{{ edit.id_company }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-cust" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                  </div> 
             </div>
-            <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Find</button>
-            </span>
         </div>
     <div class="form-group col-lg-12">
         <div class="col-md-2">
@@ -88,21 +85,28 @@
         </div>
     <div class="form-group col-lg-12">
        <div class="col-md-2">
-               <label>From</label>
+            <label>From</label>
        </div>
        <div class="col-md-3">
-               <input onfocus="gfPop.fPopCalendar(this);" class="form-control" id="trans_date" name="trans_date_from" type="text" value="{{ main.trans_date_from }}" required>
-            </div>
+            <div class='input-group date' id='datetimepicker1'>
+                    <input type="text" class="form-control" id="tanggal_collect" name="tanggal_collect" value="{{ edit.tanggal_collect }}" placeholder="YYYY-MM-DD">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+          </div>
     </div>
         <div class="form-group col-lg-12">
         <div class="col-md-2">
             <label>to</label>
         </div>
             <div class="col-md-3">
-               <input onfocus="gfPop.fPopCalendar(this);" class="form-control" id="trans_date" name="trans_date_to" type="text" value="{{ main.trans_date_to }}" required>
+               <div class='input-group date' id='datetimepicker1'>
+                    <input type="text" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi" value="{{ edit.tanggal_transaksi }}" placeholder="YYYY-MM-DD">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                 </div>
             </div>
         </div>
-
         <input type="submit" class="btn btn-default" value="Proses">
     </form>   
 </div>

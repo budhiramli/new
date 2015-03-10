@@ -20,6 +20,7 @@
 </div>
 <!-- /.row -->
 <div class="row">
+    <form action="{{ base_url }}index.php/reports/sub_ledger/home" method="post" name="form1">
     <div class="col-lg-12">
         <h4>Financial Reports</h4><br>
         
@@ -29,7 +30,14 @@
             <label>Branch</label>
         </div>
             <div class="col-md-3">
-                
+               <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="id_branch" name="id_branch" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-branch" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                  </div> 
             </div>    
         </div>
     <div class="form-group col-lg-12">
@@ -37,7 +45,14 @@
             <label>Report Type</label>
         </div>
             <div class="col-md-3">
-                
+                <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="id_report_type" name="id_report_type" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-report_type" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                  </div>
             </div>    
         </div>
     <div class="form-group col-lg-12">
@@ -45,7 +60,14 @@
             <label>Type</label>
         </div>
             <div class="col-md-3">
-                
+               <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="type" name="type" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-type" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                  </div> 
             </div>    
         </div>
     <div class="form-group col-lg-12">
@@ -53,7 +75,14 @@
             <label>View</label>
         </div>
             <div class="col-md-3">
-                
+                <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="id_view" name="id_view" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-view" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                  </div>
             </div>    
     </div>
     <div class="form-group col-lg-12">
@@ -61,7 +90,7 @@
             <label>Period</label>
         </div>
         <div class="col-md-3">
-            
+           <input type="text" class="form-control" id="period" name="period" value="" placeholder="xxxxxxxx"> 
         </div>
         <div class="col-md-2">
             <h6>[MM/YYYY]</h6>
@@ -81,20 +110,7 @@
             </div>
         </div>
     </div>
-    
-    <div class="table-responsive">
-    <table class="table table-bordered table-hover table-striped">
-        <thead>
-            <tr>
-              	<th>Branch No</th>
-                <th>Report Type</th>
-              	<th>Type</th>
-                <th>View</th>
-                <th>Period</th>
-            </tr>
-        </thead>
-    </table>
-    
-    {{links|raw}}
-    </div>
+      <input type="submit" class="btn btn-default" value="Proses">
+  </form>
+</div>
 {% endblock %}

@@ -20,16 +20,23 @@
 <!-- /.row -->
 
 <div class="row">
+    <form action="{{ base_url }}index.php/reports/refund_summary/home" method="post" name="form1">
     <div class="col-lg-12">
-        <h4>Tour Profit/Cost Summary</h4><br>
-        
+        <h4>Tour Profit/Cost Summary</h4><br> 
     </div>
     <div class="form-group col-md-12">
         <div class="col-md-2">
             <label>View</label>
         </div>
             <div class="col-md-3">
-                
+             <div class='input-group'>
+                 <input type="text" class="form-control typeahead tt-query" id="id_view" name="id_view" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                     <span class="input-group-btn">
+                        <button type="button" data-toggle="modal" data-target="#window-view" class="btn btn-primary" style="cursor:pointer;">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+               </div>   
             </div>    
         </div>
     <div class="form-group col-lg-12">
@@ -37,7 +44,14 @@
             <label>Type</label>
         </div>
         <div class="col-md-3">
-                
+             <div class='input-group'>
+                    <input type="text" class="form-control typeahead tt-query" id="id_type" name="id_type" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-type" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                     </span>
+               </div>   
             </div>    
         </div>  
     <div class="form-group col-lg-12">
@@ -45,21 +59,42 @@
             <label>Category</label>
         </div>
             <div class="col-md-3">
-                
+               <div class='input-group'>
+                    <input type="text" class="form-control typeahead tt-query" id="id_category" name="id_category" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-category" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                     </span>
+               </div> 
             </div>    
         </div>
     <div class="form-group col-lg-12">
         <div class="col-md-2">
-            <label>Product Type</label>
+          <label>Product Type</label>
             </div>
-            <div class="col-md-3">
-                
+                <div class="col-md-3">
+                <div class='input-group'>
+                    <input type="text" class="form-control typeahead tt-query" id="id_prod_type" name="id_prod_type" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-product_type" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                     </span>
+               </div>
             </div>
         <div class="col-md-2">
             <label>Region</label>
         </div>
         <div class="col-md-3">
-                
+              <div class='input-group'>
+                   <input type="text" class="form-control typeahead tt-query" id="id_region" name="id_region" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-region" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                      </span>
+                </div>  
             </div>
     </div>
     <div class="form-group col-lg-12">
@@ -67,7 +102,14 @@
             <label>Report Type</label>
         </div>
             <div class="col-md-3">
-                
+               <div class='input-group'>
+                   <input type="text" class="form-control typeahead tt-query" id="id_report_type" name="id_report_type" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-report_type" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                      </span>
+                </div> 
             </div>    
         </div>
     <div class="form-group col-lg-12">
@@ -82,13 +124,21 @@
                <label>From</label>
        </div>
        <div class="col-md-3">
-               
+              <div class='input-group date' id='datetimepicker1'>
+                    <input type="text" class="form-control" id="tanggal_collect" name="tanggal_collect" value="{{ edit.tanggal_collect }}" placeholder="YYYY-MM-DD">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div> 
             </div>  
         <div class="col-md-2">
             <label>to</label>
         </div>
             <div class="col-md-3">
-               
+               <div class='input-group date' id='datetimepicker1'>
+                    <input type="text" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi" value="{{ edit.tanggal_transaksi }}" placeholder="YYYY-MM-DD">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                 </div>
             </div>
         </div>
     <div class="form-group col-lg-12">
@@ -116,13 +166,21 @@
                <label>From</label>
        </div>
        <div class="col-md-3">
-               
+               <div class='input-group date' id='datetimepicker1'>
+                    <input type="text" class="form-control" id="tanggal_collect" name="tanggal_collect" value="{{ edit.tanggal_collect }}" placeholder="YYYY-MM-DD">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
             </div>  
         <div class="col-md-2">
             <label>to</label>
         </div>
             <div class="col-md-3">
-              
+              <div class='input-group date' id='datetimepicker1'>
+                    <input type="text" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi" value="{{ edit.tanggal_transaksi }}" placeholder="YYYY-MM-DD">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                 </div>
             </div>
         </div>
     <div class="form-group col-lg-12">
@@ -143,28 +201,8 @@
             <div class="radio-inline">
                 <label><input type="radio"  name="v_type" value="region"> Region</label>
             </div>
-    </div>
+      </div>
+        <input type="submit" class="btn btn-default" value="Proses">
+  </form>
 </div>
-    
-    <div class="table-responsive">
-    <table class="table table-bordered table-hover table-striped">
-        <thead>
-            <tr>
-              	<th>View</th>
-              	<th>Type</th>
-                <th>Category</th>
-                <th>Product Type</th>
-                <th>Region</th>
-                <th>Report Type</th>
-                <th>From</th>
-                <th>To</th>
-                <th>Report Type</th>
-            </tr>
-        </thead>
-        
-        
-    </table>
-    
-    {{links|raw}}
-    </div>
 {% endblock %}
