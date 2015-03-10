@@ -18,6 +18,11 @@ class journal_memorial_summary extends CI_Controller {
 
                 $content = $this->twiggy->template('reports/journal_memorial_summary')->render();                
                 $this->twiggy->set('content_page', $content);
+                
+                $window_page = $this->twiggy->template('window/window_branch')->render();
+                
+                // end        
+                $this->twiggy->set('window_page', $window_page);
 
                 $output = $this->twiggy->template('dashboard')->render();
                 $this->output->set_output($output);

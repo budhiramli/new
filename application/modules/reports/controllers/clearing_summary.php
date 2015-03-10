@@ -16,7 +16,7 @@ class clearing_summary extends CI_Controller {
             $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
             $data = array();
 
-            $content = $this->twiggy->template('reports/refund_summary')->render();                
+            $content = $this->twiggy->template('reports/clearing_summary')->render();                
             $this->twiggy->set('content_page', $content);
 
             $output = $this->twiggy->template('dashboard')->render();

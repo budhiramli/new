@@ -18,6 +18,15 @@ class Invoice_status extends CI_Controller {
 
                 $content = $this->twiggy->template('reports/invoice_status')->render();                
                 $this->twiggy->set('content_page', $content);
+                
+                $window_page = $this->twiggy->template('window/window_branch')->render();
+                $window_page .= $this->twiggy->template('window/window_report_type')->render();
+                $window_page .= $this->twiggy->template('window/window_dept')->render();
+                $window_page .= $this->twiggy->template('window/window_user')->render();
+                $window_page .= $this->twiggy->template('window/window_company')->render();
+                
+                // end        
+                $this->twiggy->set('window_page', $window_page);
 
                 $output = $this->twiggy->template('dashboard')->render();
                 $this->output->set_output($output);

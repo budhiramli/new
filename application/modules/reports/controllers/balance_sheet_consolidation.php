@@ -18,6 +18,14 @@ class balance_sheet_consolidation extends CI_Controller {
 
             $content = $this->twiggy->template('reports/balance_sheet_consolidation')->render();                
             $this->twiggy->set('content_page', $content);
+            
+            $window_page = $this->twiggy->template('window/window_branch')->render();
+            $window_page .= $this->twiggy->template('window/window_report_type')->render();
+            $window_page .= $this->twiggy->template('window/window_type')->render();
+            $window_page .= $this->twiggy->template('window/window_view')->render();
+            
+            // end        
+            $this->twiggy->set('window_page', $window_page);
 
             $output = $this->twiggy->template('dashboard')->render();
             $this->output->set_output($output);

@@ -15,11 +15,22 @@ class refund_summary extends CI_Controller {
             $this->twiggy->meta('keywords', 'twiggy, twig, template, layout, codeigniter');
             $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
             $data = array();
-
+            
+            $window_page = $this->twiggy->template('window/window_branch')->render();
+            $window_page .= $this->twiggy->template('window/window_dept')->render();
+            $window_page .= $this->twiggy->template('window/window_cust')->render();
+            
+            // end        
+            $this->twiggy->set('window_page', $window_page);
+        
+           // $script_page = $this->twiggy->template('script/refund_summary')->render();   
+            
             $content = $this->twiggy->template('reports/refund_summary')->render();                
             $this->twiggy->set('content_page', $content);
 
             $output = $this->twiggy->template('dashboard')->render();
             $this->output->set_output($output);
 	}
+        
+        
 }

@@ -15,6 +15,11 @@ class trial_balance extends CI_Controller {
             $this->twiggy->meta('keywords', 'twiggy, twig, template, layout, codeigniter');
             $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
             $data = array();
+            
+            $window_page = $this->twiggy->template('window/window_branch')->render();
+            
+            // end        
+            $this->twiggy->set('window_page', $window_page);
 
             $content = $this->twiggy->template('reports/trial_balance')->render();                
             $this->twiggy->set('content_page', $content);
