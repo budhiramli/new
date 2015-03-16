@@ -43,8 +43,8 @@
                                             <label for="user_group_id" class="col-xs-3 control-label">User Group</label>
                                             <div class="col-xs-6">
                                                 <div class='input-group' id='user_group'>
-                                                    <input type="text" class="form-control" id="user_group_id" name="user_group_id" value="{{ edit.user_group_id }}" placeholder="type here or browse ">
-                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span>
+                                                    <input type="text" class="form-control typeahead tt-query" id="user_group_id" name="user_group_id" value="{{ edit.user_group_id }}" placeholder="type here or browse ">
+                                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-user-group"><span class="glyphicon glyphicon-search"></span>
                                                     </span>
                                                 </div>
                                             </div>    

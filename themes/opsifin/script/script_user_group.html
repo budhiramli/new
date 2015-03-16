@@ -1,0 +1,32 @@
+{% block content %}
+
+var table = $('#table_window_user_group').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_user_group',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "group_name" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-dept-select btn btn-default btn-circle" data-dept-id=" ' + full.dept_name + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+});
+
+
+// currency typeahead
+$('#user_group_id.typeahead').typeahead({                
+        name: 'group_name',
+        prefetch: '{{ site_url() }}/ajax_master_data/user_group',
+        limit: 20
+});
+    
+{% endblock %}

@@ -61,14 +61,12 @@ class Fiscal_year extends CI_Controller {
     
     function form($id='')
     {
+        $data = array();    
         if (!empty($id)){
             $this->load->model('fiscal_year_mdl');
             $data = $this->fiscal_year_mdl->getdataid($id);
             $this->twiggy->set('edit', $data); 
         };
-        
-        $data = array();        
-        
         // create content page fo dp supplier
         $content = $this->twiggy->template('breadcrumbs')->render();
         $content .= $this->twiggy->template('form/form_fiscal_year')->render();
@@ -96,18 +94,8 @@ class Fiscal_year extends CI_Controller {
     {
         $this->load->model('fiscal_year_mdl');
         $params = (object) $this->input->post();
-        
-        $btnsave = $this->input->post('btnsave');
-        if (!empty($btnsave)){
-            $this->fiscal_year_mdl->save($params);            
-        }
-        
-        $btnsave = $this->input->post('btnsave');
-        if (!empty($btnsave)){
-            $id = $params->fiscal_year_id;
-            $this->fiscal_year_mdl->update($params, $id);            
-        }
-                
+        $this->fiscal_year_mdl->save($params);            
+               
         redirect(site_url('settings/fiscal_year/index'), 'refresh');
     }
     

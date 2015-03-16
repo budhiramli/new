@@ -55,8 +55,12 @@ class Group_account extends CI_Controller {
     
     function form($id='')
     {
-        
-        $data = array();        
+        $data = array(); 
+        if (!empty($id)){
+            $this->load->model('group_accounts_mdl');
+            $data = $this->group_accounts_mdl->getdataid($id);
+            $this->twiggy->set('edit', $data); 
+        };
         
         // create content page fo dp supplier
         $content = $this->twiggy->template('breadcrumbs')->render();

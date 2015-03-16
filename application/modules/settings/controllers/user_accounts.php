@@ -18,7 +18,7 @@ class User_accounts extends CI_Controller {
         $this->load->library('menu');
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
-          $this->load->model('user_accounts_mdl');
+        $this->load->model('user_accounts_mdl');
     }
     
     function index()
@@ -53,22 +53,25 @@ class User_accounts extends CI_Controller {
     
     function form($id='')
     {
+        $data = array(); 
+        if (!empty($id)){
+            $this->load->model('user_accounts_mdl');
+            $data = $this->user_accounts_mdl->getdataid($id);
+            $this->twiggy->set('edit', $data); 
+        };
         
-        $data = array();        
-        
-        // create content page fo dp supplier
-        //$content = $this->twiggy->template('breadcrumbs')->render();
-        //$content .= $this->twiggy->template('form/filter_dp_supplier')->render();        
         $content = $this->twiggy->template('form/form_user_account')->render();
-        // end        
         $this->twiggy->set('content_page', $content);
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
+        $window_page = $this->twiggy->template('window/window_user_group')->render();      
+        $this->twiggy->set('window_page', $window_page);
+        
         $script_page = $this->twiggy->template('script/form_user_accounts')->render();         
-        //$script_page .= $this->twiggy->template('script/script_all')->render();         
+        $script_page .= $this->twiggy->template('script/script_user_group')->render();         
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();

@@ -56,14 +56,15 @@ class User_accounts_mdl extends CI_Model {
                 'last_login'
             );
             $this->db->select($fields);
-            $this->db->where('id_pv', $id);
-            $query = $this->db->get('pv_transaction');
+            $this->db->where('user_id', $id);
+            $query = $this->db->get('user');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
                     'user_id'               => $row->user_id,
                     'user_login'            => $row->user_login,
                     'user_name'             => $row->user_name,
+                    'user_password'         => $row->user_password,                    
                     'status'                => $row->user_is_active,
                     'last_login'            => $row->last_login,
                 );

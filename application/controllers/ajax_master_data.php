@@ -121,6 +121,35 @@ class Ajax_master_data extends CI_Controller {
         $data['iTotalDisplayRecords']   = $this->customer_all_mdl->getrecordcount();
         echo json_encode($data);
     }
+    
+    
+    function user_group()
+    {
+        //$this->db->like('currency', $currency);
+        $this->db->order_by('group_name asc');
+        $query = $this->db->get('user_group');
+        foreach($query->result() as $row):
+            $data[] = $row->user_group_id . ' ' . $row->group_name; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+    
+    function get_user_group()
+    {
+        $this->load->model('user_group_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->user_group_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->user_group_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->user_group_mdl->getrecordcount();
+        echo json_encode($data);
+    }
 }    
     
     

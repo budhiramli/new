@@ -40,16 +40,16 @@ class Group_accounts_mdl extends CI_Model {
             $data = array();
             $fields = array(
                 'user_group_id',
-                'user_name',
+                'group_name',
             );
             $this->db->select($fields);
-            $this->db->where('user_id', $id);
+            $this->db->where('user_group_id', $id);
             $query = $this->db->get('user_group');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
-                    'user_group_id'          => $row->user_id,
-                    'group_name'             => $row->user_name,
+                    'user_group_id'          => $row->user_group_id,
+                    'group_name'             => $row->group_name,
                 );
             }
             return $data;

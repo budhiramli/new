@@ -64,30 +64,27 @@ class Fiscal_year_mdl extends CI_Model {
         
         public function save($params)
 	{	
-		$fields = array(
+		print_r($params);
+                $fields = array(
                     'fiscal_year_start'         => $params->fiscal_year_start,
                     'fiscal_year_end'           => $params->fiscal_year_end,
                     //'fiscal_year_is_active'     => $params->fiscal_year_is_active,
                 );
+                
+                
 		$this->db->set($fields);
-                $valid = $this->db->insert('fiscal_year');
-		$valid = $this->logUpdate->addLog("insert", "user_group", $params);
+                if (!empty($params->btnsave)){
+                    $valid = $this->db->insert('fiscal_year');
+                    $valid = $this->logUpdate->addLog("insert", "user_group", $params);
+                }
+                else {
+                    $id = $params->fiscal_year_id;
+                    $this->db->where("fiscal_year_id", $id);
+                    $valid = $this->db->insert('fiscal_year');
+                    $valid = $this->logUpdate->addLog("update", "user_group", $params);
+                }
 		return true;		
 	}
-        
-        function update($params, $id)
-        {
-            $fields = array(
-                    'fiscal_year_start'         => $params->fiscal_year_start,
-                    'fiscal_year_end'           => $params->fiscal_year_end,
-                    //'fiscal_year_is_active'     => $params->fiscal_year_is_active,
-            );            
-            $this->db->set($fields);
-            $this->db->where("fiscal_year_id", $id);
-            $valid = $this->db->update("fiscal_year");
-            $valid = $this->logUpdate->addLog("update", "user_group", $params);
-            return true;
-       }
         
         public function delete($id)
 	{	

@@ -53,13 +53,12 @@ class Dp_supplier extends CI_Controller {
     
     function form($id='')
     {
+        $data = array();
         if (!empty($id)){
             $this->load->model('modeldpsupplier');
             $data = $this->modeldpsupplier->getdataid($id);
             $this->twiggy->set('edit', $data); 
         };
-        
-        $data = array();
         
         // create content page fo dp supplier
         //$content = $this->twiggy->template('breadcrumbs')->render();
