@@ -4,7 +4,7 @@ var table = $('#table_group_accounts').dataTable( {
         "searching": true,
         "ordering": false,    
         "bLengthChange" : false,
-        "ajax": '{{ site_url() }}/settings/ajax_data/getrecord_useraccount',
+        "ajax": '{{ site_url() }}/settings/ajax_data/getrecord_groupaccount',
         "columns": [
                 { "data": "nomor" },
                 { "data": "group_name" },
@@ -19,5 +19,37 @@ var table = $('#table_group_accounts').dataTable( {
                     $(row).addClass('selected');
                 }
             }   
+});
+
+
+// Edit record
+$('#table_group_accounts').on( 'click', 'a.edit-btn', function (e) {
+        e.preventDefault();    
+        var editId = $(this).data('edit-id');
+        window.location.href='{{ site_url() }}/settings/group_account/form/' + editId;	
+        
+} );
+
+// permission record
+$('#table_group_accounts').on( 'click', 'a.permission-btn', function (e) {
+        e.preventDefault();    
+        var editId = $(this).data('permission-id');
+        window.location.href='{{ site_url() }}/settings/user_permissions/index/' + editId;	
+        
+} );
+ 
+// Delete a record
+$('#table_group_accounts').on( 'click', 'a.del-btn', function (e) {
+        e.preventDefault();
+        if(confirm("Are you sure?")) {
+                var delId = $(this).data('delete-id');  
+                window.location='{{ site_url() }}/settings/group_account/delete/' + delId;	
+	}
+	else
+		return false;
+} );
+    
+$('body').on('show.bs.modal', '.modal',function (e) {
+    
 });
 {% endblock %}

@@ -18,6 +18,7 @@ class Group_account extends CI_Controller {
         $this->load->library('menu');
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
+        $this->load->model('group_accounts_mdl');
     }
     
     function index()
@@ -34,7 +35,7 @@ class Group_account extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_user_accounts');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.user_id');
+        $this->twiggy->set('FORM_IDKEY', 'full.user_group_id');
         $this->twiggy->set('FORM_LINK', site_url('settings/group_accounts/delete'));
         $this->twiggy->set('PERMISSION_LINK', site_url('settings/user_permissions/index'));
         
@@ -82,6 +83,17 @@ class Group_account extends CI_Controller {
         if (!empty($_POST)){
             $this->group_accounts_mdl->save($params);
         }
-        redirect(site_url(), 'refresh');
+        
+        redirect(site_url('settings/group_account/index'), 'refresh');
+    }
+    
+    function delete($id)
+    {
+        //echo 'test';
+	$valid = false;
+	$valid = $this->group_accounts_mdl->delete($id);
+	//echo $this->db->last_query();	
+	if ($valid)
+            redirect(site_url('settings/group_account/index'), "refresh");	
     }
 }    

@@ -17,13 +17,13 @@ class ModelPv extends CI_Model {
             $data = array();
             $fields = array(
                 'pv_no',
-                'transaksi_no',
-                'transaksi_type',
-                'tanggal_transaksi',
-                'due_date',
-                
+                'transaction_no',
+                'transaction_type_id',
+                'transaction_date',
+                'lg_no',
+                'due_date',                
                 'receipt_by',
-                'kode_vendor',
+                'supplier_code',
             );
             
             $this->db->select($fields);
@@ -33,12 +33,12 @@ class ModelPv extends CI_Model {
                 $data[] = array(
                     'nomor'                 => $nomor,
                     'pv_no'                 => $row->pv_no,
-                    'transaksi_no'          => $row->transaksi_no,
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
-                    'transaksi_type'        => $row->transaksi_type,
-                    
+                    'transaction_no'        => $row->transaction_no,
+                    'transaction_date'      => $row->transaction_date,
+                    'transaction_type_id'   => $row->transaction_type_id,
+                    'lg_no'                 => $row->lg_no,
                     'receipt_by'            => $row->receipt_by,
-                    'vendor'           => $row->kode_vendor,
+                    'supplier_code'         => $row->supplier_code,
                 );
                 $nomor++;
             endforeach;
@@ -49,31 +49,27 @@ class ModelPv extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_pv', 
                 'pv_no',
-                'transaksi_no',
-                'transaksi_type',
-                'tanggal_transaksi',
-                'due_date',
-               
+                'transaction_no',
+                'transaction_type_id',
+                'transaction_date',
+                'due_date',               
                 'receipt_by',
-                'id_branch',
-                'kode_vendor',
+                'branch_code',
+                'supplier_code',
             );
             $this->db->select($fields);
-            $this->db->where('id_pv', $id);
+            $this->db->where('pv_no', $id);
             $query = $this->db->get('pv_transaction');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
-                    'id_pv'                 => $row->id_pv, 
                     'pv_no'                 => $row->pv_no,
-                    'transaksi_no'          => $row->transaksi_no,
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
-                    'transaksi_type'        => $row->transaksi_type,
-                    
+                    'transaction_no'          => $row->transaction_no,
+                    'transaction_date'     => $row->transaction_date,
+                    'transaction_type_id'        => $row->transaction_type_id,                    
                     'receipt_by'            => $row->receipt_by,
-                    'kode_vendor'           => $row->kode_vendor,
+                    'supplier_code'           => $row->supplier_code,
                 );
             }
             return $data;
@@ -85,18 +81,17 @@ class ModelPv extends CI_Model {
 		$valid = false;
 		
                 $fields = array(
-                    'id_pv'                 => $params->id_pv, 
                     'pv_no'                 => $params->pv_no,
-                    'transaksi_no'          => $params->transaksi_no,
-                    'tanggal_transaksi'     => $params->tanggal_transaksi,
-                    'transaksi_type'        => $params->transaksi_type,
-                    
+                    'transaction_no'        => $params->transaction_no,
+                    'transaction_date'      => $params->transaction_date,
+                    'transaction_type_id' => $params->transaction_type_id,                    
                     'receipt_by'            => $params->receipt_by,
-                    'kode_vendor'           => $params->kode_vendor,      
+                    'supplier_code'         => $params->supplier_code,      
                 );
 		
-		if (!empty($params->id)) {
-			$this->db->where("id_cn", $params->id);
+                $this->db->set($fields);
+		if (!empty($params->pv_no)) {
+			$this->db->where("pv_no", $params->pv_no);
 			$valid = $this->db->update("pv_transaction");
                         
 			$valid = $this->logUpdate->addLog("update", "pv_transaction", $params);
@@ -115,10 +110,10 @@ class ModelPv extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;		
-		$valid = $this->logUpdate->addLog("delete", "pv_transaction", array("id_dn" => $id));	
+		$valid = $this->logUpdate->addLog("delete", "pv_transaction", array("pv_no" => $id));	
 		
 		if ($valid){
-			$this->db->where('id_pv', $id);
+			$this->db->where('pv_no', $id);
 			$valid = $this->db->delete('pv_transaction');
 		}
 		

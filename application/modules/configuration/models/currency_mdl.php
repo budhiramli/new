@@ -16,7 +16,6 @@ class Currency_mdl extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'currency_id',
                 'currency',
                 'symbol',
                 'currency_name',
@@ -29,7 +28,6 @@ class Currency_mdl extends CI_Model {
             foreach($query->result() as $row):
                 $data[] = array(
                     'nomor'                 => $nomor,
-                    'currency_id'           => $row->currency_id,
                     'currency'             => $row->currency,
                     'symbol'               => $row->symbol,
                     'currency_name'        => $row->currency_name,
@@ -44,7 +42,6 @@ class Currency_mdl extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'currency_id', 
                 'currency',
                 'symbol',
                 'currency_name',
@@ -52,12 +49,11 @@ class Currency_mdl extends CI_Model {
             );
             
             $this->db->select($fields);
-            $this->db->where('currency_id', $id);
+            $this->db->where('currency', $id);
             $query = $this->db->get('mst_currency');
             if ($query->num_rows() > 0){
                 $row = $query->row();
                     $data = array(
-                        'currency_id'          => $row->currency_id, 
                         'currency'             => $row->currency,
                         'symbol'               => $row->symbol,
                         'currency_name'        => $row->currency_name,
@@ -83,7 +79,7 @@ class Currency_mdl extends CI_Model {
             
             if (!empty($params->btnupdate)){
                 $id = $params->currency_id;
-                $this->db->where('currency_id', $id);
+                $this->db->where('currency', $id);
                 $this->db->update('mst_currency');
             }
             return true;

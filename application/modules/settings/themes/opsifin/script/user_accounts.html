@@ -23,4 +23,30 @@ var table = $('#table_user_accounts').dataTable( {
                 }
             }   
 });
+
+
+// Edit record
+$('#table_user_accounts').on( 'click', 'a.edit-btn', function (e) {
+        e.preventDefault();    
+        var editId = $(this).data('edit-id');
+        window.location.href='{{ site_url() }}/settings/user_accounts/form/' + editId;	
+        
+} );
+ 
+// Delete a record
+$('#table_user_accounts').on( 'click', 'a.del-btn', function (e) {
+        e.preventDefault();
+        if(confirm("Are you sure?")) {
+                var delId = $(this).data('delete-id');  
+                window.location='{{ site_url() }}/settings/user_accounts/delete/' + delId;	
+	}
+	else
+		return false;
+} );
+    
+$('body').on('show.bs.modal', '.modal',function (e) {
+    
+});
+
+
 {% endblock %}

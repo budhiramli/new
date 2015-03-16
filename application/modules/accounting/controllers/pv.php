@@ -19,7 +19,7 @@ class Pv extends CI_Controller {
         $this->twiggy->set('BREADCRUMBS_TITLE', 'Payment Voucher');
         $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Accounting');
         $this->twiggy->set('LIST_TITLE', 'Payment Voucher');
-        
+        $this->load->model('modelpv');
         
     }
     
@@ -90,14 +90,12 @@ class Pv extends CI_Controller {
     {
         $params = (object) $this->input->post();   
         
-        $valid = $this->modeldpcustomer->save($params);
-        echo $this->db->last_query();
+        $valid = $this->modelpv->save($params);
         
-        die();
         if (empty($valid))
-            $this->owner->alert("Please complete the form", "../index.php/cashier/dp_customer/form");
+            $this->owner->alert("Please complete the form", site_url('accounting/pv/form'));
 	else
-            redirect("../index.php/cashier/dp_customer/form");
+            redirect(site_url('accounting/pv/index'), "refresh");
     }   
     
     public function delete()
@@ -107,6 +105,6 @@ class Pv extends CI_Controller {
 		$valid = $this->modeldpcustomer->delete($id);
 		
 		if ($valid)
-			redirect("../index.php/cashier/dp_customer/form");	
+			redirect(site_url('accounting/pv/index'), "refresh");	
 	}
 }

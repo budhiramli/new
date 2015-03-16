@@ -18,6 +18,7 @@ class User_accounts extends CI_Controller {
         $this->load->library('menu');
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
+          $this->load->model('user_accounts_mdl');
     }
     
     function index()
@@ -47,6 +48,7 @@ class User_accounts extends CI_Controller {
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);
+        $this->load->model('user_accounts_mdl');
     }
     
     function form($id='')
@@ -55,9 +57,9 @@ class User_accounts extends CI_Controller {
         $data = array();        
         
         // create content page fo dp supplier
-        $content = $this->twiggy->template('breadcrumbs')->render();
+        //$content = $this->twiggy->template('breadcrumbs')->render();
         //$content .= $this->twiggy->template('form/filter_dp_supplier')->render();        
-        $content .= $this->twiggy->template('form/form_user_account')->render();
+        $content = $this->twiggy->template('form/form_user_account')->render();
         // end        
         $this->twiggy->set('content_page', $content);
         
@@ -71,5 +73,25 @@ class User_accounts extends CI_Controller {
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);
+    }
+    
+    function save()
+    {
+        $params = (object) $this->input->post();
+        if (!empty($_POST)){
+            $this->user_accounts_mdl->save($params);
+        }
+        
+        redirect(site_url('settings/user_accounts/index'), 'refresh');
+    }
+    
+    function delete($id)
+    {
+        //echo 'test';
+	$valid = false;
+	$valid = $this->user_accounts_mdl->delete($id);
+	//echo $this->db->last_query();	
+	if ($valid)
+            redirect(site_url('settings/user_accounts/index'), "refresh");	
     }
 }    

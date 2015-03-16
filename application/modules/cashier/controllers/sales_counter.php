@@ -7,8 +7,7 @@ class Sales_counter extends CI_Controller {
         if (empty($username)){
             redirect(site_url('main/index'), 'refresh');
         };
-	$this->load->model('modeldpcustomer');
-        $this->load->model('modelnumtrans');
+	
         
         $this->twiggy->title('OPSIFIN')->prepend('Sales Counter');;
         $this->twiggy->meta('keywords', 'twiggy, twig, template, layout, codeigniter');

@@ -59,22 +59,24 @@ class Group_accounts_mdl extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;
-		
+		print_r($params);
                 $fields = array(
-                    'user_group_id'               => $params->user_group_id,
-                    'user_group_name'             => $params->user_group_name,
+                    'group_name'             => $params->group_name,
                 );
 		$this->db->set($fields);
                 
-		if (!empty($params->id)) {
-			$this->db->where("user_group_id", $params->id);
+		if (!empty($params->btnupdate)) {
+			$this->db->where("user_group_id", $params->user_group_id);
                 	$valid = $this->db->update("user_group");
+                        
                 	$valid = $this->logUpdate->addLog("update", "user_group", $params);
 		}
 		else {
 			$valid = $this->db->insert('user_group');
+                        
 		        $valid = $this->logUpdate->addLog("insert", "user_group", $params);
                 }
+                
 		return true;		
 	}
         
@@ -85,6 +87,10 @@ class Group_accounts_mdl extends CI_Model {
 		$valid = $this->logUpdate->addLog("delete", "user_group", array("user_group_id" => $id));	
 		
 		if ($valid){
+                    //delete permision first
+                    $this->db->where('user_group_id', $id);
+                    $this->db->delete('user_permission');
+                    
                     $this->db->where('user_group_id', $id);
                     $valid = $this->db->delete('user_group');
 		}

@@ -20,13 +20,16 @@ class User_permissions extends CI_Controller {
         $this->twiggy->set('menu_navigasi', $menu);
     }
     
-    function index()
+    function index($id='')
     {        
         $data = array();        
         $userid     = $this->session->userdata('user_id');
-        $groupid    = $this->session->userdata('group_id');
+        if (empty($id)){
+            $id    = $this->session->userdata('group_id');
+        }
+        
         $this->load->model('permission_mdl');
-        $permission = $this->permission_mdl->getdatalist($groupid, $userid);
+        $permission = $this->permission_mdl->getdatalist($id, $userid);
         $this->twiggy->set('permission', $permission);
         
         // create content page fo dp supplier

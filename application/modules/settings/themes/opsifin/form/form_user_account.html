@@ -1,49 +1,82 @@
 {% block content %}
 <div class="row">
-        <form class="form-horizontal" action="{{ site_url('settings/user_accounts/save') }}" method="post" role="form" name="form1">
-        <input id="user_id" name="user_id" type="hidden" value="{{ edit.user_id }}" />
-        
-        <div class="col-xs-12 col-md-8">
-            <div class="form-group col-xs-12">
-                <label for="user_login" class="col-xs-2 control-label">Login</label>
-                <div class="col-xs-4">
-                  <input type="text" class="form-control" id="user_login" name="user_login" value="{{ edit.user_login }}" placeholder="xxxxxxxx">
+    <div class="col-lg-12">
+        <div class="header-row"></div>
+                <form class="form-horizontal" action="{{ site_url('settings/user_accounts/save') }}" method="post" role="form" name="form1">
+                <input id="user_id" name="user_id" type="hidden" value="{{ edit.user_id }}" />
+
+                 <div class="panel panel-default">
+                        <div class="panel-heading">
+                                    {{ BREADCRUMBS_TITLE }}
+                        </div>
+                        <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="form-group col-xs-12">
+                                            <label for="user_login" class="col-xs-3 control-label">Login</label>
+                                            <div class="col-xs-6">
+                                              <input type="text" class="form-control" id="user_login" name="user_login" value="{{ edit.user_login }}" placeholder="user login">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="form-group col-xs-12">
+                                            <label for="Password" class="col-xs-3 control-label">Password</label>
+                                            <div class="col-xs-6">
+                                              <input type="text" class="form-control" id="user_password" name="user_password" value="{{ edit.user_password }}" placeholder="password">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="form-group col-xs-12">
+                                            <label for="user_name" class="col-xs-3 control-label">Full Name</label>
+                                            <div class="col-xs-6">
+                                              <input type="text" class="form-control" id="user_name" name="user_name" value="{{ edit.user_name }}" placeholder="type here">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="form-group col-xs-12">
+                                            <label for="user_group_id" class="col-xs-3 control-label">User Group</label>
+                                            <div class="col-xs-6">
+                                                <div class='input-group' id='user_group'>
+                                                    <input type="text" class="form-control" id="user_group_id" name="user_group_id" value="{{ edit.user_group_id }}" placeholder="type here or browse ">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span>
+                                                    </span>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="form-group col-xs-12">
+                                            <label for="user_name" class="col-xs-3 control-label">Status</label>
+                                            <div class="col-xs-6">
+                                                <label><input type="checkbox" class="form-control" id="user_is_active" name="user_is_active" value="{{ edit.user_is_active }}"> Is Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                 </div>    
+                 <div class="panel panel-default">
+
+                        <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <div class="form-group col-xs-12">        
+                                        <input type="submit" class="btn btn-default" name="btnsave" id="btnsave" value="Save">
+                                        <input type="submit" class="btn btn-default" name="btnupdate" id="btnupdate" value="Update">            
+                                    </div>
+                                    </div>    
+                                </div>
+                        </div>    
                 </div>
-            </div>
+                </form>
+            </div>    
         </div>
-        
-        <div class="col-xs-12 col-md-8">
-            <div class="form-group col-xs-12">
-                <label for="Password" class="col-xs-2 control-label">Password</label>
-                <div class="col-xs-4">
-                  <input type="text" class="form-control" id="user_password" name="user_password" value="{{ edit.user_password }}" placeholder="xxxxxxxx">
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-xs-12 col-md-8">
-            <div class="form-group col-xs-12">
-                <label for="user_name" class="col-xs-2 control-label">User Name</label>
-                <div class="col-xs-4">
-                  <input type="text" class="form-control" id="user_name" name="user_name" value="{{ edit.user_name }}" placeholder="xxxxxxxx">
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-xs-12 col-md-8">
-            <div class="form-group col-xs-12">
-                <label for="user_group_id" class="col-xs-2 control-label">User Group</label>
-                <div class="col-xs-4">
-                  
-                </div>
-            </div>
-        </div>
-        
-        <div class="form-group col-xs-12">        
-            <input type="submit" class="btn btn-default" name="btnsave" id="btnsave" value="Save">
-            <input type="submit" class="btn btn-default" name="btnupdate" id="btnupdate" value="Update">            
-        </div>
-        </form>
-    </div>
-    
+</div>        
 {% endblock %}

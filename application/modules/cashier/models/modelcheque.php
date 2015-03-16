@@ -9,7 +9,7 @@ class modelcheque extends CI_Model {
         
         function getrecordcount()
         {
-            $data = $this->db->count_all_results('dp_customer');
+            $data = $this->db->count_all_results('cheque_transaction');
             return $data;
         }
         
@@ -17,16 +17,15 @@ class modelcheque extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_cheque', 
                 'bg_prefix',
                 'bg_no',
-                'transaksi_no', 
-                'tanggal_transaksi', 
+                'transaction_no', 
+                'transaction_date', 
                 'due_date',
                 'ref_prefix', 
                 'ref_type', 
                 'cp', 
-                'bank_nama', 
+                'bank_name', 
                 'currency', 
                 'amount', 
                 'is_balance',
@@ -37,15 +36,14 @@ class modelcheque extends CI_Model {
             foreach($query->result() as $row):
                 $data[] = array(
                     'nomor'                 => $nomor,
-                    'id_cheque'             => $row->id_cheque,
                     'branch'                => 'nama_cabang',
                     'bg_no'                 => $row->bg_no, 
-                    'transaksi_no'          => $row->transaksi_no, 
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
+                    'transaction_no'          => $row->transaction_no, 
+                    'transaction_date'     => $row->transaction_date,
                     'due_date'              => $row->due_date,
                     'ref_type'              => $row->ref_type, 
                     'cp'                    => $row->cp, 
-                    'bank_nama'             => $row->bank_nama,
+                    'bank_name'             => $row->bank_name,
                     'currency'              => $row->currency,
                     'amount'                => $row->amount,                    
                 );
@@ -59,35 +57,33 @@ class modelcheque extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_cheque', 
                 'bg_prefix',
                 'bg_no',
-                'transaksi_no', 
-                'tanggal_transaksi', 
+                'transaction_no', 
+                'transaction_date', 
                 'due_date',
                 'ref_prefix', 
                 'ref_type', 
                 'cp', 
-                'bank_nama', 
+                'bank_name', 
                 'currency', 
                 'amount', 
                 'is_balance',
             );
             $this->db->select($fields);
-            $this->db->where('id_cheque', $id);
+            $this->db->where('bg_no', $id);
             $query = $this->db->get('cheque_transaction');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
-                    'id_cheque'             => $row->id_cheque,
                     'branch'                => '',
                     'bg_no'                 => $row->bg_no, 
-                    'transaksi_no'          => $row->transaksi_no, 
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
+                    'transaction_no'          => $row->transaction_no, 
+                    'transaction_date'     => $row->transaction_date,
                     'due_date'              => $row->due_date,
                     'ref_type'              => $row->ref_type, 
                     'cp'                    => $row->cp, 
-                    'bank_nama'             => $row->bank_nama,
+                    'bank_name'             => $row->bank_name,
                     'currency'              => $row->currency,
                     'amount'                => $row->amount,    
                 );
@@ -102,8 +98,8 @@ class modelcheque extends CI_Model {
 		
 		$this->db->set("id_cabang", $params->id_cabang );
 		$this->db->set("ref_no", $params->ref_no );
-		$this->db->set("transaksi_no", $params->transaksi_no );
-		$this->db->set("tanggal_transaksi", $params->tanggal_transaksi );		
+		$this->db->set("transaction_no", $params->transaction_no );
+		$this->db->set("transaction_date", $params->transaction_date );		
 		$this->db->set("id_customer", $params->id_customer );
 		$this->db->set("cp", $params->cp );		
 		$this->db->set("nama_bank", $params->nama_bank );

@@ -17,13 +17,11 @@ class modelcc extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_cc', 
-                'ref_no', 
-                'transaksi_no', 
-                'tanggal_transaksi', 
-                'id_customer', 
+                'cc_no', 
+                'transaction_no', 
+                'company_code', 
                 'cp', 
-                'nama_bank', 
+                'bank_name', 
                 'currency',
                 'amount', 
                 'charges_currency', 
@@ -37,14 +35,12 @@ class modelcc extends CI_Model {
             foreach($query->result() as $row):
                 $data[] = array(
                     'nomor'              => $nomor,
-                    'id_cc'             => $row->id_cc,
                     'branch'            => 'nama_cabang',
-                    'ref_no'            => $row->ref_no, 
-                    'transaksi_no'      => $row->transaksi_no, 
-                    'tanggal_transaksi' => $row->tanggal_transaksi, 
+                    'cc_no'            => $row->cc_no, 
+                    'transaction_no'      => $row->transaction_no, 
                     'customer'          => 'nama_customer', 
                     'cp'                => $row->cp, 
-                    'nama_bank'         => $row->nama_bank,
+                    'bank_name'         => $row->bank_name,
                     'currency'          => $row->currency,
                     'amount'            => $row->amount, 
                     'charges_currency'  => $row->charges_currency, 
@@ -60,13 +56,12 @@ class modelcc extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_cc', 
                 'ref_no', 
-                'transaksi_no', 
-                'tanggal_transaksi', 
-                'id_customer', 
+                'transaction_no', 
+                'transaction_date', 
+                'company_code', 
                 'cp', 
-                'nama_bank', 
+                'bank_name', 
                 'currency',
                 'amount', 
                 'charges_currency', 
@@ -74,19 +69,18 @@ class modelcc extends CI_Model {
                 'note',
             );
             $this->db->select($fields);
-            $this->db->where('id_cc', $id);
+            $this->db->where('cc_no', $id);
             $query = $this->db->get('cc_transaction');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
-                    'id_cc'             => $row->id_cc,
                     'branch'            => 'nama_cabang',
                     'ref_no'            => $row->ref_no, 
-                    'transaksi_no'      => $row->transaksi_no, 
-                    'tanggal_transaksi' => $row->tanggal_transaksi, 
+                    'transaction_no'      => $row->transaction_no, 
+                    'transaction_date' => $row->transaction_date, 
                     'customer'          => 'nama_customer', 
                     'cp'                => $row->cp, 
-                    'nama_bank'         => $row->nama_bank,
+                    'bank_name'         => $row->bank_name,
                     'currency'          => $row->currency,
                     'amount'            => $row->amount, 
                     'charges_currency'  => $row->charges_currency, 
@@ -103,13 +97,12 @@ class modelcc extends CI_Model {
 		$valid = false;
 		
                 $fields = array(
-                    "id_cabang"         => $params->id_cabang,
                     "ref_no"            => $params->ref_no,
-                    "transaksi_no"      => $params->transaksi_no,
-                    "tanggal_transaksi" => $params->tanggal_transaksi,		
-                    "id_customer"       => $params->id_customer,
+                    "transaction_no"      => $params->transaction_no,
+                    "transaction_date" => $params->transaction_date,		
+                    "company_code"       => $params->company_code,
                     "cp"                => $params->cp,
-                    "nama_bank"         => $params->nama_bank,
+                    "bank_name"         => $params->bank_name,
                     "currency"          => $params->currency,                    
                     "amount"            => $params->amount,
                     "charges_currency"  => $params->currency,                    

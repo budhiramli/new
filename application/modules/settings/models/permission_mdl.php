@@ -8,7 +8,7 @@ class Permission_mdl extends CI_Model {
     
     function getrecordcount()
     {
-            $data = $this->db->count_all_results('user_permission');
+            $data = $this->db->count_all_results('menu');
             return $data;
     }
         
@@ -22,11 +22,11 @@ class Permission_mdl extends CI_Model {
             );
             
             $this->db->select($fields);
-            $this->db->join('user_group','user_group.user_group_id=user_permission.user_group_id', 'left');
-            $this->db->join('menu','menu.menu_id=user_permission.menu_id', 'left');
-            
-            $query = $this->db->get('user_permission');
-            echo $this->db->last_query();
+            $this->db->join('user_permission','user_permission.menu_id=menu.menu_id', 'left');
+            $this->db->join('user_group','user_group.user_group_id=user_permission.user_group_id', 'left');            
+            $this->db->where('user_permission.user_group_id', $groupid);
+            $query = $this->db->get('menu');
+            //echo $this->db->last_query();
             $nomor = 1;
             foreach($query->result() as $row):
                 $data[] = array(

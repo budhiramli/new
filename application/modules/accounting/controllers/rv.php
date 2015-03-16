@@ -56,7 +56,7 @@ class Rv extends CI_Controller {
         $data = array();
         
         // create content page fo dp supplier
-        $content .= $this->twiggy->template('form/form_rv')->render();        
+        $content = $this->twiggy->template('form/form_rv')->render();        
         // end        
         $this->twiggy->set('content_page', $content);
         

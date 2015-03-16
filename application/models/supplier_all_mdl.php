@@ -7,14 +7,14 @@ class Supplier_all_mdl extends CI_Model {
     
     function getrecordcount()
     {
-            $data = $this->db->count_all_results('supplier');
+            $data = $this->db->count_all_results('mst_supplier');
             return $data;
     }
         
     function getdatalist()
     {
         $this->db->order_by('supplier_name asc');
-        $query = $this->db->get('supplier');
+        $query = $this->db->get('mst_supplier');
         $nomor = 1;
         foreach($query->result() as $row):
             $data[] = array(

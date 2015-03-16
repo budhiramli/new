@@ -17,7 +17,6 @@ class modeldpcustomer extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'dc_transaction_id',
                 'dc_no', 
                 'transaction_no', 
                 "(DATE_FORMAT(transaction_date, '%d-%m-%Y')) as transaction_date" ,
@@ -34,7 +33,6 @@ class modeldpcustomer extends CI_Model {
             foreach($query->result() as $row):                
                 $data[] = array(
                     'nomor'                     => $nomor,
-                    'dc_transaction_id'         => $row->dc_transaction_id, 
                     'dc_no'                     => $row->dc_no, 
                     'transaction_no'            => $row->transaction_no, 
                     'transaction_date'          => $row->transaction_date,

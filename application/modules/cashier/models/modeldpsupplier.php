@@ -7,6 +7,63 @@ class modeldpsupplier extends CI_Model {
             $this->load->model('logUpdate');
 	}
         
+        function get_dsno()
+        {
+            $tahun = date('Y');
+            //check first from counter_log
+            $this->db->where('counter_code', 'dp_supplier');
+            $this->db->where('counter_year', $tahun);            
+            $query = $this->db->get('counter_log');
+            if ($query->num_rows() == 1){
+                $row = $query->row();
+                $dsno = $row->counter_no;
+            }
+            else {
+                //add new counter code
+                $dsno = 1;
+                $fields = array(
+                    'counter_code'  => 'dp_supplier',
+                    'counter_year'  => $tahun,
+                    'counter_no'    => $dsno,    
+                );
+                $this->db->set($fields);
+                $this->db->insert('counter_log');
+                
+            }
+            $pnj = strlen($dsno);
+            $panjang = ($pnj*-1);
+            $dsno = substr('00000', 0, $panjang) . $dsno;
+            return $dsno;
+        }
+        
+        function get_transno()
+        {
+            $tahun = date('Y');
+            //check first from counter_log
+            $this->db->where('counter_code', 'dp_transno');
+            $this->db->where('counter_year', $tahun);            
+            $query = $this->db->get('counter_log');
+            if ($query->num_rows() == 1){
+                $row = $query->row();
+                $transno = $row->counter_no;
+            }
+            else {
+                //add new counter code
+                $transno = 1;
+                $fields = array(
+                    'counter_code'  => 'dp_transno',
+                    'counter_year'  => $tahun,
+                    'counter_no'    => $transno,    
+                );
+                $this->db->set($fields);
+                $this->db->insert('counter_log');                
+            }
+            $pnj = strlen($transno);
+            $panjang = ($pnj*-1);
+            $transno = substr('00000', 0, $panjang) . $transno;
+            return $transno;
+        }
+        
         function getrecordcount()
         {
             $data = $this->db->count_all_results('dp_supplier');
@@ -16,7 +73,6 @@ class modeldpsupplier extends CI_Model {
         function getdatalist()
         {
             $fields = array(
-                'ds_transaction_id',
                 'ds_no',
                 'transaction_no',
                 "(DATE_FORMAT(transaction_date, '%d-%m-%Y')) as transaction_date",
@@ -29,8 +85,8 @@ class modeldpsupplier extends CI_Model {
                 'note',
             );
             $this->db->select($fields);
-            $this->db->join('supplier', 'supplier.supplier_code=dp_supplier.supplier_code', 'left');
-            $this->db->order_by('ds_transaction_id desc');
+            $this->db->join('mst_supplier', 'mst_supplier.supplier_code=dp_supplier.supplier_code', 'left');
+            $this->db->order_by('ds_no desc');
             $query = $this->db->get('dp_supplier');
             //echo $this->db->last_query();
             $nomor = 1;
@@ -38,16 +94,14 @@ class modeldpsupplier extends CI_Model {
             foreach($query->result() as $row):
                 $data[] = array(
                     'nomor'                 => $nomor,
-                    'DT_RowId'              => $row->ds_transaction_id,
-                    'ds_transaction_id'     => $row->ds_transaction_id,
+                    'DT_RowId'              => $row->ds_no,
                     'ds_no'                 => $row->ds_no,
                     'transaction_no'        => $row->transaction_no,
                     'transaction_date'      => $row->transaction_date,
                     'supplier_code'         => $row->supplier_name,
                     'cp'                    => $row->cp,
                     'lg_no'             => $row->lg_no,
-                    'currency'            => $row->currency,
-                    
+                    'currency'            => $row->currency,                    
                     'amount'            => $row->amount,
                     'note'              => $row->note,
                 );
@@ -97,31 +151,32 @@ class modeldpsupplier extends CI_Model {
         function save($params)
         {
             $valid = true;
-            $amount = str_replace(',','', $params->amount);
-            
+            $amount = str_replace(',','', $params->amount);            
             $used_amount = str_replace(',','', $params->used_amount);
-            
+            $supplier_code = explode(' ',trim($params->supplier_code));
             $fields = array(
-                'ds_no'                 => trim($params->ds_no),
-                'transaction_no'        => trim($params->transaction_no),
                 'transaction_date'      => $params->transaction_date,
                 'dept_id'               => $params->dept_id,
-                'supplier_code'         => trim($params->supplier_code),
-                'cp'                    => $params->cp,
-                'lg_no'                 => $params->lg_no,
+                'supplier_code'         => $supplier_code[0],
+                'cp'                    => strtoupper($params->cp),
+                'lg_no'                 => strtoupper($params->lg_no),
                 'currency'              => trim($params->currency),
                 'amount'                => $amount,
                 'used_amount'           => $used_amount,
-                'note'                  => $params->note,
+                'note'                  => strtoupper(strip_tags($params->note)),
             );
             
-            $this->db->set($fields);
             if (!empty($params->btnsave)){
+                $fields['ds_no']            = $this->get_dsno();
+                $fields['transaction_no']   = $this->get_transno();
+                
+                $this->db->set($fields);            
                 $valid = $this->db->insert('dp_supplier');
                 $id = $this->db->insert_id();
             }
             
             if (!empty($params->btnupdate)){
+                $this->db->set($fields);            
                 $id = $params->ds_transaction_id;
                 $this->db->where('ds_transaction_id', $id);
                 $valid = $this->db->update('dp_supplier');

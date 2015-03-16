@@ -9,9 +9,8 @@ var table = $('#table_rv').dataTable( {
         "columns": [
                 { "data": "nomor" },
                 { "data": "rv_no" },
-                { "data": "transaksi_no" },
-                { "data": "tanggal_transaksi" },
-                
+                { "data": "transaction_no" },
+                { "data": "transaction_date" },                
                 { "mRender" : function ( data, type, full ) {
                     FullData = full;
                     return '{{ BUTTON_CRUD }} ';

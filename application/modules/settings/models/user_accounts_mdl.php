@@ -71,28 +71,27 @@ class User_accounts_mdl extends CI_Model {
             return $data;
         }
         
-        public function save($params)
+        function save($params)
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;
 		
                 $fields = array(
-                    'user_id'               => $params->user_id,
                     'user_login'            => $params->user_login,
                     'user_name'             => $params->user_name,
-                    'status'                => $params->user_is_active,
-                    'last_login'            => $params->last_login,   
+                    //'user_is_active'                => $params->user_is_active,
+                    'last_login'            => date('Y-m-d H:i:s'),   
                 );
 		
 		if (!empty($params->id)) {
+                        $this->db->set($fields);
 			$this->db->where("user_id", $params->id);
-			$valid = $this->db->update("user");
-                        
+			$valid = $this->db->update("user");                        
 			$valid = $this->logUpdate->addLog("update", "user", $params);
 		}
 		else {
-			$valid = $this->db->insert('user');
-			
+                        $this->db->set($fields);
+			$valid = $this->db->insert('user');			
                         $valid = $this->logUpdate->addLog("insert", "user", $params);
                         
 		}

@@ -15,14 +15,13 @@ class ModelDebitNote extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_dn', 
                 'dn_no',
-                'transaksi_no',
-                'tanggal_transaksi',
-                'transaksi_type',
-                'id_cabang',
-                'id_dept',
-                'kode_vendor',                
+                'transaction_no',
+                'transaction_date',
+                'transaction_type_id',
+                'branch_code',
+                'dept_id',
+                'supplier_code',                
                 'used_sap_amount',
                 'used_amount',
             );
@@ -33,14 +32,13 @@ class ModelDebitNote extends CI_Model {
             foreach($query->result() as $row):
                 $data[] = array(
                     'nomor'              => $nomor,
-                    'id_dn'                 => $row->id_dn, 
                     'dn_no'                 => $row->dn_no,
-                    'transaksi_no'          => $row->transaksi_no,
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
-                    'transaksi_type'        => $row->transaksi_type,
-                    'branch'                => 'nama cabang',
-                    'dept'                  => 'nama dept',
-                    'vendor'                => 'nama vendor',
+                    'transaction_no'          => $row->transaction_no,
+                    'transaction_date'     => $row->transaction_date,
+                    'transaction_type_id'        => $row->transaction_type_id,
+                    'branch_code'                => 'nama cabang',
+                    'dept_id'                  => 'nama dept',
+                    'supplier_code'                => 'nama vendor',
                     'used_sap_amount'       => $row->used_sap_amount,
                     'used_amount'           => $row->used_amount,                    
                 );
@@ -53,31 +51,29 @@ class ModelDebitNote extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_dn', 
                 'dn_no',
-                'transaksi_no',
-                'tanggal_transaksi',
-                'transaksi_type',
-                'id_cabang',
-                'id_dept',
-                'kode_vendor',
+                'transaction_no',
+                'transaction_date',
+                'transaction_type',
+                'branch_code',
+                'dept_id',
+                'supplier_code',
                 'used_sap_amount',
                 'used_amount',
             );
             $this->db->select($fields);
-            $this->db->where('id_cc', $id);
+            $this->db->where('dn_no', $id);
             $query = $this->db->get('dn_transaction');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
-                    'id_dn'                 => $row->id_dn, 
                     'dn_no'                 => $row->dn_no,
-                    'transaksi_no'          => $row->transaksi_no,
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
-                    'transaksi_type'        => $row->transaksi_type,
-                    'branch'                => 'nama cabang',
-                    'dept'                  => 'nama dept',
-                    'kode_vendor'           => $row->kode_vendor,
+                    'transaction_no'          => $row->transaction_no,
+                    'transaction_date'     => $row->transaction_date,
+                    'transaction_type_id'        => $row->transaction_type_id,
+                    'branc_code'                => 'nama cabang',
+                    'dept_id'                  => 'nama dept',
+                    'supplier_code'           => $row->supplier_code,
                     'used_sap_amount'       => $row->used_sap_amount,
                     'used_amount'           => $row->used_amount, 
                 );
@@ -92,26 +88,23 @@ class ModelDebitNote extends CI_Model {
 		
                 $fields = array(
                     'dn_no'                 => $params->dn_no,
-                    'transaksi_no'          => $params->transaksi_no,
-                    'tanggal_transaksi'     => $params->tanggal_transaksi,
-                    'transaksi_type'        => $params->transaksi_type,
-                    'id_cabang'             => $params->id_cabang,
-                    'id_dept'               => $params->id_dept,
-                    'kode_vendor'           => $params->kode_vendor,
+                    'transaction_no'          => $params->transaction_no,
+                    'transaction_date'     => $params->transaction_date,
+                    'transaction_type_id'        => $params->transaction_type_id,
+                    'branch_code'             => $params->branch_code,
+                    'dept_id'               => $params->dept_id,
+                    'supplier_code'           => $params->supplier_code,
                                 
                 );
 		
-		if (!empty($params->id)) {
-			$this->db->where("id_dn", $params->id);
-			$valid = $this->db->update("dn_transaction");
-                        
+		if (!empty($params->dn_no)) {
+			$this->db->where("dn_no", $params->id);
+			$valid = $this->db->update("dn_transaction");                        
 			$valid = $this->logUpdate->addLog("update", "dn_transaction", $params);
 		}
 		else {
-			$valid = $this->db->insert('dn_transaction');
-			
-                        $valid = $this->logUpdate->addLog("insert", "dn_transaction", $params);
-                        
+			$valid = $this->db->insert('dn_transaction');			
+                        $valid = $this->logUpdate->addLog("insert", "dn_transaction", $params);                        
 		}
 		
 		return true;		
@@ -121,10 +114,10 @@ class ModelDebitNote extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;		
-		$valid = $this->logUpdate->addLog("delete", "dn_transaction", array("id_dn" => $id));	
+		$valid = $this->logUpdate->addLog("delete", "dn_transaction", array("dn_no" => $id));	
 		
 		if ($valid){
-			$this->db->where('id_dn', $id);
+			$this->db->where('dn_no', $id);
 			$valid = $this->db->delete('dn_transaction');
 		}
 		

@@ -15,14 +15,14 @@ class ModelCreditNote extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_cn', 
-                'id_branch',
                 'cn_no',
-                'transaksi_no',
-                'tanggal_transaksi',
-                'transaksi_type',
-                'id_dept',
-                'kode_vendor',
+                'transaction_no',                
+                'branch_code',
+                'transaction_date',
+                'transaction_type_id',
+                'dept_id',
+                'company_code',
+                'supplier_code',
                 'cp',
                 'is_add_manual',
                 'used_amount',
@@ -34,14 +34,13 @@ class ModelCreditNote extends CI_Model {
             foreach($query->result() as $row):
                 $data[] = array(
                     'nomor'              => $nomor,
-                    'id_cn'                 => $row->id_cn, 
-                    'branch'                => 'nama branch',
                     'cn_no'                 => $row->cn_no,
-                    'transaksi_no'          => $row->transaksi_no,
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
-                    'transaksi_type'        => $row->transaksi_type,
-                    'dept'                  => 'nama dept',
-                    'customer'              => $row->kode_vendor,
+                    'transaction_no'          => $row->transaction_no,                    
+                    'branch'                => 'nama branch',
+                    'transaction_date'     => $row->transaction_date,
+                    'transaction_type_id'        => $row->transaction_type_id,
+                    'dept_id'                  => 'nama dept',
+                    'company_code'              => $row->company_code,
                     'cp'                    => $row->cp,
                     'is_add_manual'         => $row->is_add_manual,
                     'used_amount'           => $row->used_amount
@@ -55,32 +54,30 @@ class ModelCreditNote extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_cn', 
-                'id_branch',
                 'cn_no',
-                'transaksi_no',
-                'tanggal_transaksi',
-                'transaksi_type',
-                'id_dept',
-                'kode_vendor',
+                'transaction_no',                
+                'branch_code',
+                'transaction_date',
+                'transaction_type_id',
+                'dept_id',
+                'supplier_code',
                 'cp',
                 'is_add_manual',
                 'used_amount',
             );
             $this->db->select($fields);
-            $this->db->where('id_cn', $id);
+            $this->db->where('cn_no', $id);
             $query = $this->db->get('cn_transaction');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
-                    'id_cn'                 => $row->id_cn, 
-                    'branch'                => 'nama branch',
                     'cn_no'                 => $row->cn_no,
-                    'transaksi_no'          => $row->transaksi_no,
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
-                    'transaksi_type'        => $row->transaksi_type,
-                    'id_dept'               => $row->id_dept,
-                    'kode_vendor'           => $row->kode_vendor,
+                    'transaction_no'          => $row->transaction_no,                    
+                    'branch_code'                => 'nama branch',
+                    'transaction_date'     => $row->transaction_date,
+                    'transaction_type_id'        => $row->transaction_type_id,
+                    'dept_id'               => $row->dept_id,
+                    'supplier_code'           => $row->supplier_code,
                     'cp'                    => $row->cp,
                     'is_add_manual'         => $row->is_add_manual,
                     'used_amount'           => $row->used_amount
@@ -95,21 +92,20 @@ class ModelCreditNote extends CI_Model {
 		$valid = false;
 		
                 $fields = array(
-                    'id_cn'                 => $params->id_cn, 
-                    'branch'                => 'nama branch',
                     'cn_no'                 => $params->cn_no,
-                    'transaksi_no'          => $params->transaksi_no,
-                    'tanggal_transaksi'     => $params->tanggal_transaksi,
-                    'transaksi_type'        => $params->transaksi_type,
-                    'id_dept'               => $params->id_dept,
-                    'kode_vendor'           => $params->kode_vendor,
+                    'transaction_no'          => $params->transaction_no,
+                    'branch_code'           => 'nama branch',
+                    'transaction_date'     => $params->transaction_date,
+                    'transaction_type_id'        => $params->transaction_type_id,
+                    'dept_id'               => $params->dept_id,
+                    'supplier_code'           => $params->supplier_code,
                     'cp'                    => $params->cp,
                     'is_add_manual'         => $params->is_add_manual,
                     'used_amount'           => $params->used_amount         
                 );
 		
 		if (!empty($params->id)) {
-			$this->db->where("id_cn", $params->id);
+			$this->db->where("cn_no", $params->id);
 			$valid = $this->db->update("cn_transaction");
                         
 			$valid = $this->logUpdate->addLog("update", "cn_transaction", $params);
@@ -128,13 +124,12 @@ class ModelCreditNote extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;		
-		$valid = $this->logUpdate->addLog("delete", "dn_transaction", array("id_dn" => $id));	
+		$valid = $this->logUpdate->addLog("delete", "dn_transaction", array("cn_no" => $id));	
 		
 		if ($valid){
-			$this->db->where('id_dn', $id);
+			$this->db->where('cn_no', $id);
 			$valid = $this->db->delete('dn_transaction');
-		}
-		
+		}		
 		return $valid;		
 	}
     

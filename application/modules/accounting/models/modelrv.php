@@ -16,12 +16,12 @@ class ModelRv extends CI_Model {
             $data = array();
             $fields = array(
                 'rv_no',
-                'transaksi_no',
-                'transaksi_type',
-                'tanggal_transaksi',
+                'transaction_no',
+                'transaction_date',
+                'transaction_type_id',
                 'lg_no',
                 'receipt_by',
-                'kode_vendor',
+                'supplier_code',
             );
             
             $this->db->select($fields);
@@ -31,12 +31,12 @@ class ModelRv extends CI_Model {
                 $data[] = array(
                     'nomor'                 => $nomor,
                     'rv_no'                 => $row->rv_no,
-                    'transaksi_no'          => $row->transaksi_no,
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
-                    'transaksi_type'        => $row->transaksi_type,
+                    'transaction_no'          => $row->transaction_no,
+                    'transaction_date'     => $row->transaction_date,
+                    'transaction_type_id'        => $row->transaction_type_id,
                     'lg_no'                 => $row->lg_no,
                     'receipt_by'            => $row->receipt_by,
-                    'vendor'           => $row->kode_vendor,
+                    'supplier_code'           => $row->supplier_code,
                 );
                 $nomor++;
             endforeach;
@@ -47,30 +47,27 @@ class ModelRv extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_pv', 
-                'pv_no',
-                'transaksi_no',
-                'transaksi_type',
-                'tanggal_transaksi',
+                'rv_no',
+                'transaction_no',
+                'transaction_date',
+                'transaction_type_id',
                 'lg_no',
                 'receipt_by',
-                'id_branch',
-                'kode_vendor',
+                'supplier_code'
             );
             $this->db->select($fields);
-            $this->db->where('id_pv', $id);
-            $query = $this->db->get('pv_transaction');
+            $this->db->where('rv_no', $id);
+            $query = $this->db->get('rv_transaction');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
-                    'id_pv'                 => $row->id_pv, 
-                    'pv_no'                 => $row->rv_no,
-                    'transaksi_no'          => $row->transaksi_no,
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
-                    'transaksi_type'        => $row->transaksi_type,
+                    'rv_no'                 => $row->rv_no,
+                    'transaction_no'          => $row->transaction_no,
+                    'transaction_date'     => $row->transaction_date,
+                    'transaction_type_id'        => $row->transaction_type_id,
                     'lg_no'                 => $row->lg_no,
                     'receipt_by'            => $row->receipt_by,
-                    'kode_vendor'           => $row->kode_vendor,
+                    'supplier_code'           => $row->supplier_code,
                 );
             }
             return $data;
@@ -82,14 +79,13 @@ class ModelRv extends CI_Model {
 		$valid = false;
 		
                 $fields = array(
-                    'id_pv'                 => $params->id_pv, 
                     'rv_no'                 => $params->rv_no,
-                    'transaksi_no'          => $params->transaksi_no,
-                    'tanggal_transaksi'     => $params->tanggal_transaksi,
-                    'transaksi_type'        => $params->transaksi_type,
+                    'transaction_no'          => $params->transaction_no,
+                    'transaction_date'     => $params->transaction_date,
+                    'transaction_type_id'        => $params->transaction_type,
                     'lg_no'                 => $params->lg_no,
                     'receipt_by'            => $params->receipt_by,
-                    'kode_vendor'           => $params->kode_vendor,      
+                    'supplier_code'           => $params->supplier_code,      
                 );
 		
 		if (!empty($params->id)) {
@@ -112,10 +108,10 @@ class ModelRv extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;		
-		$valid = $this->logUpdate->addLog("delete", "pv_transaction", array("id_dn" => $id));	
+		$valid = $this->logUpdate->addLog("delete", "pv_transaction", array("rv_no" => $id));	
 		
 		if ($valid){
-			$this->db->where('id_pv', $id);
+			$this->db->where('rv_no', $id);
 			$valid = $this->db->delete('pv_transaction');
 		}
 		

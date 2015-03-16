@@ -79,7 +79,7 @@ class Dp_supplier extends CI_Controller {
         
         $window_page = $this->twiggy->template('window/window_currency')->render();
         $window_page .= $this->twiggy->template('window/window_dept')->render();
-        $window_page .= $this->twiggy->template('window/window_vendor')->render();
+        $window_page .= $this->twiggy->template('window/window_supplier')->render();
         $window_page .= $this->twiggy->template('window/window_lg')->render();
         
         // end        
@@ -100,8 +100,8 @@ class Dp_supplier extends CI_Controller {
         $params = (object) $this->input->post();
         $valid = $this->modeldpsupplier->save($params);	       
         //print_r($params);
-        //echo $this->db->last_query();
-        redirect(site_url('cashier/dp_supplier/index'), 'refresh');
+        echo $this->db->last_query();
+        //redirect(site_url('cashier/dp_supplier/index'), 'refresh');
     }   
     
     public function delete($id)

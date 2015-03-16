@@ -7,8 +7,7 @@ class Cheque_bg extends CI_Controller {
         if (empty($username)){
             redirect(site_url('main/index'), 'refresh');
         };
-	$this->load->model('modeldpcustomer');
-        $this->load->model('modelnumtrans');
+	
         $this->load->library('menu');
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
