@@ -64,16 +64,16 @@ class Fiscal_year_mdl extends CI_Model {
         
         public function save($params)
 	{	
-		print_r($params);
-                $fields = array(
+		$fields = array(
                     'fiscal_year_start'         => $params->fiscal_year_start,
                     'fiscal_year_end'           => $params->fiscal_year_end,
                     //'fiscal_year_is_active'     => $params->fiscal_year_is_active,
-                );
-                
+                );                
                 
 		$this->db->set($fields);
                 if (!empty($params->btnsave)){
+                    $tahun = date('Y', strtotime($params->fiscal_year_start));
+                    $this->db->set('fiscal_year', $tahun);
                     $valid = $this->db->insert('fiscal_year');
                     $valid = $this->logUpdate->addLog("insert", "user_group", $params);
                 }
@@ -89,7 +89,7 @@ class Fiscal_year_mdl extends CI_Model {
         public function delete($id)
 	{	
 				
-		$valid = $this->logUpdate->addLog("delete", "user_group", array("user_group_id" => $id));	
+		$valid = $this->logUpdate->addLog("delete", "fiscal_year", array("fiscal_year_id" => $id));	
 		
 		if ($valid){
                     $this->db->where('fiscal_year_id', $id);
