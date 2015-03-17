@@ -16,7 +16,7 @@ class modeldpsupplier extends CI_Model {
             $query = $this->db->get('counter_log');
             if ($query->num_rows() == 1){
                 $row = $query->row();
-                $dsno = $row->counter_no;
+                $dsno = $row->counter_no+1;
             }
             else {
                 //add new counter code
@@ -45,7 +45,7 @@ class modeldpsupplier extends CI_Model {
             $query = $this->db->get('counter_log');
             if ($query->num_rows() == 1){
                 $row = $query->row();
-                $transno = $row->counter_no;
+                $transno = $row->counter_no+1;
             }
             else {
                 //add new counter code
