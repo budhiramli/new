@@ -1,0 +1,178 @@
+
+{% block content %}
+
+ <!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Cashier Transaction Detail
+        </h1>
+
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i><a href="#"> Dashboard</a>
+            </li>
+
+            <li class="active">
+                <i class="fa fa-edit"></i> Home
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- /.row -->
+<div class="row">
+    <form action="{{ base_url }}index.php/reports/bank_statement/home" method="post" name="form1">
+    <div class="col-lg-12">
+        <h4>Cashier Transaction Detail</h4><br>
+    </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Branch</label>
+        </div>
+            <div class="col-md-3">
+                <div class='input-group'>
+                    <input type="text" class="form-control typeahead tt-query" id="id_branch" name="id_branch" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-branch" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                      </span>
+               </div>  
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+       <div class="col-md-2">
+               <label>Begin Date</label>
+       </div>
+       <div class="col-md-3">
+            <div class='input-group date' id='datetimepicker1'>
+                <input type="text" class="form-control" id="tanggal_collect" name="tanggal_collect" value="{{ edit.tanggal_collect }}" placeholder="YYYY-MM-DD">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+          </div>
+    </div>
+    <div class="form-group col-lg-12">
+       <div class="col-md-2">
+               <label>From</label>
+       </div>
+       <div class="col-md-3">
+               <div class='input-group date' id='datetimepicker1'>
+                    <input type="text" class="form-control" id="tanggal_collect" name="tanggal_collect" value="{{ edit.tanggal_collect }}" placeholder="YYYY-MM-DD">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+    </div>
+    <div class="form-group col-lg-12">
+        <div class="col-md-2">
+            <label>to</label>
+        </div>
+            <div class="col-md-3">
+               <div class='input-group date' id='datetimepicker1'>
+                    <input type="text" class="form-control" id="tanggal_collect" name="tanggal_collect" value="{{ edit.tanggal_collect }}" placeholder="YYYY-MM-DD">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+    </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Report Type</label>
+        </div>
+            <div class="col-md-3">
+                <div class='input-group'>
+                    <input type="text" class="form-control typeahead tt-query" id="id_report_type" name="id_report_type" value="{{ edit.id_dept }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-report_type" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                      </span>
+               </div> 
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Bank Name</label>
+        </div>
+            <div class="col-md-3">
+                <div class='input-group'>
+                        <input type="text" class="form-control typeahead tt-query" id="bank_nama" name="bank_nama" value="{{ edit.id_dept }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-bank_name" class="btn btn-primary" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                  </div>  
+        </div>
+    </div>
+     <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Currency</label>
+        </div>
+            <div class="col-md-3">
+                <div class='input-group'>
+                    <input type="text" class="form-control typeahead tt-query" id="id_currency" name="id_currency" value="{{ edit.id_dept }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#window-currency" class="btn btn-primary" style="cursor:pointer;">
+                            <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                     </span>
+               </div>  
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+      <div class="col-md-2">
+            <label>Transaction</label>
+        </div>
+          <div class="col-md-3">
+             <div class='input-group'>
+                <input type="text" class="form-control typeahead tt-query" id="transaction" name="transaction" value="{{ edit.id_dept }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                    <span class="input-group-btn">
+                        <button type="button" data-toggle="modal" data-target="#window-transaction" class="btn btn-primary" style="cursor:pointer;">
+                          <span class="glyphicon glyphicon-search"></span>
+                          </button>
+                    </span>
+              </div>     
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Trans ID</label>
+        </div>
+            <div class="col-md-3">
+                <div class='input-group'>
+                <input type="text" class="form-control typeahead tt-query" id="id_transaction" name="id_transaction" value="{{ edit.id_dept }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                    <span class="input-group-btn">
+                        <button type="button" data-toggle="modal" data-target="#window-transaction_id" class="btn btn-primary" style="cursor:pointer;">
+                          <span class="glyphicon glyphicon-search"></span>
+                          </button>
+                    </span>
+              </div>  
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+       <div class="col-md-2">
+            <div class="checkbox-inline">
+                  <label><input type="checkbox" name="v_type" value="amount_idr"> View Amount IDR</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+       <div class="col-md-2">
+            <div class="checkbox-inline">
+                  <label><input type="checkbox" name="v_type" value="cust_type"> Sort By Customer Type</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-lg-12">
+       <div class="col-md-2">
+            <div class="checkbox-inline">
+                  <label><input type="checkbox" name="v_type" value="sort_currency"> Sort By Currency</label>
+            </div>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-default" value="Proses"> 
+    </form>
+</div>
+{% endblock %}

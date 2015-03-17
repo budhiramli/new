@@ -1,0 +1,185 @@
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="header-row"></div>
+        
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ BREADCRUMBS_TITLE }}
+                </div>
+            <div class="panel-body">
+                <div class="row">
+                    <form action="{{ base_url }}index.php/reports/dp_cash_advance_summary/home" method="post" name="form1">
+                    <div class="form-group col-lg-12">
+                        <div class="col-md-2">
+                            <div class="radio-inline">
+                                <label><input type="radio" name="v_type" value="from_cust"> Down Payment From Customer</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="radio-inline">
+                                <label><input type="radio" name="v_type" value="to_suppli"> Down Payment To Supplier</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="radio-inline">
+                                <label><input type="radio" name="v_type" value="cash_advance"> Cash Advance</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="radio-inline">
+                                <label><input type="radio" name="v_type" value="cash_advance"> Cash Advance Settlement</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="col-md-2">
+                            <label>Branch</label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class='input-group'>
+                                <input type="text" class="form-control typeahead tt-query" id="id_branch" name="id_branch" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                    <span class="input-group-btn">
+                                        <button type="button" data-toggle="modal" data-target="#window-branch" class="btn btn-primary" style="cursor:pointer;">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>  
+                        </div>
+                        <div class="col-md-2">
+                            <label>Status</label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class='input-group'>
+                                <input type="text" class="form-control typeahead tt-query" id="status" name="status" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                    <span class="input-group-btn">
+                                        <button type="button" data-toggle="modal" data-target="#window-status" class="btn btn-primary" style="cursor:pointer;">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>   
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="col-md-2">
+                            <label>Cust. Group</label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class='input-group'>
+                                <input type="text" class="form-control typeahead tt-query" id="cust_group" name="cust_group" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                    <span class="input-group-btn">
+                                        <button type="button" data-toggle="modal" data-target="#window-group" class="btn btn-primary" style="cursor:pointer;">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>  
+                        </div>
+                        <div class="col-md-2">
+                            <label>User</label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class='input-group'>
+                                <input type="text" class="form-control typeahead tt-query" id="id_user" name="id_user" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                <span class="input-group-btn">
+                                    <button type="button" data-toggle="modal" data-target="#window-user" class="btn btn-primary" style="cursor:pointer;">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="col-md-2">
+                            <label>Customer</label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class='input-group'>
+                                <input type="text" class="form-control typeahead tt-query" id="id_costumer" name="id_costumer" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                <span class="input-group-btn">
+                                    <button type="button" data-toggle="modal" data-target="#window-cust" class="btn btn-primary" style="cursor:pointer;">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>  
+                        </div>
+                        <div class="col-md-2">
+                            <label>Request</label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class='input-group'>
+                                <input type="text" class="form-control typeahead tt-query" id="requset" name="request" value="{{ edit.id_branch }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                <span class="input-group-btn">
+                                    <button type="button" data-toggle="modal" data-target="#window-requset" class="btn btn-primary" style="cursor:pointer;">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="col-md-2">
+                            <label>From</label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type="text" class="form-control" id="from_tanggal" name="from_tanggal" placeholder="YYYY-MM-DD">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div> 
+                        </div>
+                        <div class="col-md-2">
+                            <div class="checkbox-inline">
+                                <label><input type="checkbox" name="v_type" value="by_date"> By Date</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="col-md-2">
+                            <label>to</label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type="text" class="form-control" id="to_tanggal" name="to_tanggal" placeholder="YYYY-MM-DD">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="col-md-2">
+                            <label>Dp Slip No</label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class='input-group'>
+                                <input type="text" class="form-control typeahead tt-query" id="slip_no" name="slip_no" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                <span class="input-group-btn">
+                                    <button type="button" data-toggle="modal" data-target="#window-cust" class="btn btn-primary" style="cursor:pointer;">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="col-md-2">
+                            <label>Department</label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class='input-group'>
+                                <input type="text" class="form-control typeahead tt-query" id="id_dept" name="id_dept" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                                <span class="input-group-btn">
+                                    <button type="button" data-toggle="modal" data-target="#window-dept" class="btn btn-primary" style="cursor:pointer;">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-default" value="Proses">
+    </div>
+</div>
+{% endblock %}
