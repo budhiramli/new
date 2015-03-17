@@ -2,7 +2,7 @@
 $('#supplier_code.typeahead').typeahead({
         name: 'supplier_code',
         prefetch: '{{ site_url() }}/ajax_master_data/supplier',
-        limit: 20
+        limit: 15
 })
 
 var table = $('#table_window_supplier').dataTable( {    
@@ -30,5 +30,6 @@ var table = $('#table_window_supplier').dataTable( {
 $('#table_window_supplier tbody').on( 'click', '.btn-supplier-select', function () {
         var supplierId = $(this).data('supplier-id');
         $('#supplier_code').val(supplierId);
+        
 });
     
