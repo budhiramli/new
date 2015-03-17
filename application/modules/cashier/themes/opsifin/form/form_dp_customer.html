@@ -37,7 +37,7 @@
                                 <label for="dept_id" class="col-xs-3 control-label">Dept</label>
                                 <div class="col-xs-4">
                                     <div class='input-group date' id='dept_select'>
-                                        <input type="text" class="form-control" id="dept_id" name="dept_id" value="{{ edit.dept_id }}" placeholder="type or Browse">
+                                        <input type="text" class="form-control typeahead tt-query" id="dept_id" name="dept_id" value="{{ edit.dept_id }}" placeholder="type or Browse">
                                         <span class="input-group-addon" data-toggle="modal" data-target="#window-dept"><span class="glyphicon glyphicon-search"></span>
                                         </span>
                                     </div>
@@ -48,8 +48,8 @@
                                 <label for="company_code" class="col-xs-3 control-label">Customer</label>
                                 <div class="col-xs-7">
                                     <div class='input-group date' id='customer_select'>
-                                        <input type="text" class="form-control" id="company_code" name="company_code" value="{{ edit.company_code }}" placeholder="type or browse">
-                                        <span class="input-group-addon" data-toggle="modal" data-target="#window-customer"><span class="glyphicon glyphicon-calendar"></span>
+                                        <input type="text" class="form-control typeahead tt-query" id="company_code" name="company_code" value="{{ edit.company_code }}" placeholder="type or browse">
+                                        <span class="input-group-addon" data-toggle="modal" data-target="#window-customer"><span class="glyphicon glyphicon-search"></span>
                                         </span>
                                     </div>
                                 </div>                
@@ -66,7 +66,7 @@
                                 <label for="currency_id" class="col-xs-3 control-label">Amount</label>
                                 <div class="col-xs-3">
                                     <div class='input-group'>
-                                        <input type="text" class="form-control" id="currency_id" name="currency" value="{{ edit.currency }}" placeholder="type or Browse">
+                                        <input type="text" class="form-control typeahead tt-query" id="currency_id" name="currency" value="{{ edit.currency }}" placeholder="type or Browse">
                                         <span class="input-group-addon" data-toggle="modal" data-target="#window-currency"><span class="glyphicon glyphicon-search"></span>
                                         </span>
                                     </div>    

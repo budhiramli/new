@@ -12,7 +12,7 @@
                }
             });
             
-            var dcId = '{{ edit.dc_transaction_id}}';
+            var dcId = '{{ edit.dc_no}}';
            
             if (!!dcId){                
                 $('#btnupdate').removeClass('hide');
@@ -27,37 +27,8 @@
                 format: 'YYYY-MM-DD'
             });
             
-            // currency typeahead
-            $('#currency.typeahead').typeahead({                
-                name: 'currency',
-                prefetch: '{{ base_url() }}index.php/cashier/ajax_data/currency',
-                limit: 20
-            });
-            
-            // vendor typeahead
-            $('#kode_vendor.typeahead').typeahead({
-                name: 'kode_vendor',
-                prefetch: '{{ base_url() }}index.php/cashier/ajax_data/vendor',
-                limit: 20
-            })
-            
-            // vendor typeahead
-            $('#id_dept.typeahead').typeahead({
-                name: 'id_dept',
-                prefetch: '{{ base_url() }}index.php/cashier/ajax_data/dept',
-                limit: 20
-            })
-            
-            // vendor typeahead
-            $('#lg_no.typeahead').typeahead({
-                name: 'kode_vendor',
-                prefetch: '{{ base_url() }}index.php/cashier/ajax_data/lg_no',
-                limit: 20
-            })
-             
-            
             var selected = [];
-            var table = $('#table_dp_supplier_detail').dataTable( {    
+            var table = $('#table_dp_customer').dataTable( {    
                     "searching": false,
                     "ordering": false,    
                     "bLengthChange" : false,

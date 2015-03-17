@@ -1,0 +1,34 @@
+// vendor typeahead
+$('#company_code.typeahead').typeahead({
+        name: 'company_code',
+        prefetch: '{{ site_url() }}/ajax_master_data/customer',
+        limit: 20
+})
+
+var table = $('#table_window_customer').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_customer',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "company_code" },
+                    { "data": "company_name" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-customer-select btn btn-default btn-circle" data-customer-id=" ' + full.company_code + ' ' + full.company_name + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+});
+    
+$('#table_window_customer tbody').on( 'click', '.btn-customer-select', function () {
+        var customerId = $(this).data('customer-id');
+        $('#company_code').val(customerId);
+});
+    

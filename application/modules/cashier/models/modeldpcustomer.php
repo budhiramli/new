@@ -7,6 +7,63 @@ class modeldpcustomer extends CI_Model {
             $this->load->model('logUpdate');
 	}
         
+        function get_dsno()
+        {
+            $tahun = date('Y');
+            //check first from counter_log
+            $this->db->where('counter_code', 'dp_customer');
+            $this->db->where('counter_year', $tahun);            
+            $query = $this->db->get('counter_log');
+            if ($query->num_rows() == 1){
+                $row = $query->row();
+                $dsno = $row->counter_no+1;
+            }
+            else {
+                //add new counter code
+                $dsno = 1;
+                $fields = array(
+                    'counter_code'  => 'dp_customer',
+                    'counter_year'  => $tahun,
+                    'counter_no'    => $dsno,    
+                );
+                $this->db->set($fields);
+                $this->db->insert('counter_log');
+                
+            }
+            $pnj = strlen($dsno);
+            $panjang = ($pnj*-1);
+            $dsno = substr('00000', 0, $panjang) . $dsno;
+            return $dsno;
+        }
+        
+        function get_transno()
+        {
+            $tahun = date('Y');
+            //check first from counter_log
+            $this->db->where('counter_code', 'dc_transno');
+            $this->db->where('counter_year', $tahun);            
+            $query = $this->db->get('counter_log');
+            if ($query->num_rows() == 1){
+                $row = $query->row();
+                $transno = $row->counter_no+1;
+            }
+            else {
+                //add new counter code
+                $transno = 1;
+                $fields = array(
+                    'counter_code'  => 'dc_transno',
+                    'counter_year'  => $tahun,
+                    'counter_no'    => $transno,    
+                );
+                $this->db->set($fields);
+                $this->db->insert('counter_log');                
+            }
+            $pnj = strlen($transno);
+            $panjang = ($pnj*-1);
+            $transno = substr('00000', 0, $panjang) . $transno;
+            return $transno;
+        }
+        
         function getrecordcount()
         {
             $data = $this->db->count_all_results('dp_customer');
@@ -53,7 +110,6 @@ class modeldpcustomer extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'dc_transaction_id',
                 'dc_no', 
                 'transaction_no', 
                 "transaction_date" ,
@@ -65,12 +121,11 @@ class modeldpcustomer extends CI_Model {
                 'note',
             );
             $this->db->select($fields);
-            $this->db->where('dc_transaction_id', $id);
+            $this->db->where('dc_no', $id);
             $query = $this->db->get('dp_customer');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
-                    'dc_transaction_id'         => $row->dc_transaction_id, 
                     'dc_no'                     => $row->dc_no, 
                     'transaction_no'            => $row->transaction_no, 
                     'transaction_date'          => $row->transaction_date,
@@ -89,7 +144,10 @@ class modeldpcustomer extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;
-                
+                $amount = str_replace(',','', $params->amount);            
+                $used_amount = str_replace(',','', $params->used_amount);
+                $customer_code = explode(' ',trim($params->company_code));
+            
                 $fields = array(
                     'dc_no'                     => trim($params->dc_no), 
                     'transaction_no'            => trim($params->transaction_no), 
@@ -111,8 +169,10 @@ class modeldpcustomer extends CI_Model {
 		}
 		else {
                         $this->db->set($fields);
-                        $valid = $this->db->insert('dp_customer');
+                        $this->db->set('dc_no', $this->get_dsno());
+                        $this->db->set('transaction_no', $this->get_transno());
                         
+                        $valid = $this->db->insert('dp_customer');
                         $valid = $this->logUpdate->addLog("insert", "dp_customer", $params);
 		}
 		
@@ -126,7 +186,7 @@ class modeldpcustomer extends CI_Model {
 		//$valid = $this->logUpdate->addLog("delete", "dp_customer", array("dc_transaction_id" => $id, $log));	
 		
 		if ($valid){
-			$this->db->where('dc_transaction_id', $id);
+			$this->db->where('dc_no', $id);
 			$valid = $this->db->delete('dp_customer');
                         //echo $this->db->last_query();
 		}

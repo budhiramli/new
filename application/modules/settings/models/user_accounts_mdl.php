@@ -81,11 +81,13 @@ class User_accounts_mdl extends CI_Model {
                 $fields = array(
                     'user_login'            => $params->user_login,
                     'user_name'             => $params->user_name,
-                    //'user_is_active'                => $params->user_is_active,
+                    'user_group_id'         => $params->user_group_id,
+                    'user_is_active'        => $params->user_is_active,
                     'last_login'            => date('Y-m-d H:i:s'),   
                 );
-		
-                $btnedit = $params->btnedit;
+                $btnedit = $params->btnupdate;
+                
+                
 		if (!empty($btnedit)) {
                         $this->db->set($fields);
 			$this->db->where("user_id", $params->id);
@@ -93,11 +95,15 @@ class User_accounts_mdl extends CI_Model {
 			$valid = $this->logUpdate->addLog("update", "user", $params);
 		}
 		else {
+                    // check first
+                    //$this->db->
+                    //$query = $this->db->get('user');
+                    
                         $this->db->set($fields);
 			$valid = $this->db->insert('user');			
                         $valid = $this->logUpdate->addLog("insert", "user", $params);                        
 		}
-		echo $this->db->last_query();
+		//echo $this->db->last_query();
 		return true;		
 	}
         

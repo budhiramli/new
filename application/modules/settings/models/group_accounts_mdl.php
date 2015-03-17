@@ -64,19 +64,18 @@ class Group_accounts_mdl extends CI_Model {
                     'group_name'             => $params->group_name,
                 );
 		$this->db->set($fields);
+                $btnupdate = $params->btnupdate;
                 
-		if (!empty($params->btnupdate)) {
+		if (!empty($btnupdate)) {
 			$this->db->where("user_group_id", $params->user_group_id);
-                	$valid = $this->db->update("user_group");
-                        
+                	$valid = $this->db->update("user_group");                        
                 	$valid = $this->logUpdate->addLog("update", "user_group", $params);
 		}
 		else {
-			$valid = $this->db->insert('user_group');
-                        
+			$valid = $this->db->insert('user_group');                        
 		        $valid = $this->logUpdate->addLog("insert", "user_group", $params);
                 }
-                
+                echo $this->db->last_query();
 		return true;		
 	}
         

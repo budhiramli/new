@@ -34,7 +34,7 @@ class Dp_customer extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_dp_customer');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.dc_transaction_id');
+        $this->twiggy->set('FORM_IDKEY', 'full.dc_no');
         $this->twiggy->set('FORM_LINK', site_url('cashier/dp_customer/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -74,16 +74,21 @@ class Dp_customer extends CI_Controller {
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
-        $window_page = $this->twiggy->template('window/window_currency')->render();
+        $window_page = $this->twiggy->template('window/window_customer')->render();
+        $window_page .= $this->twiggy->template('window/window_currency')->render();
         $window_page .= $this->twiggy->template('window/window_dept')->render();
-        $window_page .= $this->twiggy->template('window/window_customer')->render();
         $window_page .= $this->twiggy->template('window/window_lg')->render();
         
         // end        
         $this->twiggy->set('window_page', $window_page);
         
         $script_page = $this->twiggy->template('script/form_dp_customer')->render();         
-        $script_page .= $this->twiggy->template('script/script_all')->render();         
+        $script_page .= $this->twiggy->template('script/script_customer')->render();
+        $script_page .= $this->twiggy->template('script/script_dept')->render();
+        $script_page .= $this->twiggy->template('script/script_currency')->render();
+        
+        
+        //$script_page .= $this->twiggy->template('script/script_all')->render();         
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
