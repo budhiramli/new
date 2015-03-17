@@ -65,11 +65,11 @@ class Ajax_master_data extends CI_Controller {
     }
     
     
-    function vendor()
+    function supplier()
     {
         //$this->db->like('currency', $currency);
         $this->db->order_by('supplier_name asc');
-        $query = $this->db->get('supplier');
+        $query = $this->db->get('mst_supplier');
         foreach($query->result() as $row):
             $data[] = $row->supplier_code . ' ' . $row->supplier_name; 
         endforeach;

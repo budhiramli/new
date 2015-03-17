@@ -82,10 +82,9 @@ class User_accounts extends CI_Controller {
     {
         $params = (object) $this->input->post();
         if (!empty($_POST)){
-            $this->user_accounts_mdl->save($params);
-        }
+            $this->user_accounts_mdl->save($params);        }
         
-        redirect(site_url('settings/user_accounts/index'), 'refresh');
+        //redirect(site_url('settings/user_accounts/index'), 'refresh');
     }
     
     function delete($id)

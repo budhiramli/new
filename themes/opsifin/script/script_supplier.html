@@ -1,0 +1,34 @@
+// vendor typeahead
+$('#supplier_code.typeahead').typeahead({
+        name: 'supplier_code',
+        prefetch: '{{ site_url() }}/ajax_master_data/supplier',
+        limit: 20
+})
+
+var table = $('#table_window_supplier').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_supplier',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "supplier_code" },
+                    { "data": "supplier_name" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-supplier-select btn btn-default btn-circle" data-supplier-id=" ' + full.supplier_code + ' ' + full.supplier_name + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+});
+    
+$('#table_window_supplier tbody').on( 'click', '.btn-supplier-select', function () {
+        var supplierId = $(this).data('supplier-id');
+        $('#supplier_code').val(supplierId);
+});
+    

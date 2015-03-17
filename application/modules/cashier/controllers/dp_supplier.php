@@ -77,15 +77,19 @@ class Dp_supplier extends CI_Controller {
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
         $window_page = $this->twiggy->template('window/window_currency')->render();
-        $window_page .= $this->twiggy->template('window/window_dept')->render();
         $window_page .= $this->twiggy->template('window/window_supplier')->render();
-        $window_page .= $this->twiggy->template('window/window_lg')->render();
+        $window_page .= $this->twiggy->template('window/window_dept')->render();
         
-        // end        
+        //$window_page .= $this->twiggy->template('window/window_lg')->render();
+        
         $this->twiggy->set('window_page', $window_page);
         
-        $script_page = $this->twiggy->template('script/form_dp_supplier')->render();         
-        $script_page .= $this->twiggy->template('script/script_all')->render();         
+        $script_page = $this->twiggy->template('script/form_dp_supplier')->render();   
+        $script_page .= $this->twiggy->template('script/script_currency')->render(); 
+        $script_page .= $this->twiggy->template('script/script_supplier')->render(); 
+        $script_page .= $this->twiggy->template('script/script_dept')->render(); 
+        
+        //$script_page .= $this->twiggy->template('script/script_all')->render();         
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
@@ -99,8 +103,8 @@ class Dp_supplier extends CI_Controller {
         $params = (object) $this->input->post();
         $valid = $this->modeldpsupplier->save($params);	       
         //print_r($params);
-        echo $this->db->last_query();
-        //redirect(site_url('cashier/dp_supplier/index'), 'refresh');
+        //echo $this->db->last_query();
+        redirect(site_url('cashier/dp_supplier/index'), 'refresh');
     }   
     
     public function delete($id)
