@@ -45,11 +45,10 @@
 
 <body>
 
-    <div id="wrapper">
+   
         {% block content %}
 
         {% endblock %}
-    </div>
     <!-- /#wrapper -->
     <!--/PAGE -->
 	<!-- JAVASCRIPTS -->
@@ -70,8 +69,12 @@
 	<!-- BLOCK UI -->
 	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/jQuery-BlockUI/jquery.blockUI.min.js"></script>
 	<!-- DATA TABLES -->
-	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/datatables/media/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/datatables/media/assets/js/datatables.min.js"></script>
+        <!--
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/datatables/media/js/jquery.dataTables.js"></script>
+	-->
+        
+        <script type="text/javascript" src="{{ base_url() }}assets/DataTables/media/js/jquery.dataTables.js"></script>
+        <!--
 	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/datatables/extras/TableTools/media/js/TableTools.min.js"></script>
 	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js"></script>
 	
