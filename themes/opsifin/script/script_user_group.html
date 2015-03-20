@@ -8,8 +8,19 @@ var table = $('#table_window_user_group').dataTable( {
             "columns": [
                     { "data": "nomor" },
                     { "data": "group_name" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-user-group-select btn btn-default btn-circle" data-user-group-id=" ' + full.user_group_id + ' ' + full.group_name + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
                 ], 
                  
+});
+
+$('#table_window_user_group tbody').on( 'click', '.btn-user-group-select', function () {
+        var usergroupId = $(this).data('user-group-id');
+        $('#user_group_id').val(usergroupId);
+        
 });
 
 
