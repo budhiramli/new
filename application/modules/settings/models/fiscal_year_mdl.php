@@ -41,22 +41,28 @@ class Fiscal_year_mdl extends CI_Model {
         
         function getdataid($id)
         {
-            $data = array();
             $fields = array(
                 'fiscal_year_id',
-                'fiscal_year_start',
-                'fiscal_year_end',
+                "(DATE_FORMAT(fiscal_year_start, '%d-%m-%Y')) as fiscal_year_start",
+                "(DATE_FORMAT(fiscal_year_end, '%d-%m-%Y')) as fiscal_year_end",
                 'fiscal_year_is_active',
             );
             
             $this->db->select($fields);
+            $this->db->where('fiscal_year_id', $id);
             $query = $this->db->get('fiscal_year');
             $row = $query->row();
+            $status = '';
+            if ($row->fiscal_year_is_active == 'TRUE'){
+                $status = 'checked="checked"';
+            }
+            
             $data = array(
                     'fiscal_year_id'            => $row->fiscal_year_id,
                     'fiscal_year_start'         => $row->fiscal_year_start,
                     'fiscal_year_end'           => $row->fiscal_year_end,
                     'fiscal_year_is_active'     => $row->fiscal_year_is_active,
+                    'status'                    => $status,
             );
             return $data;
         }
@@ -64,25 +70,40 @@ class Fiscal_year_mdl extends CI_Model {
         
         public function save($params)
 	{	
-		$fields = array(
-                    'fiscal_year_start'         => $params->fiscal_year_start,
-                    'fiscal_year_end'           => $params->fiscal_year_end,
-                    //'fiscal_year_is_active'     => $params->fiscal_year_is_active,
-                );                
+                $status = 'FALSE';
+                if (!empty($params->fiscal_year_is_active)){
+                    $status = 'TRUE';
+                }
                 
+		$fields = array(
+                    'fiscal_year_start'         => date('Y-m-d', strtotime($params->fiscal_year_start)),
+                    'fiscal_year_end'           => date('Y-m-d', strtotime($params->fiscal_year_end)),
+                    'fiscal_year_is_active'     => $status,
+                );                                
 		$this->db->set($fields);
-                if (!empty($params->btnsave)){
+                
+                $btnsave = @$params->btnsave;
+                if (!empty($btnsave)){
+                    
                     $tahun = date('Y', strtotime($params->fiscal_year_start));
+                    $this->db->set($fields);
                     $this->db->set('fiscal_year', $tahun);
                     $valid = $this->db->insert('fiscal_year');
                     $valid = $this->logUpdate->addLog("insert", "user_group", $params);
                 }
-                else {
+                
+                $btnedit = @$params->btnedit;
+                if(!empty($btnedit)) {
+                    
                     $id = $params->fiscal_year_id;
+                    $this->db->set($fields);
+                    $tahun = date('Y', strtotime($params->fiscal_year_start));
+                    $this->db->set('fiscal_year', $tahun);                    
                     $this->db->where("fiscal_year_id", $id);
-                    $valid = $this->db->insert('fiscal_year');
+                    $valid = $this->db->update('fiscal_year');
                     $valid = $this->logUpdate->addLog("update", "user_group", $params);
                 }
+                //echo $this->db->last_query();
 		return true;		
 	}
         

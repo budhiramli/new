@@ -11,8 +11,8 @@
                         <div class="form-group col-xs-12">
                             <label for="fiscal_year_start" class="col-xs-4 control-label">Fiscal Year Start</label>
                             <div class="col-xs-5">
-                                <div class='input-group date' id='datetimepicker1'>
-                                    <input type="text" class="form-control" id="fiscal_year_start" name="fiscal_year_start" value="{{ edit.fiscal_year_start }}" placeholder="DD-MM-YYYY">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control datepicker_start" id="fiscal_year_start" name="fiscal_year_start" value="{{ edit.fiscal_year_start }}" placeholder="DD-MM-YYYY">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>    
@@ -23,8 +23,8 @@
                         <div class="form-group col-xs-12">
                             <label for="fiscal_year_end" class="col-xs-4 control-label">Fiscal Year End</label>
                             <div class="col-xs-5">
-                                <div class='input-group date' id='datetimepicker2'>
-                                    <input type="text" class="form-control" id="fiscal_year_end" name="fiscal_year_end" value="{{ edit.fiscal_year_end }}" placeholder="DD-MM-YYYY">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control datepicker_end" id="fiscal_year_end" name="fiscal_year_end" value="{{ edit.fiscal_year_end }}" placeholder="DD-MM-YYYY">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>    
@@ -36,7 +36,7 @@
                             <label for="fiscal_year_is_active" class="col-xs-4 control-label">Fiscal Year Status</label>
                             <div class="col-xs-5">
                             <label>
-                                    <input type="checkbox" id="fiscal_year_is_active" name="fiscal_year_is_active" value="{{ edit.fiscal_year_is_active }}">
+                                    <input type="checkbox" id="fiscal_year_is_active" name="fiscal_year_is_active" value="TRUE" {{ edit.status }}>
                             </label>
                             </div>
                         </div>

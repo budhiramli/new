@@ -1,7 +1,27 @@
 {% block content %}
+    var test;
+    $(".datepicker_start").datepicker({ 
+        dateFormat: 'dd-mm-yy',
+        onSelect: function(dateText, inst)
+        {
+            test = $(this).datepicker('getDate');
+            testm = new Date(test.getTime());
+            testm.setDate(testm.getDate() + 1);
 
-    $('#datetimepicker1').datetimepicker({ format: 'YYYY-MM-DD'});    
-    $('#datetimepicker2').datetimepicker({ format: 'YYYY-MM-DD'});
+            $(".datepicker_end").datepicker("option", "minDate", testm);
+        }
+    });
     
-    
+    $(".datepicker_end").datepicker({ 
+        dateFormat: 'dd-mm-yy'
+    });
+
+    $('#btnsave').removeClass('hide');
+    $('#btnedit').addClass('hide');
+        
+    var id = $("#fiscal_year_id").val();
+    if (!!id){
+        $('#btnsave').addClass('hide');
+        $('#btnedit').removeClass('hide');
+    }
 {% endblock %} 

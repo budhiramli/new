@@ -62,6 +62,7 @@ class Fiscal_year extends CI_Controller {
     function form($id='')
     {
         $data = array();    
+        
         if (!empty($id)){
             $this->load->model('fiscal_year_mdl');
             $data = $this->fiscal_year_mdl->getdataid($id);
@@ -94,8 +95,9 @@ class Fiscal_year extends CI_Controller {
     {
         $this->load->model('fiscal_year_mdl');
         $params = (object) $this->input->post();
-        $this->fiscal_year_mdl->save($params);            
-               
+        if (!empty($_POST)){
+            $this->fiscal_year_mdl->save($params);            
+        }       
         redirect(site_url('settings/fiscal_year/index'), 'refresh');
     }
     
