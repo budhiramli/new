@@ -59,23 +59,25 @@ class Group_accounts_mdl extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;
-		print_r($params);
-                $fields = array(
+		$fields = array(
                     'group_name'             => $params->group_name,
                 );
-		$this->db->set($fields);
+		
                 $btnupdate = $params->btnupdate;
-                
-		if (!empty($btnupdate)) {
-			$this->db->where("user_group_id", $params->user_group_id);
-                	$valid = $this->db->update("user_group");                        
-                	$valid = $this->logUpdate->addLog("update", "user_group", $params);
+                if (!empty($btnupdate)) {
+			$valid = $this->logUpdate->addLog("update", "user_group", $params);
+                        
+                        $this->db->set($fields);
+                        $this->db->where("user_group_id", $params->user_group_id);
+                	$valid = $this->db->update("user_group"); 
 		}
 		else {
-			$valid = $this->db->insert('user_group');                        
-		        $valid = $this->logUpdate->addLog("insert", "user_group", $params);
+                    $valid = $this->logUpdate->addLog("insert", "user_group", $params);
+                    
+                    $this->db->set($fields);
+                    $valid = $this->db->insert('user_group');
                 }
-                echo $this->db->last_query();
+                //echo $this->db->last_query();
 		return true;		
 	}
         

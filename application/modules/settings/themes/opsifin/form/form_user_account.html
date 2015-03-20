@@ -24,7 +24,9 @@
                                         <div class="form-group col-xs-12">
                                             <label for="Password" class="col-xs-3 control-label">Password</label>
                                             <div class="col-xs-6">
-                                              <input type="text" class="form-control" id="user_password" name="user_password" value="{{ edit.user_password }}" placeholder="password">
+                                              <input type="password" class="form-control" id="user_password" name="user_password" value="{{ edit.user_password }}" placeholder="password">
+                                              <input type="hidden" class="form-control" id="old_password" name="old_password" value="{{ edit.user_password }}">
+                                              
                                             </div>
                                         </div>
                                     </div>
@@ -56,7 +58,7 @@
                                             <label for="user_name" class="col-xs-3 control-label">Status</label>
                                             <div class="col-xs-6">
                                             <label>
-                                                <input type="checkbox" id="user_is_active" name="user_is_active" value="{{ edit.user_is_active }}"> Is Active
+                                                <input type="checkbox" id="user_is_active" name="user_is_active" value="TRUE" checked="{{ edit.status }}"> Is Active
                                             </label>
                                             </div>    
                                         </div>

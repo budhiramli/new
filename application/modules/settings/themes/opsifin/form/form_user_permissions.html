@@ -1,7 +1,7 @@
 {% block content %}
 <div class="row">
     <form class="form-horizontal" action="{{ site_url('settings/user_permissions/save') }}" method="post" role="form" name="form1">
-        <input id="user_id" name="user_id" type="hidden" value="{{ edit.user_id }}" />
+        <input id="user_group_id" name="user_group_id" type="hidden" value="{{ user_group_id }}" />
         
         <div class="col-xs-12 col-md-12">
             <div class="form-group col-xs-12">
@@ -9,32 +9,29 @@
                 <thead>
                     <tr>
                         <th rowspan="2" width="40">No</th>
-                        <th rowspan="2" width="90">Group Name</th>
                         <th rowspan="2">Menu Name</th>                        
-                        <th colspan="4" width="120">Action</th>
-                        <th rowspan="2" width="40">Approval</th>                        
-                        <th rowspan="2" width="40">Print</th>
+                        <th colspan="4" width="120" align="center">Action</th>
+                        <th rowspan="2" width="60">Approval</th>                        
+                        <th rowspan="2" width="60">Print</th>
                     </tr> 
                     <tr>
-                        <th width="40">C</th>
-                        <th width="40">R</th>
-                        <th width="40">U</th>
-                        <th width="40">D</th>
+                        <th width="60">C</th>
+                        <th width="60">R</th>
+                        <th width="60">U</th>
+                        <th width="60">D</th>
                     </tr>    
                 </thead>
                 <tbody>
                 {% for data in permission %}
                 <tr>
-                        <th width="40">{{ data.nomor}}</th>
-                        <th>{{ data.group_name }}</th>  
+                        <th width="60">{{ data.nomor}}</th>
                         <th>{{ data.menu_name }}</th>
-                        <th><input type="checkbox"></th>
-                        <th><input type="checkbox"></th>
-                        <th><input type="checkbox"></th>
-                        <th><input type="checkbox"></th>
-                        <th><input type="checkbox"></th>
-                        <th><input type="checkbox"></th>
-                        
+                        <th align="center"><input type="checkbox" name="CRUD[{{ data.menu_id }}][]" value="C" {{ data.crud_act_c }}></th>
+                        <th align="center"><input type="checkbox" name="CRUD[{{ data.menu_id }}][]" value="R" {{ data.crud_act_r }}></th>
+                        <th align="center"><input type="checkbox" name="CRUD[{{ data.menu_id }}][]" value="U" {{ data.crud_act_u }}></th>
+                        <th align="center"><input type="checkbox" name="CRUD[{{ data.menu_id }}][]" value="D" {{ data.crud_act_d }}></th>
+                        <th align="center"><input type="checkbox" name="ACT[{{ data.menu_id }}][]" value="A" {{ data.act_apr }}></th>
+                        <th align="center"><input type="checkbox" name="ACT[{{ data.menu_id }}][]" value="P" {{ data.act_pri }}></th>                        
                 </tr> 
                 {% endfor %} 
                 </tbody>    

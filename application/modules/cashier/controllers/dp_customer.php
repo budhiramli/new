@@ -83,9 +83,9 @@ class Dp_customer extends CI_Controller {
         $this->twiggy->set('window_page', $window_page);
         
         $script_page = $this->twiggy->template('script/form_dp_customer')->render();         
-        $script_page .= $this->twiggy->template('script/script_customer')->render();
-        $script_page .= $this->twiggy->template('script/script_dept')->render();
-        $script_page .= $this->twiggy->template('script/script_currency')->render();
+        //$script_page .= $this->twiggy->template('script/script_customer')->render();
+        //$script_page .= $this->twiggy->template('script/script_dept')->render();
+        //$script_page .= $this->twiggy->template('script/script_currency')->render();
         
         
         //$script_page .= $this->twiggy->template('script/script_all')->render();         

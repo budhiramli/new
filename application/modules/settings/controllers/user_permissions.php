@@ -31,6 +31,7 @@ class User_permissions extends CI_Controller {
         $this->load->model('permission_mdl');
         $permission = $this->permission_mdl->getdatalist($id, $userid);
         $this->twiggy->set('permission', $permission);
+        $this->twiggy->set('user_group_id', $id);        
         
         // create content page fo dp supplier
         $content = $this->twiggy->template('breadcrumbs')->render();
@@ -57,5 +58,15 @@ class User_permissions extends CI_Controller {
         //$this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);
+    }
+    
+    function save()
+    {
+        $this->load->model('permission_mdl');
+        $params = (object) $this->input->post();
+        if (!empty($_POST)){
+            $this->permission_mdl->save($params);        }
+        
+        redirect(site_url('settings/group_account/index'), 'refresh');
     }
 }    

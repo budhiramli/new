@@ -53,6 +53,7 @@ class User_accounts_mdl extends CI_Model {
                 'user_password',
                 'user_name',
                 'user_is_active',
+                'user_group_id',
                 'last_login'
             );
             $this->db->select($fields);
@@ -60,12 +61,19 @@ class User_accounts_mdl extends CI_Model {
             $query = $this->db->get('user');
             if ($query->num_rows>0){
                 $row = $query->row();
+                $status = '';
+                if ($row->user_is_active == 'TRUE'){
+                    $status = 'checked';
+                }
+                
                 $data = array(
                     'user_id'               => $row->user_id,
                     'user_login'            => $row->user_login,
                     'user_name'             => $row->user_name,
                     'user_password'         => $row->user_password,                    
-                    'status'                => $row->user_is_active,
+                    'user_is_active'        => $row->user_is_active,
+                    'user_group_id'         => $row->user_group_id,
+                    'status'                => $status,
                     'last_login'            => $row->last_login,
                 );
             }
@@ -74,34 +82,48 @@ class User_accounts_mdl extends CI_Model {
         
         function save($params)
 	{	
-                print_r($params);
+                
 		$log = $this->session->all_userdata();
 		$valid = false;
-		
+                $aktif = 'FALSE';
+                $isactive = @$params->user_is_active;
+                if ($isactive){
+                    $aktif = 'TRUE';
+                }   
+                
+                //check password first
+                if ($params->user_password == $params->old_password){
+                    $password = $params->user_password;
+                }
+                else {
+                    $password = md5($params->user_password);
+                }
+                
                 $fields = array(
                     'user_login'            => $params->user_login,
                     'user_name'             => $params->user_name,
+                    'user_password'         => $password,
                     'user_group_id'         => $params->user_group_id,
-                    'user_is_active'        => $params->user_is_active,
-                    'last_login'            => date('Y-m-d H:i:s'),   
+                    'user_is_active'        => $aktif,
+                    'updated_date'            => date('Y-m-d H:i:s'),   
+                    'updated_by'            => $this->session->userdata('username'),
                 );
                 $btnedit = $params->btnupdate;
-                
-                
 		if (!empty($btnedit)) {
+                        
+                        $valid = $this->logUpdate->addLog("update", "user", $params);
                         $this->db->set($fields);
-			$this->db->where("user_id", $params->id);
-			$valid = $this->db->update("user");                        
-			$valid = $this->logUpdate->addLog("update", "user", $params);
+			$this->db->where("user_id", $params->user_id);
+			$valid = $this->db->update("user"); 
 		}
 		else {
                     // check first
-                    //$this->db->
-                    //$query = $this->db->get('user');
-                    
-                        $this->db->set($fields);
-			$valid = $this->db->insert('user');			
-                        $valid = $this->logUpdate->addLog("insert", "user", $params);                        
+                    $this->db->set('created_date', date('Y-m-d H:i:s'));
+                    $this->db->set('created_by', $this->session->userdata('username'));                    
+                    $valid = $this->logUpdate->addLog("insert", "user", $params);
+                    $this->db->set($fields);
+                    $valid = $this->db->insert('user');			
+                                            
 		}
 		//echo $this->db->last_query();
 		return true;		

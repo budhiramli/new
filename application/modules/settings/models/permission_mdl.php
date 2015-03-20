@@ -16,51 +16,137 @@ class Permission_mdl extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'permission_id',
-                'group_name',
+                'menu_id',
                 'menu_name'
             );
             
             $this->db->select($fields);
-            $this->db->join('user_permission','user_permission.menu_id=menu.menu_id', 'left');
-            $this->db->join('user_group','user_group.user_group_id=user_permission.user_group_id', 'left');            
-            $this->db->where('user_permission.user_group_id', $groupid);
             $query = $this->db->get('menu');
             //echo $this->db->last_query();
             $nomor = 1;
             foreach($query->result() as $row):
+                $menuid = $row->menu_id;
+                
+                $c = '';
+                $r = '';
+                $u = '';
+                $d = '';
+                
+                $CRUD_C = $this->check_permission($menuid, $groupid, 'C');
+                if ($CRUD_C){
+                    $c = 'checked="checked"';
+                } 
+                
+                $CRUD_R = $this->check_permission($menuid, $groupid, 'R');
+                if ($CRUD_R){
+                    $r = 'checked="checked"';
+                }
+                $CRUD_U = $this->check_permission($menuid, $groupid, 'U');
+                if ($CRUD_U){
+                    $u = 'checked="checked"';
+                }
+                $CRUD_D = $this->check_permission($menuid, $groupid, 'D');
+                if ($CRUD_D){
+                    $d = 'checked="checked"';
+                }
+                
+                $apr = '';
+                $pri = '';
+                $ACT_APR = $this->check_permission($menuid, $groupid, 'A');
+                if ($ACT_APR){
+                    $apr = 'checked="checked"';
+                }
+                $ACT_PRI = $this->check_permission($menuid, $groupid, 'P');
+                if ($ACT_PRI){
+                    $pri = 'checked="checked"';
+                }
+                
                 $data[] = array(
-                    'nomor'                 => $nomor,
-                    'permission_id'         => $row->permission_id,
-                    'group_name'            => $row->group_name,
-                    'menu_name'            => $row->menu_name,
+                    'nomor'             => $nomor,
+                    'menu_id'           => $row->menu_id,
+                    'menu_name'         => $row->menu_name,
+                    'crud_act_c'        => $c,
+                    'crud_act_r'        => $r,
+                    'crud_act_u'        => $u,
+                    'crud_act_d'        => $d,
+                    'act_apr'        => $apr,
+                    'act_pri'        => $pri,
+                    
                 );
                 $nomor++;
             endforeach;
             return $data;
         }
         
+        function check_permission($menuid, $groupid, $act)
+        {
+            $fields = array(
+                'crud_action',
+                'other_action',
+            );
+            $this->db->select($fields);
+            $this->db->where('user_group_id', $groupid);
+            $this->db->where('menu_id', $menuid);
+            $query = $this->db->get('user_permission');
+            $row = $query->row();
+            
+            $valid = false;
+            if (!empty($row->crud_action)){
+                $crud_act = json_decode($row->crud_action);
+                if (in_array($act, $crud_act)){
+                    $valid = true;
+                }
+            }
+            
+            if (!empty($row->other_action)){
+                $othe_act = json_decode($row->other_action);
+                if (in_array($act, $othe_act)){
+                    $valid = true;
+                }
+            }
+                        
+            return $valid;
+        }
         
         public function save($params)
 	{	
-		$log = $this->session->all_userdata();
-		$valid = false;
-		
-                $fields = array(
-                    'user_group_id'               => $params->user_group_id,
-                    'user_group_name'             => $params->user_group_name,
-                );
-		$this->db->set($fields);
+		//delete old permission
+                $this->db->where('user_group_id', $params->user_group_id);
+                $this->db->delete('user_permission');
                 
-		if (!empty($params->id)) {
-			$this->db->where("user_group_id", $params->id);
-                	$valid = $this->db->update("user_group");
-                	$valid = $this->logUpdate->addLog("update", "user_group", $params);
-		}
-		else {
-			$valid = $this->db->insert('user_group');
-		        $valid = $this->logUpdate->addLog("insert", "user_group", $params);
-                }
+                $log = $this->session->all_userdata();
+		$valid = false;
+		$groupid = $params->user_group_id;
+                $crud   = $params->CRUD;
+                $act = array();
+                if (!empty(@$params->ACT)){
+                    $act = $params->ACT;
+                }               
+                
+                
+                $query = $this->db->get('menu');
+                foreach($query->result() as $row):
+                   
+                    $crud_action    = '';
+                    if (array_key_exists($row->menu_id, $crud)){
+                        $crud_action    = json_encode($crud[$row->menu_id]);
+                    }
+                    $other_action   = '';
+                    if (array_key_exists($row->menu_id, $act)){
+                        $other_action   = json_encode($act[$row->menu_id]);
+                    } 
+                    
+                    $fields = array(
+                        'user_group_id' => $groupid,
+                        'menu_id'       => $row->menu_id,
+                        'crud_action'   => $crud_action,
+                        'other_action'  => $other_action,
+                    );
+                    $this->db->set($fields);
+                    $this->db->insert('user_permission');
+                    //echo $this->db->last_query()."<br>";
+                endforeach;
+               
 		return true;		
 	}
         

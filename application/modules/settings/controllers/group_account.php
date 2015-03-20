@@ -88,7 +88,7 @@ class Group_account extends CI_Controller {
             $this->group_accounts_mdl->save($params);
         }
         
-        //redirect(site_url('settings/group_account/index'), 'refresh');
+        redirect(site_url('settings/group_account/index'), 'refresh');
     }
     
     function delete($id)
