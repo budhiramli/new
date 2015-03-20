@@ -54,8 +54,8 @@ class logUpdate extends CI_Model {
 		}
 		
 		$this->db->set("ip_address", $ip);
-		$this->db->set("id_user", $this->session->userdata('userId'));
-		$this->db->set("id_jabatan", $this->session->userdata('userSKPD'));
+		$this->db->set("id_user", $this->session->userdata('user_id'));
+		$this->db->set("id_jabatan", $this->session->userdata('user_group_id'));
 		$this->db->set("action", $act);
 		$this->db->set("record", $dataRecord);
 		$this->db->set("table_transaction", $table);
