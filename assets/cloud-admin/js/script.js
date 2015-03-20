@@ -316,7 +316,7 @@ var App = function () {
                startDate: moment().subtract('days', 29),
                endDate: moment(),
                minDate: '01/01/2012',
-               maxDate: '12/31/2014',
+               maxDate: '31/12/2014',
                dateLimit: { days: 60 },
                showDropdowns: true,
                showWeekNumbers: true,
@@ -332,7 +332,7 @@ var App = function () {
                buttonClasses: ['btn btn-default'],
                applyClass: 'btn-small btn-primary',
                cancelClass: 'btn-small',
-               format: 'MM/DD/YYYY',
+               format: 'DD/MM/YYYY',
                separator: ' to ',
                locale: {
                    applyLabel: 'Submit',
@@ -796,19 +796,24 @@ var App = function () {
 	/*	Date & Color Picker
 	/*-----------------------------------------------------------------------------------*/
 	var handleDateColorpicker = function () {
-		$(".datepicker").datepicker();
+		$(".datepicker").datepicker({ 
+                    dateFormat: 'dd-mm-yy',                    
+                });
+                
 		$(".inlinepicker").datepicker({
 			inline: true,
-			showOtherMonths: true
+			showOtherMonths: true,
+                        dateFormat: 'dd-mm-yy',
 		});
-		$(".datepicker-fullscreen").pickadate();
+		$(".datepicker-fullscreen").pickadate({ 
+                    fdateFormat: 'dd-mm-yy', });
 		$(".timepicker-fullscreen").pickatime();
 		//Color picker
-		$('.colorpicker').colorpicker();
-		var a = $("#color-pickers")[0].style;
-		$("#colorpicker-event").colorpicker().on("changeColor", function (b) {
-			a.backgroundColor = b.color.toHex()
-		});
+		//$('.colorpicker').colorpicker();
+		//var a = $("#color-pickers")[0].style;
+		//$("#colorpicker-event").colorpicker().on("changeColor", function (b) {
+		//	a.backgroundColor = b.color.toHex()
+		//});
 	}
 	/*-----------------------------------------------------------------------------------*/
 	/*	Raty
@@ -3174,7 +3179,9 @@ var App = function () {
 	/*	Handles Profile Edit
 	/*-----------------------------------------------------------------------------------*/
 	var handleProfileEdit = function () {
-		$(".datepicker").datepicker();
+		$(".datepicker").datepicker({
+                    dateFormat: 'dd-mm-yy',
+                });
 	}
 	return {
 
