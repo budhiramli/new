@@ -126,7 +126,7 @@ class User_accounts_mdl extends CI_Model {
                     $valid = $this->db->insert('user');			
                     
                     $valid = $this->logUpdate->addLog("insert", "user", $params);
-                                            
+
 		}
 		//echo $this->db->last_query();
 		return true;		

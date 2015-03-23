@@ -66,10 +66,10 @@ class Group_accounts_mdl extends CI_Model {
                 $btnupdate = $params->btnupdate;
                 if (!empty($btnupdate)) {
 			$valid = $this->logUpdate->addLog("update", "user_group", $params);
-                        
-                        $this->db->set($fields);
+                
+			            $this->db->set($fields);
                         $this->db->where("user_group_id", $params->user_group_id);
-                	$valid = $this->db->update("user_group"); 
+                	$valid = $this->db->update("user_group");
 		}
 		else {
                     $valid = $this->logUpdate->addLog("insert", "user_group", $params);
