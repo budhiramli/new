@@ -804,11 +804,11 @@ var App = function () {
 		$(".datepicker-fullscreen").pickadate();
 		$(".timepicker-fullscreen").pickatime();
 		//Color picker
-		$('.colorpicker').colorpicker();
-		var a = $("#color-pickers")[0].style;
-		$("#colorpicker-event").colorpicker().on("changeColor", function (b) {
-			a.backgroundColor = b.color.toHex()
-		});
+		//$('.colorpicker').colorpicker();
+		//var a = $("#color-pickers")[0].style;
+		//$("#colorpicker-event").colorpicker().on("changeColor", function (b) {
+		//	a.backgroundColor = b.color.toHex()
+		//});
 	}
 	/*-----------------------------------------------------------------------------------*/
 	/*	Raty
