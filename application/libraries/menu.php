@@ -7,7 +7,8 @@ class CI_Menu {
     {
         $CI =& get_instance(); 
         $CI->load->model('menu_mdl');         
-        $data = $CI->menu_mdl->getlist();         
+        $data = $CI->menu_mdl->getlist();  
+        	
         return $data;
     }
     

@@ -20,6 +20,7 @@ class Main extends CI_Controller {
     {   
         $this->load->library('menu');
         $menu = $this->menu->set_menu();
+		
         $this->twiggy->set('menu_navigasi', $menu);      
         
         $data = array();
