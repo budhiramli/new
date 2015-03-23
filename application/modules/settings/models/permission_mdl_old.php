@@ -117,7 +117,7 @@ class Permission_mdl extends CI_Model {
                 $log = $this->session->all_userdata();
 		$valid = false;
 		$groupid = $params->user_group_id;
-                $crud   = $params->CRUD;
+                $crud    = ''; //$params->CRUD;
                 $act = array();
                 if (!empty(@$params->ACT)){
                     $act = $params->ACT;
