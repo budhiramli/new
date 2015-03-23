@@ -108,21 +108,24 @@ class User_accounts_mdl extends CI_Model {
                     'updated_date'            => date('Y-m-d H:i:s'),   
                     'updated_by'            => $this->session->userdata('username'),
                 );
-                $btnedit = $params->btnupdate;
-		if (!empty($btnedit)) {
+                
+		if (!empty($params->btnupdate)) {
                         
-                        $valid = $this->logUpdate->addLog("update", "user", $params);
                         $this->db->set($fields);
-			$this->db->where("user_id", $params->user_id);
-			$valid = $this->db->update("user"); 
+						$this->db->where("user_id", $params->user_id);
+						$valid = $this->db->update("user");
+                        $valid = $this->logUpdate->addLog("update", "user", $params);
+                        						
 		}
 		else {
                     // check first
                     $this->db->set('created_date', date('Y-m-d H:i:s'));
                     $this->db->set('created_by', $this->session->userdata('username'));                    
-                    $valid = $this->logUpdate->addLog("insert", "user", $params);
                     $this->db->set($fields);
-                    $valid = $this->db->insert('user');			
+                    $valid = $this->db->insert('user');
+
+					$valid = $this->logUpdate->addLog("insert", "user", $params);
+                    		
                                             
 		}
 		//echo $this->db->last_query();
