@@ -115,10 +115,16 @@ class Permission_mdl extends CI_Model {
                 $this->db->delete('user_permission');
                 
                 $log    = $this->session->all_userdata();
-		$valid  = false;
-		$groupid    = $params->user_group_id;
-                $crud       = $params->CRUD;
-		$act        = array();
+				$valid  = false;
+				$groupid    = $params->user_group_id;
+                $crud = array();
+				if (!empty($params->CRUD)){
+                    $crud = $params->CRUD;
+                } 
+				$act = array();
+				if (!empty($params->ACT)){
+                    $act = $params->ACT;
+                } 
                 
                 $query = $this->db->get('menu');
                 foreach($query->result() as $row):
