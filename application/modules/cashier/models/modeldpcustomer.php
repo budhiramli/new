@@ -17,16 +17,21 @@ class modeldpcustomer extends CI_Model {
             if ($query->num_rows() == 1){
                 $row = $query->row();
                 $dsno = $row->counter_no+1;
+                
+                $this->db->where('counter_code', 'dp_customer');
+                $this->db->where('counter_year', $tahun);
+                $this->db->set('counter_no', $dsno);
+                $this->db->update('counter_log');
             }
             else {
                 //add new counter code
                 $dsno = 1;
-                $fields = array(
+                $fields_counter = array(
                     'counter_code'  => 'dp_customer',
                     'counter_year'  => $tahun,
                     'counter_no'    => $dsno,    
                 );
-                $this->db->set($fields);
+                $this->db->set($fields_counter);
                 $this->db->insert('counter_log');
                 
             }
@@ -46,6 +51,11 @@ class modeldpcustomer extends CI_Model {
             if ($query->num_rows() == 1){
                 $row = $query->row();
                 $transno = $row->counter_no+1;
+                
+                $this->db->where('counter_code', 'dc_transno');
+                $this->db->where('counter_year', $tahun);
+                $this->db->set('counter_no', $transno);
+                $this->db->update('counter_log');
             }
             else {
                 //add new counter code
@@ -168,11 +178,15 @@ class modeldpcustomer extends CI_Model {
 			$valid = $this->logUpdate->addLog("update", "dp_customer", $params);
 		}
 		else {
+                        $dc_no = $this->get_dsno();
+                        $trans_no = $this->get_transno();
                         $this->db->set($fields);
-                        $this->db->set('dc_no', $this->get_dsno());
-                        $this->db->set('transaction_no', $this->get_transno());
+                        $this->db->set('dc_no', $dc_no);
+                        $this->db->set('transaction_no', $trans_no);
                         
                         $valid = $this->db->insert('dp_customer');
+                        //echo $this->db->last_query();
+                        
                         $valid = $this->logUpdate->addLog("insert", "dp_customer", $params);
 		}
 		

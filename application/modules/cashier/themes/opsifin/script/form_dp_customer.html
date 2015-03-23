@@ -1,5 +1,9 @@
 {% block content %}
 
+            $("#transaction_date").datepicker({ 
+                    dateFormat: 'dd-mm-yy'
+            });
+
             $("#amount").maskMoney();
             $("#used_amount").maskMoney();
             

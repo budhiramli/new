@@ -79,8 +79,7 @@ class Dp_supplier extends CI_Controller {
         $window_page = $this->twiggy->template('window/window_currency')->render();
         $window_page .= $this->twiggy->template('window/window_supplier')->render();
         $window_page .= $this->twiggy->template('window/window_dept')->render();
-        
-        //$window_page .= $this->twiggy->template('window/window_lg')->render();
+        $window_page .= $this->twiggy->template('window/window_lg')->render();
         
         $this->twiggy->set('window_page', $window_page);
         
@@ -88,6 +87,7 @@ class Dp_supplier extends CI_Controller {
         $script_page .= $this->twiggy->template('script/script_currency')->render(); 
         $script_page .= $this->twiggy->template('script/script_supplier')->render(); 
         $script_page .= $this->twiggy->template('script/script_dept')->render(); 
+        $script_page .= $this->twiggy->template('script/script_lg')->render(); 
         
         //$script_page .= $this->twiggy->template('script/script_all')->render();         
         

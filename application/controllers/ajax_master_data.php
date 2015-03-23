@@ -150,6 +150,62 @@ class Ajax_master_data extends CI_Controller {
         $data['iTotalDisplayRecords']   = $this->user_group_mdl->getrecordcount();
         echo json_encode($data);
     }
+    
+    
+    function lgno()
+    {
+        $this->db->order_by('lg_no asc');
+        $query = $this->db->get('lg');
+        foreach($query->result() as $row):
+            $data[] = $row->lg_no; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+    
+    function get_lgno()
+    {
+        $this->load->model('lg');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->lg_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->lg_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->lg_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
+    
+    function branch()
+    {
+        $this->db->order_by('company_name asc');
+        $query = $this->db->get('mst_company');
+        foreach($query->result() as $row):
+            $data[] = $row->company_code . ' ' . $row->company_name; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+    
+    function get_branch()
+    {
+        $this->load->model('branch_all_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->branch_all_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->branch_all_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->branch_all_mdl->getrecordcount();
+        echo json_encode($data);
+    }
 }    
     
     

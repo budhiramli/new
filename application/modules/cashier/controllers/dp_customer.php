@@ -82,10 +82,11 @@ class Dp_customer extends CI_Controller {
         // end        
         $this->twiggy->set('window_page', $window_page);
         
+        
         $script_page = $this->twiggy->template('script/form_dp_customer')->render();         
-        //$script_page .= $this->twiggy->template('script/script_customer')->render();
-        //$script_page .= $this->twiggy->template('script/script_dept')->render();
-        //$script_page .= $this->twiggy->template('script/script_currency')->render();
+        $script_page .= $this->twiggy->template('script/script_dept')->render();
+        $script_page .= $this->twiggy->template('script/script_customer')->render();
+        $script_page .= $this->twiggy->template('script/script_currency')->render();
         
         
         //$script_page .= $this->twiggy->template('script/script_all')->render();         
@@ -100,6 +101,7 @@ class Dp_customer extends CI_Controller {
         $this->load->model('modeldpcustomer');
         $params = (object) $this->input->post();   
         $valid = $this->modeldpcustomer->save($params);
+        
         
         if (empty($valid))
             $this->owner->alert("Please complete the form", site_url('cashier/dp_customer/form'));
