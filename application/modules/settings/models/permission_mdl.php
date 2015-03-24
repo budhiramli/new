@@ -17,13 +17,17 @@ class Permission_mdl extends CI_Model {
             $data = array();
             $fields = array(
                 'menu_id',
+                'menu_parent_id',
                 'menu_name'
             );
             
             $this->db->select($fields);
+            $this->db->where('menu_parent_id', 0);
+            $this->db->order_by('menu_position asc');
             $query = $this->db->get('menu');
             //echo $this->db->last_query();
             $nomor = 1;
+            $level = 1;
             foreach($query->result() as $row):
                 $menuid = $row->menu_id;
                 
@@ -70,11 +74,98 @@ class Permission_mdl extends CI_Model {
                     'crud_act_u'        => $u,
                     'crud_act_d'        => $d,
                     'act_apr'        => $apr,
-                    'act_pri'        => $pri,
-                    
+                    'act_pri'        => $pri,                    
                 );
+                
+                $this->db->where('menu_parent_id', $menuid);
+                $this->db->order_by('menu_position asc');
+                $jml = $this->db->count_all_results('menu');
+                
+                if ($jml > 0){
+                    $child_data = $this->menu_child($groupid, $menuid, $level, $nomor, '&nbsp;&nbsp;&nbsp;');
+                    $data = array_merge($data, $child_data);                    
+                }
                 $nomor++;
             endforeach;
+            return $data;
+        }
+        
+        
+        function menu_child($groupid, $parentid, $level, $nomor, $space)
+        {
+            $level++;
+            $data = array();
+            $fields = array(
+                    'menu_id',
+                    'menu_parent_id',
+                    'menu_name'
+            );
+
+            $this->db->select($fields);
+            $this->db->where('menu_parent_id', $parentid);
+            $this->db->order_by('menu_position asc');
+            $query = $this->db->get('menu');
+            $no = 1;            
+            foreach($query->result() as $row):
+                $menuid = $row->menu_id;
+                $c = '';
+                $r = '';
+                $u = '';
+                $d = '';
+                
+                $CRUD_C = $this->check_permission($menuid, $groupid, 'C');
+                if ($CRUD_C){
+                    $c = 'checked="checked"';
+                } 
+                
+                $CRUD_R = $this->check_permission($menuid, $groupid, 'R');
+                if ($CRUD_R){
+                    $r = 'checked="checked"';
+                }
+                $CRUD_U = $this->check_permission($menuid, $groupid, 'U');
+                if ($CRUD_U){
+                    $u = 'checked="checked"';
+                }
+                $CRUD_D = $this->check_permission($menuid, $groupid, 'D');
+                if ($CRUD_D){
+                    $d = 'checked="checked"';
+                }
+                
+                $apr = '';
+                $pri = '';
+                $ACT_APR = $this->check_permission($menuid, $groupid, 'A');
+                if ($ACT_APR){
+                    $apr = 'checked="checked"';
+                }
+                $ACT_PRI = $this->check_permission($menuid, $groupid, 'P');
+                if ($ACT_PRI){
+                    $pri = 'checked="checked"';
+                }
+                
+                $data[] = array(
+                    'nomor'             => $nomor.'.'.$no,
+                    'menu_id'           => $row->menu_id,
+                    'menu_name'         => $space."&nbsp;&nbsp;&nbsp;".$row->menu_name,
+                    'crud_act_c'        => $c,
+                    'crud_act_r'        => $r,
+                    'crud_act_u'        => $u,
+                    'crud_act_d'        => $d,
+                    'act_apr'        => $apr,
+                    'act_pri'        => $pri,                    
+                );
+                
+                $this->db->where('menu_parent_id', $menuid);
+                $this->db->order_by('menu_position asc');
+                $jml = $this->db->count_all_results('menu');
+                
+                if ($jml > 0){
+                    $child_data = $this->menu_child($groupid, $menuid, $level, $nomor.'.'.$no, '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+                    $data = array_merge($data, $child_data);                    
+                }
+                
+                $no++;
+            endforeach;
+            
             return $data;
         }
         
