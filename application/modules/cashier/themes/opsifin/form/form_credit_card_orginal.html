@@ -50,9 +50,9 @@
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="transaction_date" class="col-xs-3 control-label">Date</label>
+                            <label for="tanggal_transaksi" class="col-xs-3 control-label">Date</label>
                             <div class="col-xs-4">
-                                <div class='input-group'>
+                                <div class='input-group date' id='datetimepicker1'>
                                     <input type="text" class="form-control" id="transaction_date" name="transaction_date" value="{{ edit.transaction_date }}" placeholder="DD-MM-YYYY">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -74,7 +74,7 @@
                         <div class="form-group col-xs-12">
                             <label for="cp" class="col-xs-3 control-label">CP</label>
                             <div class="col-xs-7">
-                                <input type="text" class="form-control" id="cp" name="cp" value="{{ edit.cp }}" placeholder="type here">  
+                                <input type="text" class="form-control" id="cp" name="cp" value="{{ edit.cp }}" placeholder="xxxxxxxx">  
                             </div>                
                         </div>
 
@@ -82,7 +82,7 @@
                             <label for="cp" class="col-xs-3 control-label">Bank Name</label>
                             <div class="col-xs-7">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="bank_name" name="bank_name" value="{{ edit.bank_name }}" placeholder="type or browse"> 
+                                    <input type="text" class="form-control" id="nama_bank" name="nama_bank" value="{{ edit.nama_bank }}" placeholder="xxxxxxxx"> 
                                     <span class="input-group-addon" data-toggle="modal" data-target="#window-bank"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>
@@ -93,8 +93,8 @@
                             <label for="amount" class="col-xs-3 control-label">Amount</label>
                             <div class="col-xs-3">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query currency_id" id="currency_id" name="currency" value="currency" placeholder="xxx">
-                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-currency"><span class="glyphicon glyphicon-search"></span>
+                                    <input type="text" class="form-control typeahead tt-query" id="currency_id" name="currency" value="currency" placeholder="xxx">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-branch"><span class="glyphicon glyphicon-search"></span>
                                     </span>    
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                             <div class="col-xs-3">
                                 <div class='input-group'>
                                     <input type="text" class="form-control typeahead tt-query" id="charges_currency" name="charges_currency" value="{{ edit.charges_currency }}" placeholder="xxx">
-                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-currency"><span class="glyphicon glyphicon-search"></span>
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-branch"><span class="glyphicon glyphicon-search"></span>
                                     </span>   
                                 </div>
                             </div>

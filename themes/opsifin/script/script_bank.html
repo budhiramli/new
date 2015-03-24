@@ -1,23 +1,23 @@
 {% block content %}
     
-            $('#branch_code.typeahead').typeahead({
+            $('#bank_name.typeahead').typeahead({
                 name: 'company_name',
-                prefetch: '{{ site_url() }}/ajax_master_data/branch',
+                prefetch: '{{ site_url() }}/ajax_master_data/bank',
                 limit: 20
             })
             
-    var table = $('#table_window_branch').dataTable( {    
+    var table = $('#table_window_bank').dataTable( {    
             "searching": true,
             "ordering": false,    
             "bLengthChange" : false,
-            "ajax": '{{ site_url() }}/ajax_master_data/get_branch',
+            "ajax": '{{ site_url() }}/ajax_master_data/get_bank',
             "columns": [
                     { "data": "nomor" },
-                    { "data": "branch_code" },
-                    { "data": "branch_name" },
+                    { "data": "bank_name" },
+                    { "data": "bank_alias" },                    
                     { "mRender" : function ( data, type, full ) {
                         FullData = full;
-                        return ' <a href="#" data-dismiss="modal" class="btn-branch-select btn btn-default btn-circle" data-branch-id=" ' + full.branch_code + ' "><i class="fa fa-check"></i></a> ';
+                        return ' <a href="#" data-dismiss="modal" class="btn-bank-select btn btn-default btn-circle" data-bank-id=" ' + full.bank_name + ' "><i class="fa fa-check"></i></a> ';
                       }
                     },
                 ], 
@@ -28,9 +28,9 @@
                 }   
     });
     
-    $('#table_window_branch tbody').on( 'click', '.btn-branch-select', function () {
-        var branchId      = $(this).data('branch-id');
-        $('#branch_code').val(branchId);
+    $('#table_window_bank tbody').on( 'click', '.btn-bank-select', function () {
+        var bankId      = $(this).data('bank-id');
+        $('#bank_name').val(bankId);
     });
     
 {% endblock %}

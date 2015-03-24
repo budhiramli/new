@@ -76,7 +76,7 @@ class Cheque_bg extends CI_Controller {
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
-        $window_page = $this->twiggy->template('window/window_currency')->render();
+        $window_page = $this->twiggy->template('window/window_branch')->render();
         $window_page .= $this->twiggy->template('window/window_dept')->render();
         $window_page .= $this->twiggy->template('window/window_vendor')->render();
         $window_page .= $this->twiggy->template('window/window_lg')->render();
@@ -85,7 +85,7 @@ class Cheque_bg extends CI_Controller {
         $this->twiggy->set('window_page', $window_page);
         
         $script_page = $this->twiggy->template('script/form_cheque_bg')->render();         
-        //$script_page .= $this->twiggy->template('script/script_all')->render();         
+        $script_page .= $this->twiggy->template('script/script_branch')->render();         
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();

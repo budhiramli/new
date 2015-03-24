@@ -206,6 +206,33 @@ class Ajax_master_data extends CI_Controller {
         $data['iTotalDisplayRecords']   = $this->branch_all_mdl->getrecordcount();
         echo json_encode($data);
     }
+    
+    function bank()
+    {
+        $this->db->order_by('bank_name asc');
+        $query = $this->db->get('mst_bank');
+        foreach($query->result() as $row):
+            $data[] = $row->bank_name; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+    
+    function get_bank()
+    {
+        $this->load->model('bank_all_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->bank_all_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->bank_all_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->bank_all_mdl->getrecordcount();
+        echo json_encode($data);
+    }
 }    
     
     

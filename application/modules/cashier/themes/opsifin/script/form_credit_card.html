@@ -1,4 +1,8 @@
 {% block content %}
+
+            $("#transaction_date").datepicker({ 
+                    dateFormat: 'dd-mm-yy'
+            });
        
             var selected = [];
             var table = $('#table_cc_detail').dataTable( {    

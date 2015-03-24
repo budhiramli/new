@@ -7,6 +7,16 @@
             limit: 20
     });
     
+    
+    // currency typeahead
+    $('#charges_currency.typeahead').typeahead({                
+            name: 'currency',
+            prefetch: '{{ site_url() }}/ajax_master_data/currency',
+            limit: 20
+    });
+    
+    
+    
     var selected = [];
     var table = $('#table_window_currency').dataTable( {    
             "searching": true,
@@ -35,6 +45,35 @@
     $('#table_window_currency tbody').on( 'click', '.btn-curr-select', function () {
         var currId = $(this).data('curr-id');
         $('#currency_id').val(currId);
+    });    
+    
+    var table = $('#table_window_charge_currency').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_currency',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "currency" },
+                    { "data": "symbol" },
+                    //{ "data": "currency_name" },
+                    { "data": "currency_country" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-curr-select btn btn-default btn-circle" data-curr-id=" ' + full.currency + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    
+    $('#table_window_charge_currency tbody').on( 'click', '.btn-curr-select', function () {
+        var currId = $(this).data('curr-id');
+        $('#charges_currency').val(currId);
     });
     
 {% endblock %}    

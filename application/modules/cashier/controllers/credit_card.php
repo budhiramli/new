@@ -57,13 +57,9 @@ class Credit_card extends CI_Controller {
             $this->load->model('modelcc');
             $data = $this->modelcc->getdataid($id);
             $this->twiggy->set('edit', $data); 
-        };
+        };        
         
-        
-        // create content page fo dp supplier
-        //$content = $this->twiggy->template('breadcrumbs')->render();
         $content = $this->twiggy->template('form/form_credit_card')->render();        
-        // end        
         $this->twiggy->set('content_page', $content);
         $this->twiggy->set('FORM_NAME', 'form_credit_card');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
@@ -76,15 +72,18 @@ class Credit_card extends CI_Controller {
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
         $window_page = $this->twiggy->template('window/window_branch')->render();
+        $window_page .= $this->twiggy->template('window/window_customer')->render();
+        $window_page .= $this->twiggy->template('window/window_bank')->render();
         $window_page .= $this->twiggy->template('window/window_currency')->render();
-        $window_page .= $this->twiggy->template('window/window_dept')->render();
-        $window_page .= $this->twiggy->template('window/window_vendor')->render();
-        $window_page .= $this->twiggy->template('window/window_lg')->render();
         
         $this->twiggy->set('window_page', $window_page);
         
         $script_page = $this->twiggy->template('script/form_credit_card')->render();         
-        $script_page .= $this->twiggy->template('script/script_branch')->render();         
+        $script_page .= $this->twiggy->template('script/script_branch')->render(); 
+        $script_page .= $this->twiggy->template('script/script_customer')->render(); 
+        $script_page .= $this->twiggy->template('script/script_bank')->render(); 
+        $script_page .= $this->twiggy->template('script/script_currency')->render(); 
+        
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
