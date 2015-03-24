@@ -92,12 +92,11 @@ class Credit_card extends CI_Controller {
         
     function save()
     {
+        $this->load->model('modelcc');
         $params = (object) $this->input->post();   
         
-        $valid = $this->modeldpcustomer->save($params);
-        echo $this->db->last_query();
+        $valid = $this->modelcc->save($params);
         
-        die();
         if (empty($valid))
             $this->owner->alert("Please complete the form", "../index.php/cashier/dp_customer/form");
 	else

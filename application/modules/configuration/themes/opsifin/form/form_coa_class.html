@@ -10,7 +10,6 @@
                 <div class="panel-body">
                 <div class="row">
                     <form class="form-horizontal" action="{{ site_url('configuration/coa_class/save') }}" method="post" role="form" name="form1">
-                    <input id="class_id" name="class_id" type="hidden" value="{{ edit.class_id }}" />    
                     <div class="col-xs-12 col-md-8">
                         <div class="form-group col-xs-12">
                             <label for="cp" class="col-xs-3 control-label">Class ID</label>
@@ -27,7 +26,7 @@
                         </div>
                         
                         <div class="form-group col-xs-12">                            
-                            <label for="supplier_code" class="col-xs-3 control-label">Clas Type</label>
+                            <label for="class_type_id" class="col-xs-3 control-label">Class Type</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
                                     <input type="text" class="form-control typeahead tt-query" id="class_type_id" name="class_type_id" value="{{ edit.class_type_id }}"  placeholder="type here or browse">

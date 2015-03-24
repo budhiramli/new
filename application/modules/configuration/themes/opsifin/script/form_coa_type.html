@@ -1,2 +1,15 @@
 {% block content %}
+
+    var classid = $("#class_type_id").val();
+    
+    if (!!classid){
+        $('#btnsave').addClass('hide');
+        $('#btnedit').removeClass('hide');        
+    }
+    else {
+        $('#btnsave').removeClass('hide');
+        $('#btnedit').addClass('hide');        
+    }
+    
+    
 {% endblock %}

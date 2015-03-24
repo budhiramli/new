@@ -50,7 +50,7 @@ class Coa_class extends CI_Controller {
         $this->twiggy->set('window_page', $window_page);
         
         $script_page = $this->twiggy->template('script/coa_class')->render();         
-        //$script_page .= $this->twiggy->template('script/script_all')->render();         
+        $script_page .= $this->twiggy->template('script/script_class_type')->render();         
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
@@ -79,6 +79,7 @@ class Coa_class extends CI_Controller {
         $this->twiggy->set('window_page', $window_page);
         
         $script_page = $this->twiggy->template('script/form_coa_class')->render();         
+        $script_page .= $this->twiggy->template('script/script_class_type')->render();
         //$script_page .= $this->twiggy->template('script/script_all')->render();         
         
         $this->twiggy->set('SCRIPTS', $script_page);

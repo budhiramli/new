@@ -3,8 +3,7 @@
 class Ajax_master_data extends CI_Controller {
     function __construct() {
         parent::__construct();
-    }
-    
+    }    
     
     function currency()
     {
@@ -233,6 +232,62 @@ class Ajax_master_data extends CI_Controller {
         $data['iTotalDisplayRecords']   = $this->bank_all_mdl->getrecordcount();
         echo json_encode($data);
     }
+    
+    
+    function class_type()
+    {
+        $this->db->order_by('class_type_name asc');
+        $query = $this->db->get('coa_class_type');
+        foreach($query->result() as $row):
+            $data[] = $row->bank_name; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+    
+    function get_class_type()
+    {
+        $this->load->model('classtype_all_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->classtype_all_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->classtype_all_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->classtype_all_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
+    function coa_class_group()
+    {
+        $this->db->order_by('coa_group_name asc');
+        $query = $this->db->get('coa_class_group');
+        foreach($query->result() as $row):
+            $data[] = $row->coa_group_name; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+    
+    function get_coa_class_group()
+    {
+        $this->load->model('coaclassgroup_all_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->coaclassgroup_all_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->coaclassgroup_all_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->coaclassgroup_all_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
 }    
     
     

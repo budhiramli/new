@@ -57,7 +57,7 @@ class coa_class_mdl extends CI_Model {
                     $data = array(
                         'class_id'              => $row->class_id, 
                         'class_name'            => $row->class_name,
-                        'class_type_id'         => $row->class_type_id,
+                        'class_type_id'         => $row->class_type_name,
                         'class_type_name'       => $row->class_type_name,
                     );
             }
@@ -66,21 +66,36 @@ class coa_class_mdl extends CI_Model {
         
         function add($params)
         {
+            $classtypeid = $this->getclass($params->class_type_id);
+            
             $fields = array(
                 'class_id'                  => $params->class_id, 
                 'class_name'                => $params->class_name,
-                'class_type_id'             => $params->class_type_id,
+                'class_type_id'             => $classtypeid,
             );
             $this->db->set($fields);
             $this->db->insert('coa_class');
             return true;
         }
         
+        
+        function getclass($class_type_name)
+        {
+            $this->db->where('UPPER(class_type_name)', strtoupper(trim($class_type_name)));
+            $query = $this->db->get('coa_class_type');
+            //echo $this->db->last_query();
+            $row = $query->row();
+            $class_type_id = $row->class_type_id;
+            return $class_type_id;
+        }
+        
         function update($params, $id)
         {
+            $classtypeid = $this->getclass($params->class_type_id);
+            
             $fields = array(
                 'class_name'                => $params->class_name,
-                'class_type_id'             => $params->class_type_id,
+                'class_type_id'             => $classtypeid,
             );
             $this->db->set($fields);
             $this->db->where('class_id', $id);            

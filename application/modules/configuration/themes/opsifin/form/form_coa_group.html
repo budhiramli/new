@@ -27,32 +27,34 @@
                         </div>
                         
                         <div class="form-group col-xs-12">                            
-                            <label for="supplier_code" class="col-xs-3 control-label">Sub Group Of</label>
+                            <label for="coa_parent_id" class="col-xs-3 control-label">Sub Group Of</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
                                     <input type="text" class="form-control typeahead tt-query" id="coa_parent_id" name="coa_parent_id" value="{{ edit.coa_parent_id }}"  placeholder="type here or browse">
-                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-classtype"><span class="glyphicon glyphicon-search"></span>
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-coa-group"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>
                             </div>                
                         </div>
                         
                         <div class="form-group col-xs-12">                            
-                            <label for="supplier_code" class="col-xs-3 control-label">Clas Type</label>
+                            <label for="class_type_id" class="col-xs-3 control-label">Class Type</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="class_id" name="class_id" value="{{ edit.class_id }}"  placeholder="type here or browse">
+                                    <input type="text" class="form-control typeahead tt-query" id="class_type_id" name="class_type_id" value="{{ edit.class_type_id }}"  placeholder="type here or browse">
                                     <span class="input-group-addon" data-toggle="modal" data-target="#window-classtype"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>
                             </div>                
                         </div>
                         
-                        <div class="form-group col-xs-12">                            
-                            <label for="supplier_code" class="col-xs-3 control-label">
-                                <input type="checkbox" class="form-control typeahead tt-query" id="coa_group_is_active" name="coa_group_is_active">
-                                Coa Is active</label>
-                                           
+                        <div class="form-group col-xs-12"> 
+                            <label class="col-xs-3 control-label">&nbsp;</label>
+                            <div class="col-xs-7">
+                                <div class="checkbox">
+                                    <label><input type="checkbox">COA is active</label>
+                                </div>
+                            </div>               
                         </div>
 
 

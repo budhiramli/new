@@ -1,0 +1,37 @@
+{% block content %}
+    
+    $('#class_type_id.typeahead').typeahead({
+                name: 'coa_group_name',
+                prefetch: '{{ site_url() }}/ajax_master_data/coa_class_group',
+                limit: 20
+    })
+    
+    var selected = [];
+    var table = $('#table_window_coa_group').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_coa_class_group',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "coa_group_id" },
+                    { "data": "coa_group_name" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-classtype-select btn btn-default btn-circle" data-coagroup-id=" ' + full.coa_group_name + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    
+    $('#table_window_coa_group tbody').on( 'click', '.btn-coagroup-select', function () {
+        var coagroupId      = $(this).data('coagroup-id');
+        $('#coa_group_id').val(coagroupId);
+    });
+    
+{% endblock %}

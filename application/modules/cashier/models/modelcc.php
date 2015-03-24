@@ -97,9 +97,7 @@ class modelcc extends CI_Model {
 		$valid = false;
 		
                 $fields = array(
-                    "ref_no"            => $params->ref_no,
-                    "transaction_no"      => $params->transaction_no,
-                    "transaction_date" => $params->transaction_date,		
+                    "transaction_date" => date('Y-m-d', strtotime($params->transaction_date)),	
                     "company_code"       => $params->company_code,
                     "cp"                => $params->cp,
                     "bank_name"         => $params->bank_name,
@@ -111,15 +109,18 @@ class modelcc extends CI_Model {
                 );
 		
 		if (!empty($params->id)) {
-			$this->db->where("id_cc", $params->id);
+			$this->db->set($fields);
+                    
+                        $this->db->where("cc_no", $params->cc_no);
 			$valid = $this->db->update("cc_transaction");
                         
 			$valid = $this->logUpdate->addLog("update", "cc_transaction", $params);
 		}
 		else {
-			$valid = $this->db->insert('cc_transaction');
-			
-                        $valid = $this->logUpdate->addLog("insert", "cc_transaction", $params);
+                    $this->db->set($fields);
+                    $valid = $this->db->insert('cc_transaction');
+                    
+                    $valid = $this->logUpdate->addLog("insert", "cc_transaction", $params);
                         
 		}
 		
