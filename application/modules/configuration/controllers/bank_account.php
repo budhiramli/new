@@ -58,13 +58,13 @@ class Bank_account extends CI_Controller {
         $this->output->set_output($output);
     }
     
-    function form()
+    function form($id='')
     {
         $data = array();
         
         if (!empty($id)){
-            $this->load->model('coa_class_mdl');
-            $data = $this->coa_class_mdl->getdataid($id);
+            $this->load->model('bank_account_mdl');
+            $data = $this->bank_account_mdl->getdataid($id);
             $this->twiggy->set('edit', $data); 
         };
         // create content page fo dp supplier
@@ -83,16 +83,17 @@ class Bank_account extends CI_Controller {
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
-        $window_page = $this->twiggy->template('window/window_currency')->render();
-        $window_page .= $this->twiggy->template('window/window_dept')->render();
-        $window_page .= $this->twiggy->template('window/window_vendor')->render();
-        $window_page .= $this->twiggy->template('window/window_lg')->render();
+        $window_page = $this->twiggy->template('window/window_bank_account_type')->render();
+        $window_page .= $this->twiggy->template('window/window_currency')->render();
+        $window_page .= $this->twiggy->template('window/window_account_code')->render();
         
         // end        
         $this->twiggy->set('window_page', $window_page);
         
-        $script_page = $this->twiggy->template('script/form_bank_account')->render();         
-        //$script_page .= $this->twiggy->template('script/script_all')->render();         
+        $script_page = $this->twiggy->template('script/form_bank_account')->render();   
+        $script_page .= $this->twiggy->template('script/script_bank_account_type')->render();         
+        $script_page .= $this->twiggy->template('script/script_currency')->render();         
+        $script_page .= $this->twiggy->template('script/script_account_code')->render();         
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
@@ -115,14 +116,14 @@ class Bank_account extends CI_Controller {
             $id = $this->input->post('account_code');
             $this->bank_account_mdl->edit($params, $id);
         }
-        echo $this->db->last_query();
-        //redirect(site_url('configuration/bank_account/index'), 'refresh');
+        //echo $this->db->last_query();
+        redirect(site_url('configuration/bank_account/index'), 'refresh');
     }
     
     function del($id)
     {
         $this->load->model('bank_account_mdl');
-        $this->bank_account_mdl->del($id);
+        $this->bank_account_mdl->delete($id);
         redirect(site_url('configuration/bank_account/index'), 'refresh');
     }
     

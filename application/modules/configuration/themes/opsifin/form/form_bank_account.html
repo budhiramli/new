@@ -20,18 +20,18 @@
                         </div>
                         
                         <div class="form-group col-xs-12">                            
-                            <label for="supplier_code" class="col-xs-5 control-label">Bank Account Type</label>
+                            <label for="bank_account_type_id" class="col-xs-5 control-label">Bank Account Type</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
                                     <input type="text" class="form-control typeahead tt-query" id="bank_account_type_id" name="bank_account_type_id" value="{{ edit.bank_account_type_id }}"  placeholder="type here or browse">
-                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-classtype"><span class="glyphicon glyphicon-search"></span>
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-bank-account-type"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>
                             </div>                
                         </div>
                         
                         <div class="form-group col-xs-12">                            
-                            <label for="supplier_code" class="col-xs-5 control-label">Currency</label>
+                            <label for="currency" class="col-xs-5 control-label">Currency</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
                                     <input type="text" class="form-control typeahead tt-query" id="currency_id" name="currency" value="{{ edit.currency }}"  placeholder="type here or browse">
@@ -42,11 +42,11 @@
                         </div>
                         
                         <div class="form-group col-xs-12">                            
-                            <label for="supplier_code" class="col-xs-5 control-label">Account Code</label>
+                            <label for="account_code" class="col-xs-5 control-label">Account Code</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
                                     <input type="text" class="form-control typeahead tt-query" id="account_code" name="account_code" value="{{ edit.account_code }}"  placeholder="type here or browse">
-                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-account"><span class="glyphicon glyphicon-search"></span>
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-account-code"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>
                             </div>                
@@ -67,20 +67,19 @@
                         </div>
                         
                         <div class="form-group col-xs-12">
-                            <label for="cp" class="col-xs-5 control-label">Bank Address</label>
+                            <label for="bank_address" class="col-xs-5 control-label">Bank Address</label>
                             <div class="col-xs-7">
                                 <input type="text" class="form-control" id="bank_account_bank_address" name="bank_account_bank_address" value="{{ edit.bank_account_bank_address }}" placeholder="type here or browse">  
                             </div>                
                         </div>
                         
-                        <div class="form-group col-xs-12">
+                        <div class="form-group col-xs-12"> 
+                            <label class="col-xs-5 control-label">&nbsp;</label>
                             <div class="col-xs-7">
-                                <label for="cp" class="col-xs-3 control-label">
-                                    <input type="checkbox" class="form-control" id="bank_account_bank_address" name="bank_account_bank_address" value="{{ edit.bank_account_bank_address }}" placeholder="type here or browse">
-                                    Is Default Currency
-                                </label>
-                                  
-                            </div>                
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name="bank_account_is_default" value="TRUE" {{ edit.status }}>Is Default Currency</label>
+                                </div>
+                            </div>               
                         </div>
 
 

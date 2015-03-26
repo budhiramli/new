@@ -78,15 +78,17 @@ class Currency_mdl extends CI_Model {
             }
             
             if (!empty($params->btnupdate)){
-                $id = $params->currency_id;
+                $id = $params->currency;
                 $this->db->where('currency', $id);
                 $this->db->update('mst_currency');
             }
             return true;
         }
         
-        function delete()
+        function delete($id)
         {
-            
+            $this->db->where('currency', $id);
+            $this->db->delete('mst_currency');
+            return true;
         }
 }

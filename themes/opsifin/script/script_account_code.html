@@ -1,0 +1,36 @@
+{% block content %}
+    
+            $('#account_code.typeahead').typeahead({
+                name: 'account_code',
+                prefetch: '{{ site_url() }}/ajax_master_data/account_coa',
+                limit: 20
+            })
+            
+    var table = $('#table_window_account_code').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_account_coa',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "account_code" },
+                    { "data": "account_name" },                    
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-account-select btn btn-default btn-circle" data-account-id=" ' + full.account_code + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    
+    $('#table_window_account_code tbody').on( 'click', '.btn-account-select', function () {
+        var accountId      = $(this).data('account-id');
+        $('#account_code').val(accountId);
+    });
+    
+{% endblock %}

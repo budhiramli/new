@@ -1,13 +1,13 @@
 {% block content %}
     //
-    var currId = $('#currency_id').val();
+    var currId = $('#currency').val();
     if (!!currId){
                 $('#btnupdate').removeClass('hide');
                 $('#btnsave').addClass('hide');
     }
     else {
-                $('#btnupdate').removeClass('hide');
-                $('#btnsave').addClass('hide');
+                $('#btnupdate').addClass('hide');
+                $('#btnsave').removeClass('hide');
     }
 
 {% endblock %}

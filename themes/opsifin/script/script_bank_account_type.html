@@ -1,0 +1,35 @@
+{% block content %}
+    
+    $('#bank_account_type_id.typeahead').typeahead({
+                name: '	bank_account_type_name',
+                prefetch: '{{ site_url() }}/ajax_master_data/bank_account_type',
+                limit: 20
+    })
+            
+    var table = $('#table_window_bank_account_type').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_bank_account_type',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "bank_account_type_name" },        
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-bank-select btn btn-default btn-circle" data-bank-id=" ' + full.bank_account_type_name + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    
+    $('#table_window_bank_account_type tbody').on( 'click', '.btn-bank-select', function () {
+        var bankId      = $(this).data('bank-id');
+        $('#bank_account_type_id').val(bankId);
+    });
+    
+{% endblock %}

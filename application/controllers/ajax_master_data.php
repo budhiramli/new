@@ -315,6 +315,62 @@ class Ajax_master_data extends CI_Controller {
         echo json_encode($data);
     }
     
+    
+    function bank_account_type()
+    {
+        $this->db->order_by('bank_account_type_name asc');
+        $query = $this->db->get('bank_account_type');
+        foreach($query->result() as $row):
+            $data[] = $row->class_name; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+    
+    function get_bank_account_type()
+    {
+        $this->load->model('bank_account_type_all_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->bank_account_type_all_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->bank_account_type_all_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->bank_account_type_all_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
+    
+    function account_coa()
+    {
+        $this->db->order_by('account_name asc');
+        $query = $this->db->get('coa_account');
+        foreach($query->result() as $row):
+            $data[] = $row->account_name; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+    
+    function get_account_coa()
+    {
+        $this->load->model('coa_account_all_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->coa_account_all_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->coa_account_all_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->coa_account_all_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
 }    
     
     
