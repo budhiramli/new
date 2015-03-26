@@ -85,13 +85,13 @@ class Coa_account extends CI_Controller {
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
-        $window_page = $this->twiggy->template('window/window_currency')->render();
+        $window_page = $this->twiggy->template('window/window_coa_group')->render();
         
         // end        
         $this->twiggy->set('window_page', $window_page);
         
         $script_page = $this->twiggy->template('script/form_coa_account')->render();         
-        //$script_page .= $this->twiggy->template('script/script_all')->render();         
+        $script_page .= $this->twiggy->template('script/script_coa_group')->render();         
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
@@ -118,10 +118,13 @@ class Coa_account extends CI_Controller {
         redirect(site_url('configuration/coa_account/index'), 'refresh');
     }
     
-    function del($id)
+    function delete($id)
     {
-        $this->load->model('coa_account_mdl');
-        $this->coa_account_mdl->del($id);
+        if (!empty($id)){
+            $this->load->model('coa_account_mdl');
+            $this->coa_account_mdl->delete($id);
+        }
+        redirect(site_url('configuration/coa_account/index'), 'refresh');
     }
     
 }    

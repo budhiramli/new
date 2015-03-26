@@ -70,13 +70,14 @@ class Coa_group extends CI_Controller {
         $this->twiggy->set('content_page', $content);
         
         $window_page = $this->twiggy->template('window/window_coa_group')->render();
-        //$window_page .= $this->twiggy->template('window/window_coa_class')->render();
+        $window_page .= $this->twiggy->template('window/window_coa_class')->render();
         
         // end        
         $this->twiggy->set('window_page', $window_page);
         
         $script_page = $this->twiggy->template('script/form_coa_group')->render();   
-        $script_page .= $this->twiggy->template('script/script_coa_group')->render();         
+        $script_page .= $this->twiggy->template('script/script_coa_parent_group')->render();         
+        $script_page .= $this->twiggy->template('script/script_coa_class')->render();         
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();

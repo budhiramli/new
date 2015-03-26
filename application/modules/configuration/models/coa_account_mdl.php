@@ -54,11 +54,15 @@ class coa_account_mdl extends CI_Model {
             $query = $this->db->get('coa_account');
             if ($query->num_rows() > 0){
                 $row = $query->row();
+                $status = '';
+                if ($row->account_is_active == 'TRUE'){
+                    $status = 'checked="checked"';
+                }
                     $data = array(
                         'account_code'         => $row->account_code, 
                         'account_name'         => $row->account_name,
                         'coa_group_id'         => $row->coa_group_id,
-                        'account_is_active'    => $row->account_is_active,
+                        'status'               => $status,
                     );
             }
             return $data;
@@ -66,11 +70,18 @@ class coa_account_mdl extends CI_Model {
         
         function add($params)
         {
+            $coagroupid = $this->getaccountgroup($params->coa_group_id);
+            
+            $status = 'FALSE';
+            if (!empty($params->account_is_active)){
+                $status = 'TRUE';            
+            }
+            
             $fields = array(
-                'account_code'  => $params->account_code, 
-                'account_name'  => $params->account_name,
-                'coa_group_id'  => $params->coa_group_id,
-                'account_is_active'  => $params->account_is_active
+                'account_code'  => strtoupper(trim($params->account_code)), 
+                'account_name'  => strtoupper(trim($params->account_name)),
+                'coa_group_id'      => $coagroupid,
+                'account_is_active' => $status
             );
             $this->db->set($fields);
             $this->db->insert('coa_account');
@@ -79,22 +90,40 @@ class coa_account_mdl extends CI_Model {
         
         function edit($params, $id)
         {
+           
+            $coagroupid = $this->getaccountgroup($params->coa_group_id);
+            
+            $status = 'FALSE';
+            if (!empty($params->account_is_active)){
+                $status = 'TRUE';
+            }
+            
             $fields = array(
-                'account_code'  => $params->account_code, 
-                'account_name'  => $params->account_name,
-                'coa_group_id'  => $params->coa_group_id,
-                'account_is_active'  => $params->account_is_active
+                'account_code'  => strtoupper(trim($params->account_code)), 
+                'account_name'  => strtoupper(trim($params->account_name)),
+                'coa_group_id'  => $coagroupid,
+                'account_is_active'  => $status
             );
             $this->db->set($fields);
-            $this->db->where('account_code', $params->account_code);
+            $this->db->where('account_code', $id);
             $this->db->update('coa_account');
             
             return true;
         }
         
+        
+        function getaccountgroup($name)
+        {
+            $this->db->where('UPPER(coa_group_name)', strtoupper(trim($name)));
+            $query = $this->db->get('coa_class_group');
+            $row = $query->row();
+            $id = $row->coa_group_id;
+            return $id;
+        }
+        
         function delete($id)
         {
-            $this->db->where('account_code', $params->account_code);
+            $this->db->where('account_code', $id);
             $this->db->delete('coa_account');
             
             return true;

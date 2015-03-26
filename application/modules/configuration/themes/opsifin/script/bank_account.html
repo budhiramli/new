@@ -28,4 +28,10 @@ var table = $('#table_bank_account').dataTable( {
             }   
 });
 
+$('#table_bank_account').on('click', 'a.edit-btn', function (e) {
+    e.preventDefault(); 
+    var editId = $(this).data('edit-id');
+    window.location.href='{{ site_url() }}/configuration/bank_account/form/' + editId;
+});
+
 {% endblock %}

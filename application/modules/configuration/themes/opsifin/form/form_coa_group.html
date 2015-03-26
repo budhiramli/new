@@ -38,11 +38,11 @@
                         </div>
                         
                         <div class="form-group col-xs-12">                            
-                            <label for="class_type_id" class="col-xs-3 control-label">Class Type</label>
+                            <label for="class_id" class="col-xs-3 control-label">Class Type</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="class_type_id" name="class_type_id" value="{{ edit.class_type_id }}"  placeholder="type here or browse">
-                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-classtype"><span class="glyphicon glyphicon-search"></span>
+                                    <input type="text" class="form-control typeahead tt-query" id="class_id" name="class_id" value="{{ edit.class_id }}"  placeholder="type here or browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-coa-class"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>
                             </div>                
@@ -52,7 +52,7 @@
                             <label class="col-xs-3 control-label">&nbsp;</label>
                             <div class="col-xs-7">
                                 <div class="checkbox">
-                                    <label><input type="checkbox">COA is active</label>
+                                    <label><input type="checkbox" name="coa_group_is_active" value="TRUE" {{ edit.status }}>COA is active</label>
                                 </div>
                             </div>               
                         </div>

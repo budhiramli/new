@@ -10,44 +10,39 @@
                 <div class="panel-body">
                 <div class="row">
                     <form class="form-horizontal" action="{{ site_url('configuration/coa_account/save') }}" method="post" role="form" name="form1">
-                    <input id="account_code" name="account_code" type="hidden" value="{{ edit.account_code }}" />    
                     <div class="col-xs-12 col-md-8">
                         <div class="form-group col-xs-12">
-                            <label for="cp" class="col-xs-3 control-label">Account Code</label>
+                            <label for="account_code" class="col-xs-3 control-label">Account Code</label>
                             <div class="col-xs-7">
                                 <input type="text" class="form-control" id="account_code" name="account_code" value="{{ edit.account_code }}" placeholder="type here or browse">  
                             </div>                
                         </div>
                         
                         <div class="form-group col-xs-12">
-                            <label for="cp" class="col-xs-3 control-label">Account Name</label>
+                            <label for="account_name" class="col-xs-3 control-label">Account Name</label>
                             <div class="col-xs-7">
                                 <input type="text" class="form-control" id="account_name" name="account_name" value="{{ edit.account_name }}" placeholder="type here or browse">  
                             </div>                
                         </div>
                         
                         <div class="form-group col-xs-12">                            
-                            <label for="supplier_code" class="col-xs-3 control-label">Account Group</label>
+                            <label for="coa_group_id" class="col-xs-3 control-label">Account Group</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
                                     <input type="text" class="form-control typeahead tt-query" id="coa_group_id" name="coa_group_id" value="{{ edit.coa_group_id }}"  placeholder="type here or browse">
-                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-classtype"><span class="glyphicon glyphicon-search"></span>
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-coa-group"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>
                             </div>                
                         </div>
                         
-                        <div class="form-group col-xs-12">                            
-                            <label for="supplier_code" class="col-xs-3 control-label">Status</label>
+                        <div class="form-group col-xs-12"> 
+                            <label class="col-xs-3 control-label">&nbsp;</label>
                             <div class="col-xs-7">
-                                <div class='input-group'>
-                                    <select name="account_is_active" class="form-control">
-                                        <option value="">Select One</option>
-                                        <option value="TRUE">Active</option>
-                                        <option value="FALSE">Not Active</option>
-                                    </select>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name="account_is_active" value="TRUE" {{ edit.status }}>Account is active</label>
                                 </div>
-                            </div>                
+                            </div>               
                         </div>
 
 

@@ -288,6 +288,33 @@ class Ajax_master_data extends CI_Controller {
         echo json_encode($data);
     }
     
+    function coa_class()
+    {
+        $this->db->order_by('class_name asc');
+        $query = $this->db->get('coa_class');
+        foreach($query->result() as $row):
+            $data[] = $row->class_name; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+    
+    function get_coa_class()
+    {
+        $this->load->model('coaclass_all_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->coaclass_all_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->coaclass_all_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->coaclass_all_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
 }    
     
     

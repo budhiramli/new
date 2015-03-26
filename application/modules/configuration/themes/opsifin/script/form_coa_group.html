@@ -1,2 +1,14 @@
 {% block content %}
+
+    var coagroupid = $("#coa_group_id").val();
+    
+    if (!!coagroupid){
+        $('#btnsave').addClass('hide');
+        $('#btnedit').removeClass('hide');        
+    }
+    else {
+        $('#btnsave').removeClass('hide');
+        $('#btnedit').addClass('hide');        
+    } 
+    
 {% endblock %}

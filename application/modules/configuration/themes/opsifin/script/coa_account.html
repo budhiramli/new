@@ -26,7 +26,6 @@ var table = $('#table_coa_account').dataTable( {
 $('#table_coa_account').on('click', 'a.edit-btn', function (e) {
     e.preventDefault(); 
     var editId = $(this).data('edit-id');
-    alert(editId);
     window.location.href='{{ site_url() }}/configuration/coa_account/form/' + editId;
 });
 
