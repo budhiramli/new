@@ -17,11 +17,11 @@ class Class_type_mdl extends CI_Model {
             $data = array();
             $fields = array(
                 'class_type_id', 
-                'class_type_name',
-                
+                'class_type_name',                
             );
             
             $this->db->select($fields);
+            $this->db->order_by('class_type_id asc');            
             $query = $this->db->get('coa_class_type');
             $nomor = 1;
             foreach($query->result() as $row):
