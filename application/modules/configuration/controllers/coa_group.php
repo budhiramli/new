@@ -106,7 +106,7 @@ class Coa_group extends CI_Controller {
     function delete($id)
     {
         $this->load->model('coa_group_mdl');
-        $this->coa_group_mdl->del($id);
+        $this->coa_group_mdl->delete($id);
         redirect(site_url('configuration/coa_group/index'), 'refresh');
     }
 }    

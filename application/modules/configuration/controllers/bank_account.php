@@ -35,7 +35,7 @@ class Bank_account extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_bank_account');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.class_id');
+        $this->twiggy->set('FORM_IDKEY', 'full.bank_account_id');
         $this->twiggy->set('FORM_LINK', site_url('settings/bank_account/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         

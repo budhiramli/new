@@ -45,11 +45,14 @@ class coa_account_mdl extends CI_Model {
             $fields = array(
                 'account_code', 
                 'account_name',
-                'coa_group_id',
+                'coa_account.coa_group_id',
+                'coa_group_name',                
                 'account_is_active'
             );
             
             $this->db->select($fields);
+            $this->db->join('coa_class_group', 'coa_class_group.coa_group_id=coa_account.coa_group_id', 'left');
+            
             $this->db->where('account_code', $id);
             $query = $this->db->get('coa_account');
             if ($query->num_rows() > 0){
@@ -61,7 +64,7 @@ class coa_account_mdl extends CI_Model {
                     $data = array(
                         'account_code'         => $row->account_code, 
                         'account_name'         => $row->account_name,
-                        'coa_group_id'         => $row->coa_group_id,
+                        'coa_group_id'         => $row->coa_group_name,
                         'status'               => $status,
                     );
             }
