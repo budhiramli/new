@@ -12,11 +12,11 @@
                     <form class="form-horizontal" action="{{ site_url('accounting/rv/save') }}" method="post" role="form" name="form1">
                     <div class="col-xs-12 col-md-8">
                         <div class="form-group col-xs-12">
-                            <label for="ds_no" class="col-xs-3 control-label">Receipt No</label>
+                            <label for="rv_no" class="col-xs-3 control-label">Receipt No</label>
                             <div class="col-xs-3">
                               <input type="text" class="form-control" id="rv_no" name="rv_no" value="{{ edit.rv_no }}" placeholder="xxxxxxxx">
                             </div>
-                            <label for="ds_number" class="col-xs-3 control-label">Trans No</label>
+                            <label for="transaction_no" class="col-xs-3 control-label">Trans No</label>
                             <div class="col-xs-3">
                               <input type="text" class="form-control" id="transaction_no" name="transaction_no" value="{{ edit.transaction_no }}" placeholder="xxxxxxxx">
                             </div>                            
@@ -24,7 +24,7 @@
                         <div class="form-group col-xs-12">
                             <label for="transaction_date" class="col-xs-3 control-label">Date</label>
                             <div class="col-xs-4">
-                                <div class='input-group date' id='datetimepicker1'>
+                                <div class='input-group'>
                                     <input type="text" class="form-control" id="transaction_date" name="transaction_date" value="{{ edit.transaction_date }}" placeholder="DD-MM-YYYY">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -32,11 +32,11 @@
                             </div>
                         </div>
                         <div class="form-group col-xs-12">                        
-                            <label for="dept_id" class="col-xs-3 control-label">Receipt Type</label>
+                            <label for="rv_type_id" class="col-xs-3 control-label">Receipt Type</label>
                             <div class="col-xs-3">
                                 <div class='input-group'>
                                     <input type="text" class="form-control" id="rv_type_id" name="rv_type_id" value="{{ edit.rv_type_id }}" placeholder="type or Browse">
-                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-dept"><span class="glyphicon glyphicon-search"></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>    
                             </div>
@@ -64,18 +64,18 @@
                             <div class="col-xs-4">
                                 <div class='input-group'>
                                 <input type="text" class="form-control" id="amount" name="amount" value="{{ edit.amount }}" placeholder="0.000,00" required="" data-bind="value:amount">
-                                <span class="input-group-addon" data-toggle="modal" data-target="#window-currency"><span class="glyphicon glyphicon-search"></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span>
                                 </span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="lg_no" class="col-xs-3 control-label">Branch</label>
+                            <label for="branch_code" class="col-xs-3 control-label">Branch</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="lg_no" name="lg_no" value="{{ edit.lg_no }}"  placeholder="type here or browse">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span>
+                                    <input type="text" class="form-control typeahead tt-query" id="branch_code" name="branch_code" value="{{ edit.lg_no }}"  placeholder="type here or browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-branch"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>
                             </div>                
@@ -92,21 +92,21 @@
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="cp" class="col-xs-6 control-label">Clearing Out</label>
+                            <label for="clearing_out" class="col-xs-6 control-label">Clearing Out</label>
                             <div class="col-xs-6">
                                 <input type="text" class="form-control" id="clearing_out" name="clearing_out" value="{{ edit.clearing_out }}" placeholder="0.000.000,00"> 
                             </div>                
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="cp" class="col-xs-6 control-label">Clearing In</label>
+                            <label for="clearing_in" class="col-xs-6 control-label">Clearing In</label>
                             <div class="col-xs-6">
                                 <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" placeholder="0.000.000,00">
                             </div>                
                         </div>
 
                         <div class="form-group col-xs-12">
-                            <label for="cp" class="col-xs-6 control-label">&nbsp;</label>
+                            <label for="is_balance" class="col-xs-6 control-label">&nbsp;</label>
                             <div class="col-xs-6">
                                 <div class="checkbox">
                                     <label>
