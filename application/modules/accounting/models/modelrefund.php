@@ -15,16 +15,13 @@ class ModelRefund extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_refund', 
-                'id_cabang', 
                 'refund_no', 
-                'transaksi_no', 
-                'tanggal_collect', 
-                'tanggal_transaksi', 
-                'id_dept',
-                'transaksi_type', 
-                'id_customer',
-                'cp'
+                'branch_code', 
+                'transaction_no',
+                'transaction_date',
+                'collect_date', 
+                'dept_id',
+                
             );
             
             $this->db->select($fields);
@@ -32,17 +29,13 @@ class ModelRefund extends CI_Model {
             $nomor = 1;
             foreach($query->result() as $row):
                 $data[] = array(
-                    'nomor'              => $nomor,
-                    'id_refund'          => $row->id_refund, 
-                    'branch'             => 'nama cabang', 
-                    'refund_no'          => $row->refund_no, 
-                    'transaksi_no'       => $row->transaksi_no, 
-                    'tanggal_collect'    => $row->tanggal_collect, 
-                    'tanggal_transaksi'  => $row->tanggal_transaksi, 
-                    'dept'            => $row->id_dept,
-                    'transaksi_type'        => $row->transaksi_type, 
-                    'customer'          => 'nama customer',
-                    'cp'                 => $row->cp
+                    'nomor'                 => $nomor,
+                    'branch'                => 'nama cabang', 
+                    'refund_no'             => $row->refund_no, 
+                    'transaction_no'        => $row->transaction_no, 
+                    'collect_date'          => $row->collect_date, 
+                    'transaction_date'      => $row->transaction_date, 
+                    
                 );
                 $nomor++;
             endforeach;
@@ -53,33 +46,23 @@ class ModelRefund extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_dn', 
-                'dn_no',
-                'transaksi_no',
-                'tanggal_transaksi',
-                'transaksi_type',
-                'id_cabang',
-                'id_dept',
-                'kode_vendor',
-                'used_sap_amount',
-                'used_amount',
+                'refund_no', 
+                'branch_code', 
+                'transaction_no',
+                'transaction_date',
+                'collect_date', 
+                'dept_id',
             );
             $this->db->select($fields);
-            $this->db->where('id_cc', $id);
+            $this->db->where('refund_no', $id);
             $query = $this->db->get('dn_transaction');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
-                    'id_dn'                 => $row->id_dn, 
-                    'dn_no'                 => $row->dn_no,
-                    'transaksi_no'          => $row->transaksi_no,
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
-                    'transaksi_type'        => $row->transaksi_type,
-                    'branch'                => 'nama cabang',
-                    'dept'                  => 'nama dept',
-                    'kode_vendor'           => $row->kode_vendor,
-                    'used_sap_amount'       => $row->used_sap_amount,
-                    'used_amount'           => $row->used_amount, 
+                    'refund_no'             => $row->refund_no, 
+                    'transaction_no'        => $row->transaction_no, 
+                    'collect_date'          => $row->collect_date, 
+                    'transaction_date'      => $row->transaction_date,
                 );
             }
             return $data;
@@ -91,26 +74,23 @@ class ModelRefund extends CI_Model {
 		$valid = false;
 		
                 $fields = array(
-                    'dn_no'                 => $params->dn_no,
-                    'transaksi_no'          => $params->transaksi_no,
-                    'tanggal_transaksi'     => $params->tanggal_transaksi,
-                    'transaksi_type'        => $params->transaksi_type,
-                    'id_cabang'             => $params->id_cabang,
-                    'id_dept'               => $params->id_dept,
-                    'kode_vendor'           => $params->kode_vendor,
+                    'refund_no'           => $params->refund_no,
+                    'transaction_no'      => $params->transaction_no,
+                    'transaction_date'    => $params->transaction_date,
+                    'collect_date'        => $params->collect_date,
                                 
                 );
 		
 		if (!empty($params->id)) {
-			$this->db->where("id_dn", $params->id);
-			$valid = $this->db->update("dn_transaction");
+			$this->db->where("refund_no", $params->id);
+			$valid = $this->db->update("refund_transaction");
                         
-			$valid = $this->logUpdate->addLog("update", "dn_transaction", $params);
+			$valid = $this->logUpdate->addLog("update", "refund_transaction", $params);
 		}
 		else {
-			$valid = $this->db->insert('dn_transaction');
+			$valid = $this->db->insert('refund_transaction');
 			
-                        $valid = $this->logUpdate->addLog("insert", "dn_transaction", $params);
+                        $valid = $this->logUpdate->addLog("insert", "refund_transaction", $params);
                         
 		}
 		
@@ -121,11 +101,11 @@ class ModelRefund extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;		
-		$valid = $this->logUpdate->addLog("delete", "dn_transaction", array("id_dn" => $id));	
+		$valid = $this->logUpdate->addLog("delete", "refund_transaction", array("refund_no" => $id));	
 		
 		if ($valid){
-			$this->db->where('id_dn', $id);
-			$valid = $this->db->delete('dn_transaction');
+			$this->db->where('refund_no', $id);
+			$valid = $this->db->delete('refund_transaction');
 		}
 		
 		return $valid;		

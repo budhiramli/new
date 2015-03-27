@@ -31,14 +31,14 @@ class ModelDebitNote extends CI_Model {
             $nomor = 1;
             foreach($query->result() as $row):
                 $data[] = array(
-                    'nomor'              => $nomor,
+                    'nomor'                 => $nomor,
                     'dn_no'                 => $row->dn_no,
-                    'transaction_no'          => $row->transaction_no,
-                    'transaction_date'     => $row->transaction_date,
-                    'transaction_type_id'        => $row->transaction_type_id,
-                    'branch_code'                => 'nama cabang',
-                    'dept_id'                  => 'nama dept',
-                    'supplier_code'                => 'nama vendor',
+                    'transaction_no'        => $row->transaction_no,
+                    'transaction_date'      => $row->transaction_date,
+                    'transaction_type_id'   => $row->transaction_type_id,
+                    'branch_code'           => 'nama cabang',
+                    'dept_id'               => 'nama dept',
+                    'supplier_code'         => 'nama vendor',
                     'used_sap_amount'       => $row->used_sap_amount,
                     'used_amount'           => $row->used_amount,                    
                 );
@@ -68,12 +68,12 @@ class ModelDebitNote extends CI_Model {
                 $row = $query->row();
                 $data = array(
                     'dn_no'                 => $row->dn_no,
-                    'transaction_no'          => $row->transaction_no,
-                    'transaction_date'     => $row->transaction_date,
-                    'transaction_type_id'        => $row->transaction_type_id,
-                    'branc_code'                => 'nama cabang',
-                    'dept_id'                  => 'nama dept',
-                    'supplier_code'           => $row->supplier_code,
+                    'transaction_no'        => $row->transaction_no,
+                    'transaction_date'      => $row->transaction_date,
+                    'transaction_type_id'   => $row->transaction_type_id,
+                    'branc_code'            => 'nama cabang',
+                    'dept_id'               => 'nama dept',
+                    'supplier_code'         => $row->supplier_code,
                     'used_sap_amount'       => $row->used_sap_amount,
                     'used_amount'           => $row->used_amount, 
                 );
