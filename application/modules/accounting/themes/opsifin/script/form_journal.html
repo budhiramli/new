@@ -5,6 +5,16 @@
         dateFormat: 'dd-mm-yy'
     });
     
+    var jono = $("#journal_no").val();
+    if (!!jono){
+        $('#btnupdate').removeClass('hide');
+        $('#btnsave').addClass('hide');
+    }
+    else {
+        $('#btnupdate').addClass('hide');
+        $('#btnsave').removeClass('hide');
+    }
+    
     
 
 {% endblock %}
