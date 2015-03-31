@@ -6,6 +6,73 @@ class ModelPv extends CI_Model {
     }
     
     
+    function get_pvno()
+        {
+            $tahun = date('Y');
+            //check first from counter_log
+            $this->db->where('counter_code', 'pv_no');
+            $this->db->where('counter_year', $tahun);            
+            $query = $this->db->get('counter_log');
+            if ($query->num_rows() == 1){
+                $row = $query->row();
+                $dsno = $row->counter_no+1;
+                
+                $this->db->where('counter_code', 'pv_no');
+                $this->db->where('counter_year', $tahun);
+                $this->db->set('counter_no', $dsno);
+                $this->db->update('counter_log');
+            }
+            else {
+                //add new counter code
+                $dsno = 1;
+                $fields = array(
+                    'counter_code'  => 'pv_no',
+                    'counter_year'  => $tahun,
+                    'counter_no'    => $dsno,    
+                );
+                $this->db->set($fields);
+                $this->db->insert('counter_log');
+                
+            }
+            $pnj = strlen($dsno);
+            $panjang = ($pnj*-1);
+            $dsno = substr('00000', 0, $panjang) . $dsno;
+            return $dsno;
+        }
+        
+        function get_transno()
+        {
+            $tahun = date('Y');
+            //check first from counter_log
+            $this->db->where('counter_code', 'pv_transno');
+            $this->db->where('counter_year', $tahun);            
+            $query = $this->db->get('counter_log');
+            if ($query->num_rows() == 1){
+                $row = $query->row();
+                $transno = $row->counter_no+1;
+                
+                $this->db->where('counter_code', 'pv_transno');
+                $this->db->where('counter_year', $tahun);
+                $this->db->set('counter_no', $transno);
+                $this->db->update('counter_log');
+            }
+            else {
+                //add new counter code
+                $transno = 1;
+                $fields = array(
+                    'counter_code'  => 'pv_transno',
+                    'counter_year'  => $tahun,
+                    'counter_no'    => $transno,    
+                );
+                $this->db->set($fields);
+                $this->db->insert('counter_log');                
+            }
+            $pnj = strlen($transno);
+            $panjang = ($pnj*-1);
+            $transno = substr('00000', 0, $panjang) . $transno;
+            return $transno;
+        }
+    
     function getrecordcount()
     {
             $data = $this->db->count_all_results('pv_transaction');
@@ -79,24 +146,28 @@ class ModelPv extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;
-		
+                
                 $fields = array(
-                    'pv_no'                 => $params->pv_no,
-                    'transaction_no'        => $params->transaction_no,
                     'transaction_date'      => $params->transaction_date,
-                    'transaction_type_id' => $params->transaction_type_id,                    
+                    'transaction_type_id'   => $params->transaction_type_id,                    
                     'receipt_by'            => $params->receipt_by,
                     'supplier_code'         => $params->supplier_code,      
                 );
 		
                 $this->db->set($fields);
 		if (!empty($params->pv_no)) {
+                        $this->db->set($fields);
 			$this->db->where("pv_no", $params->pv_no);
-			$valid = $this->db->update("pv_transaction");
-                        
+			$valid = $this->db->update("pv_transaction");                        
 			$valid = $this->logUpdate->addLog("update", "pv_transaction", $params);
 		}
 		else {
+                        $pv_no = $this->get_pvno();
+                        $trasno = $this->get_transno();
+                        $this->db->set($fields);
+                        $this->db->set('pv_no', $pv_no);
+                        $this->db->set('transaction_no', $trasno);
+                        
 			$valid = $this->db->insert('pv_transaction');
 			
                         $valid = $this->logUpdate->addLog("insert", "pv_transaction", $params);
