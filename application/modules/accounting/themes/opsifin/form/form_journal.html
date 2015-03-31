@@ -78,35 +78,35 @@
                         <div class="form-group col-xs-12">
                             <label for="cp" class="col-xs-6 control-label">Status</label>
                             <div class="col-xs-6">
-                                <input type="text" class="form-control" id="used_amount" name="used_amount" value="{{ edit.used_amount }}" placeholder="0.000.000,00">  
+                                <input type="text" class="form-control" id="used_amount" name="used_amount" value="{{ edit.used_amount }}" readonly="readonly" placeholder="0.000.000,00">  
                             </div>                
                         </div>
 
                         <div class="form-group col-xs-12">
                             <label for="cp" class="col-xs-6 control-label">Print</label>
                             <div class="col-xs-6">
-                                <input type="text" class="form-control" id="clearing_out" name="clearing_out" value="{{ edit.clearing_out }}" placeholder="0.000.000,00"> 
+                                <input type="text" class="form-control" id="clearing_out" name="clearing_out" value="{{ edit.clearing_out }}" readonly="readonly" placeholder="0.000.000,00"> 
                             </div>                
                         </div>
 
                         <div class="form-group col-xs-12">
                             <label for="cp" class="col-xs-6 control-label">User</label>
                             <div class="col-xs-6">
-                                <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" placeholder="0.000.000,00">
+                                <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" readonly="readonly" placeholder="0.000.000,00">
                             </div>                
                         </div>
                         
                         <div class="form-group col-xs-12">
                             <label for="cp" class="col-xs-6 control-label">Approved</label>
                             <div class="col-xs-6">
-                                <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" placeholder="0.000.000,00">
+                                <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" readonly="readonly" placeholder="0.000.000,00">
                             </div>                
                         </div>
                         
                         <div class="form-group col-xs-12">
                             <label for="cp" class="col-xs-6 control-label">Journal</label>
                             <div class="col-xs-6">
-                                <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" placeholder="0.000.000,00">
+                                <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" readonly="readonly" placeholder="0.000.000,00">
                             </div>                
                         </div>
 
@@ -123,7 +123,7 @@
                         <div class="table-responsive">
                           <div class="col-md-12">  
                             <a href="#form-journal-detail" class="add-btn btn btn-primary"> Add Journal</a>  
-                            <table class="table table-responsive table-striped" border="1">
+                            <table id="table_journal_detail" class="table table-responsive table-striped" border="1">
                                 <thead>
                                 <tr>
                                     <th colspan="2">COA</th>

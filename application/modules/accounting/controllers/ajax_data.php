@@ -5,6 +5,23 @@ class Ajax_data extends CI_Controller {
         parent::__construct();
     }
     
+    
+    function getrecord_journal_detail()
+    {
+        $this->load->model('journal_detail_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->journal_detail_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->journal_detail_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->journal_detail_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
     function getrecord_pv()
     {
         $this->load->model('modelpv');
