@@ -371,6 +371,33 @@ class Ajax_master_data extends CI_Controller {
         echo json_encode($data);
     }
     
+    function payment_type()
+    {
+        $this->db->order_by('payment_type_name asc');
+        $query = $this->db->get('payment_type');
+        foreach($query->result() as $row):
+            $data[] = $row->payment_type_name; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+    
+    function get_payment_type()
+    {
+        $this->load->model('payment_type_all_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->payment_type_all_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->payment_type_all_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->payment_type_all_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
 }    
     
     

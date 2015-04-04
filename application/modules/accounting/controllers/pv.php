@@ -102,7 +102,7 @@ class Pv extends CI_Controller {
 	{		
 		$valid = false;
 		$id = $this->input->get('id');
-		$valid = $this->modeldpcustomer->delete($id);
+		$valid = $this->modelpv->delete($id);
 		
 		if ($valid)
 			redirect(site_url('accounting/pv/index'), "refresh");	

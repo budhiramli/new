@@ -36,7 +36,7 @@
                             <div class="col-xs-4">
                                 <div class='input-group'>
                                     <input type="text" class="form-control" id="transaction_type_id" name="transaction_type_id" value="{{ edit.transaction_type_id }}" placeholder="">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span>
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-vendor"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>    
                             </div>
@@ -53,33 +53,30 @@
                         
                         <div class="form-group col-xs-12">
                             <label for="payment_for" class="col-xs-3 control-label">Payment For</label>
-                            <div class="col-xs-4">
+                            <div class="col-xs-3">
                                 <div class='input-group date' id='datetimepicker1'>
                                     <input type="text" class="form-control" id="payment_for" name="payment_for" value="{{ edit.payment_for }}" placeholder="">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span>
                                     </span>
-                                </div>    
+                                </div>
                             </div>
 
-                            <label for="lg_no" class="col-xs-2 control-label">LG</label>
+                            <div class="col-xs-1">
+                                <div class="checkbox">
+                                    <label>
+                                      <input type="checkbox" name="is_lg" {{ edit.is_lg }} {{ edit.is_lg_status }} > LG
+                                    </label>
+                                </div>        
+                            </div>
+                            
+                            <label for="supplier_code" class="col-xs-1 control-label">Supplier</label>
                             <div class="col-xs-3">
-                                <div class='input-group'>
-                                    <input type="text" class="form-control" id="lg_no" name="lg_no" value="{{ edit.lg_no }}" placeholder="type or Browse">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span>
-                                    </span>
-                                </div>    
-                            </div>
-                        </div>
-
-                        <div class="form-group col-xs-12">
-                            <label for="supplier_code" class="col-xs-3 control-label">Supplier</label>
-                            <div class="col-xs-7">
                                 <div class='input-group'>
                                     <input type="text" class="form-control" id="supplier_code" name="supplier_code" value="{{ edit.supplier_code }}" placeholder="type or Browse">
                                     <span class="input-group-addon" data-toggle="modal" data-target="#window-vendor"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>
-                            </div>                
+                            </div>
                         </div>
 
                         <div class="form-group col-xs-12">
