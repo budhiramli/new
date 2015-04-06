@@ -34,7 +34,7 @@ class Credit_note extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_dp_customer');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.id_dp_customer');
+        $this->twiggy->set('FORM_IDKEY', 'full.cn_no');
         $this->twiggy->set('FORM_LINK', site_url('accounting/credit_note/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
