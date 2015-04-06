@@ -19,7 +19,7 @@ class Debit_note extends CI_Controller {
         $this->twiggy->set('BREADCRUMBS_TITLE', 'Debit Note');
         $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Accounting');
         $this->twiggy->set('LIST_TITLE', 'Debit Note');
-        
+        $this->load->model('modeldebitnote');
     }
     
     function index()
@@ -55,7 +55,7 @@ class Debit_note extends CI_Controller {
     {
         $data = array();
         if (!empty($id)){
-            $this->load->model('modeldn');
+            $this->load->model('modeldebitnote');
             $data = $this->modeldn->getdataid($id);
             
             $this->twiggy->set('edit', $data); 
@@ -73,16 +73,18 @@ class Debit_note extends CI_Controller {
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
-        $window_page = $this->twiggy->template('window/window_currency')->render();
-        $window_page .= $this->twiggy->template('window/window_dept')->render();
+        $window_page = $this->twiggy->template('window/window_dept')->render();
+        $window_page .= $this->twiggy->template('window/window_branch')->render();        
         $window_page .= $this->twiggy->template('window/window_vendor')->render();
-        $window_page .= $this->twiggy->template('window/window_lg')->render();
         
         // end        
         $this->twiggy->set('window_page', $window_page);
         
-        $script_page = $this->twiggy->template('script/form_debit_note')->render();         
-        //$script_page .= $this->twiggy->template('script/script_all')->render();         
+        $script_page = $this->twiggy->template('script/form_debit_note')->render();
+        $script_page .= $this->twiggy->template('script/script_branch')->render();                 
+        $script_page .= $this->twiggy->template('script/script_dept')->render();         
+        $script_page .= $this->twiggy->template('script/script_supplier')->render();         
+        
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
@@ -106,7 +108,7 @@ class Debit_note extends CI_Controller {
     public function delete()
 	{		
 		$valid = false;
-		$id = $this->input->get('id_dn');
+		$id = $this->input->get('dn_no');
 		$valid = $this->modeldebitnote->delete($id);
 		
 		if ($valid)

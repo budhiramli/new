@@ -18,6 +18,7 @@ class Credit_note extends CI_Controller {
         $this->twiggy->set('BREADCRUMBS_TITLE', 'Credit Note');
         $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Accounting');
         $this->twiggy->set('LIST_TITLE', 'Credit Note');
+        $this->load->model('modelcreditnote');
     }
     
     function index()
@@ -48,12 +49,12 @@ class Credit_note extends CI_Controller {
         $this->output->set_output($output);
     }
     
-    function form($id)
+    function form($id='')
     {
         $data = array();
         if (!empty($id)){
-            $this->load->model('modelcn');
-            $data = $this->modelcn->getdataid($id);
+            $this->load->model('modelcreditnote');
+            $data = $this->modelcreditnote->getdataid($id);
             
             $this->twiggy->set('edit', $data); 
         };
@@ -72,16 +73,17 @@ class Credit_note extends CI_Controller {
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
-        $window_page = $this->twiggy->template('window/window_currency')->render();
+        $window_page = $this->twiggy->template('window/window_branch')->render();
         $window_page .= $this->twiggy->template('window/window_dept')->render();
-        $window_page .= $this->twiggy->template('window/window_vendor')->render();
-        $window_page .= $this->twiggy->template('window/window_lg')->render();
+        $window_page .= $this->twiggy->template('window/window_customer')->render();
         
         // end        
-        $this->twiggy->set('window_page', $window_page);
-        
+        $this->twiggy->set('window_page', $window_page);        
         $script_page = $this->twiggy->template('script/form_credit_note')->render();         
-        //$script_page .= $this->twiggy->template('script/script_all')->render();         
+        $script_page .= $this->twiggy->template('script/script_branch')->render();         
+        $script_page .= $this->twiggy->template('script/script_dept')->render();         
+        $script_page .= $this->twiggy->template('script/script_customer')->render();         
+        
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
@@ -90,25 +92,21 @@ class Credit_note extends CI_Controller {
         
     function save()
     {
-        $params = (object) $this->input->post();   
-        
-        $valid = $this->modeldpcustomer->save($params);
-        echo $this->db->last_query();
-        
-        die();
+        $params = (object) $this->input->post();
+        $valid = $this->modelcreditnote->save($params);
         if (empty($valid))
-            $this->owner->alert("Please complete the form", "../index.php/cashier/dp_customer/form");
+            $this->owner->alert("Please complete the form", site_url('accounting/credit_note/form'));
 	else
-            redirect("../index.php/cashier/dp_customer/form");
+            redirect(site_url('accounting/credit_note/index'), "refresh");
     }   
     
     public function delete()
 	{		
 		$valid = false;
 		$id = $this->input->get('id');
-		$valid = $this->modeldpcustomer->delete($id);
+		$valid = $this->modelcreditnote->delete($id);
 		
 		if ($valid)
-			redirect("../index.php/cashier/dp_customer/form");	
+			redirect(site_url('accounting/credit_note/index'), "refresh");	
 	}
 }

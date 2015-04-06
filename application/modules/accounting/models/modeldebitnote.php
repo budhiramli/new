@@ -5,6 +5,74 @@ class ModelDebitNote extends CI_Model {
         parent::__construct();
     }
     
+    function get_dnno()
+        {
+            $tahun = date('Y');
+            //check first from counter_log
+            $this->db->where('counter_code', 'dn_no');
+            $this->db->where('counter_year', $tahun);            
+            $query = $this->db->get('counter_log');
+            if ($query->num_rows() == 1){
+                $row = $query->row();
+                $dsno = $row->counter_no+1;
+                
+                $this->db->where('counter_code', 'dn_no');
+                $this->db->where('counter_year', $tahun);
+                $this->db->set('counter_no', $dsno);
+                $this->db->update('counter_log');
+            }
+            else {
+                //add new counter code
+                $dsno = 1;
+                $fields = array(
+                    'counter_code'  => 'dn_no',
+                    'counter_year'  => $tahun,
+                    'counter_no'    => $dsno,    
+                );
+                $this->db->set($fields);
+                $this->db->insert('counter_log');
+                
+            }
+            $pnj = strlen($dsno);
+            $panjang = ($pnj*-1);
+            $dsno = substr('00000', 0, $panjang) . $dsno;
+            return $dsno;
+        }
+        
+        function get_transno()
+        {
+            $tahun = date('Y');
+            //check first from counter_log
+            $this->db->where('counter_code', 'dn_transno');
+            $this->db->where('counter_year', $tahun);            
+            $query = $this->db->get('counter_log');
+            if ($query->num_rows() == 1){
+                $row = $query->row();
+                $transno = $row->counter_no+1;
+                
+                $this->db->where('counter_code', 'dn_transno');
+                $this->db->where('counter_year', $tahun);
+                $this->db->set('counter_no', $transno);
+                $this->db->update('counter_log');
+            }
+            else {
+                //add new counter code
+                $transno = 1;
+                $fields = array(
+                    'counter_code'  => 'dn_transno',
+                    'counter_year'  => $tahun,
+                    'counter_no'    => $transno,    
+                );
+                $this->db->set($fields);
+                $this->db->insert('counter_log');                
+            }
+            $pnj = strlen($transno);
+            $panjang = ($pnj*-1);
+            $transno = substr('00000', 0, $panjang) . $transno;
+            return $transno;
+        }
+        
+    
     function getrecordcount()
     {
             $data = $this->db->count_all_results('dn_transaction');
@@ -87,24 +155,30 @@ class ModelDebitNote extends CI_Model {
 		$valid = false;
 		
                 $fields = array(
-                    'dn_no'                 => $params->dn_no,
-                    'transaction_no'          => $params->transaction_no,
                     'transaction_date'     => date('Y-m-d', strtotime($params->transaction_date)),
-                    'transaction_type_id'        => $params->transaction_type_id,
-                    'branch_code'             => $params->branch_code,
-                    'dept_id'               => $params->dept_id,
-                    'supplier_code'           => $params->supplier_code,
+                    'transaction_type_id'  => $params->transaction_type_id,
+                    'branch_code'          => $params->branch_code,
+                    'dept_id'              => $params->dept_id,
+                    'supplier_code'        => $params->supplier_code,
                                 
                 );
 		
 		if (!empty($params->dn_no)) {
+                        $this->db->set($fields);
 			$this->db->where("dn_no", $params->id);
 			$valid = $this->db->update("dn_transaction");                        
 			$valid = $this->logUpdate->addLog("update", "dn_transaction", $params);
 		}
 		else {
-			$valid = $this->db->insert('dn_transaction');			
-                        $valid = $this->logUpdate->addLog("insert", "dn_transaction", $params);                        
+                    $dn_no = $this->get_dnno();
+                    $trans_no = $this->get_transno();
+                    
+                    $this->db->set($fields);
+                    $this->db->set('dn_no', $dn_no);
+                    $this->db->set('transaction_no', $trans_no);
+                    
+                    $valid = $this->db->insert('dn_transaction');			
+                    $valid = $this->logUpdate->addLog("insert", "dn_transaction", $params);                        
 		}
 		
 		return true;		

@@ -5,6 +5,74 @@ class ModelCreditNote extends CI_Model {
         parent::__construct();
     }
     
+    function get_cnno()
+        {
+            $tahun = date('Y');
+            //check first from counter_log
+            $this->db->where('counter_code', 'cn_no');
+            $this->db->where('counter_year', $tahun);            
+            $query = $this->db->get('counter_log');
+            if ($query->num_rows() == 1){
+                $row = $query->row();
+                $dsno = $row->counter_no+1;
+                
+                $this->db->where('counter_code', 'cn_no');
+                $this->db->where('counter_year', $tahun);
+                $this->db->set('counter_no', $dsno);
+                $this->db->update('counter_log');
+            }
+            else {
+                //add new counter code
+                $dsno = 1;
+                $fields = array(
+                    'counter_code'  => 'cn_no',
+                    'counter_year'  => $tahun,
+                    'counter_no'    => $dsno,    
+                );
+                $this->db->set($fields);
+                $this->db->insert('counter_log');
+                
+            }
+            $pnj = strlen($dsno);
+            $panjang = ($pnj*-1);
+            $dsno = substr('00000', 0, $panjang) . $dsno;
+            return $dsno;
+        }
+        
+        function get_transno()
+        {
+            $tahun = date('Y');
+            //check first from counter_log
+            $this->db->where('counter_code', 'cn_transno');
+            $this->db->where('counter_year', $tahun);            
+            $query = $this->db->get('counter_log');
+            if ($query->num_rows() == 1){
+                $row = $query->row();
+                $transno = $row->counter_no+1;
+                
+                $this->db->where('counter_code', 'cn_transno');
+                $this->db->where('counter_year', $tahun);
+                $this->db->set('counter_no', $transno);
+                $this->db->update('counter_log');
+            }
+            else {
+                //add new counter code
+                $transno = 1;
+                $fields = array(
+                    'counter_code'  => 'cn_transno',
+                    'counter_year'  => $tahun,
+                    'counter_no'    => $transno,    
+                );
+                $this->db->set($fields);
+                $this->db->insert('counter_log');                
+            }
+            $pnj = strlen($transno);
+            $panjang = ($pnj*-1);
+            $transno = substr('00000', 0, $panjang) . $transno;
+            return $transno;
+        }
+        
+    
     function getrecordcount()
     {
             $data = $this->db->count_all_results('cn_transaction');
@@ -20,30 +88,31 @@ class ModelCreditNote extends CI_Model {
                 'branch_code',
                 'transaction_date',
                 'transaction_type_id',
-                'dept_id',
-                'company_code',
-                'supplier_code',
+                'dept_name',
+                'company_name',
                 'cp',
                 'is_add_manual',
                 'used_amount',
             );
             
             $this->db->select($fields);
+            $this->db->join('mst_company', 'mst_company.company_code=cn_transaction.company_code', 'left');
+            $this->db->join('mst_dept', 'mst_dept.dept_id=cn_transaction.dept_id', 'left');
+            
             $query = $this->db->get('cn_transaction');
             $nomor = 1;
             foreach($query->result() as $row):
                 $data[] = array(
                     'nomor'              => $nomor,
-                    'cn_no'                 => $row->cn_no,
-                    'transaction_no'          => $row->transaction_no,                    
-                    'branch'                => 'nama branch',
-                    'transaction_date'     => $row->transaction_date,
-                    'transaction_type_id'        => $row->transaction_type_id,
-                    'dept_id'                  => 'nama dept',
-                    'company_code'              => $row->company_code,
-                    'cp'                    => $row->cp,
-                    'is_add_manual'         => $row->is_add_manual,
-                    'used_amount'           => $row->used_amount
+                    'cn_no'              => $row->cn_no,
+                    'transaction_no'     => $row->transaction_no,                    
+                    'branch'             => $row->company_name,                    
+                    'transaction_date'   => $row->transaction_date,
+                    'dept_id'            => $row->dept_name,
+                    'company_code'       => $row->company_name,
+                    'cp'                 => $row->cp,
+                    'is_add_manual'      => $row->is_add_manual,
+                    'used_amount'        => $row->used_amount
                 );
                 $nomor++;
             endforeach;
@@ -71,16 +140,16 @@ class ModelCreditNote extends CI_Model {
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
-                    'cn_no'                 => $row->cn_no,
-                    'transaction_no'          => $row->transaction_no,                    
-                    'branch_code'                => 'nama branch',
+                    'cn_no'                => $row->cn_no,
+                    'transaction_no'       => $row->transaction_no,                    
+                    'branch_code'          => 'nama branch',
                     'transaction_date'     => $row->transaction_date,
-                    'transaction_type_id'        => $row->transaction_type_id,
-                    'dept_id'               => $row->dept_id,
-                    'supplier_code'           => $row->supplier_code,
-                    'cp'                    => $row->cp,
-                    'is_add_manual'         => $row->is_add_manual,
-                    'used_amount'           => $row->used_amount
+                    'transaction_type_id'  => $row->transaction_type_id,
+                    'dept_id'              => $row->dept_id,
+                    'supplier_code'        => $row->supplier_code,
+                    'cp'                   => $row->cp,
+                    'is_add_manual'        => $row->is_add_manual,
+                    'used_amount'          => $row->used_amount
                 );
             }
             return $data;
@@ -92,28 +161,34 @@ class ModelCreditNote extends CI_Model {
 		$valid = false;
 		
                 $fields = array(
-                    'cn_no'                 => $params->cn_no,
-                    'transaction_no'          => $params->transaction_no,
-                    'branch_code'           => 'nama branch',
-                    'transaction_date'     => date('Y-m-d', strtotime($params->transaction_date)),
-                    'transaction_type_id'        => $params->transaction_type_id,
+                    'branch_code'           => $params->branch_code,
+                    'transaction_date'      => date('Y-m-d', strtotime($params->transaction_date)),
                     'dept_id'               => $params->dept_id,
-                    'supplier_code'           => $params->supplier_code,
-                    'cp'                    => $params->cp,
-                    'is_add_manual'         => $params->is_add_manual,
-                    'used_amount'           => $params->used_amount         
+                    'customer_code'         => $params->customer_code,
+                    
+                    //'transaction_type_id'   => $params->transaction_type_id,                    
+                    //'cp'                    => $params->cp,
+                    //'is_add_manual'         => $params->is_add_manual,
+                    //'used_amount'           => $params->used_amount         
                 );
 		
-		if (!empty($params->id)) {
-			$this->db->where("cn_no", $params->id);
-			$valid = $this->db->update("cn_transaction");
+		if (!empty($params->cn_no)) {
+                    $this->db->set($fields);
+                    $this->db->where("cn_no", $params->cn_no);
+                    $valid = $this->db->update("cn_transaction");
                         
-			$valid = $this->logUpdate->addLog("update", "cn_transaction", $params);
+                    $valid = $this->logUpdate->addLog("update", "cn_transaction", $params);
 		}
 		else {
-			$valid = $this->db->insert('cn_transaction');
+                    $cnno       = $this->get_cnno();
+                    $trans_no   = $this->get_transno();
+                    
+                    $this->db->set($fields);
+                    $this->db->set('cn_no', $cnno);
+                    $this->db->set('transaction_no', $trans_no);
+                    $valid = $this->db->insert('cn_transaction');
 			
-                        $valid = $this->logUpdate->addLog("insert", "cn_transaction", $params);
+                    $valid = $this->logUpdate->addLog("insert", "cn_transaction", $params);
                         
 		}
 		

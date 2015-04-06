@@ -1,0 +1,20 @@
+{% block content %}
+
+    var cnId = '{{ edit.cn_no}}';           
+    if (!!cnId){                
+        $('#btnupdate').removeClass('hide');
+        $('#btnsave').addClass('hide');
+    }
+    else {
+        $('#btnupdate').addClass('hide');
+        $('#btnsave').removeClass('hide');
+    }
+            
+    var selected = [];
+    
+    $("#transaction_date").datepicker({ 
+        dateFormat: 'dd-mm-yy'
+    });
+    
+    
+{% endblock %}
