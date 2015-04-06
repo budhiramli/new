@@ -398,6 +398,33 @@ class Ajax_master_data extends CI_Controller {
         echo json_encode($data);
     }
     
+    function payment_method()
+    {
+        $this->db->order_by('payment_method_name asc');
+        $query = $this->db->get('payment_method');
+        foreach($query->result() as $row):
+            $data[] = $row->payment_method_name; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+    
+    function get_payment_method()
+    {
+        $this->load->model('payment_method_all_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->payment_method_all_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->payment_method_all_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->payment_method_all_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
 }    
     
     

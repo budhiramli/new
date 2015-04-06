@@ -35,8 +35,8 @@
                             <label for="payment_types" class="col-xs-3 control-label">Payment Type</label>
                             <div class="col-xs-4">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control" id="transaction_type_id" name="transaction_type_id" value="{{ edit.transaction_type_id }}" placeholder="">
-                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-vendor"><span class="glyphicon glyphicon-search"></span>
+                                    <input type="text" class="form-control" id="payment_type_id" name="payment_type_id" value="{{ edit.transaction_type_id }}" placeholder="">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-payment-type"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>    
                             </div>
@@ -54,9 +54,9 @@
                         <div class="form-group col-xs-12">
                             <label for="payment_for" class="col-xs-3 control-label">Payment For</label>
                             <div class="col-xs-3">
-                                <div class='input-group date' id='datetimepicker1'>
-                                    <input type="text" class="form-control" id="payment_for" name="payment_for" value="{{ edit.payment_for }}" placeholder="">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span>
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" id="payment_method_id" name="payment_method_id" value="{{ edit.payment_method_id }}" placeholder="">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-payment-method"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>
                             </div>

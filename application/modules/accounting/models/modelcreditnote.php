@@ -95,7 +95,7 @@ class ModelCreditNote extends CI_Model {
                     'cn_no'                 => $params->cn_no,
                     'transaction_no'          => $params->transaction_no,
                     'branch_code'           => 'nama branch',
-                    'transaction_date'     => $params->transaction_date,
+                    'transaction_date'     => date('Y-m-d', strtotime($params->transaction_date)),
                     'transaction_type_id'        => $params->transaction_type_id,
                     'dept_id'               => $params->dept_id,
                     'supplier_code'           => $params->supplier_code,

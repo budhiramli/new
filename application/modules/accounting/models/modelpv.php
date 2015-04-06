@@ -85,15 +85,18 @@ class ModelPv extends CI_Model {
             $fields = array(
                 'pv_no',
                 'transaction_no',
-                'transaction_type_id',
-                'transaction_date',
+                'payment_type_name',
+                "(DATE_FORMAT(transaction_date, '%d-%m-%Y')) as transaction_date",
+                "(DATE_FORMAT(due_date, '%d-%m-%Y')) as due_date",                
                 'lg_no',
-                'due_date',                
                 'receipt_by',
-                'supplier_code',
+                'supplier_name',
             );
             
             $this->db->select($fields);
+            $this->db->join('payment_type', 'payment_type.payment_type_id=pv_transaction.payment_type_id', 'left');
+            $this->db->join('mst_supplier', 'mst_supplier.supplier_code=pv_transaction.supplier_code', 'left');
+            
             $query = $this->db->get('pv_transaction');
             $nomor = 1;
             foreach($query->result() as $row):
@@ -102,10 +105,10 @@ class ModelPv extends CI_Model {
                     'pv_no'                 => $row->pv_no,
                     'transaction_no'        => $row->transaction_no,
                     'transaction_date'      => $row->transaction_date,
-                    'transaction_type_id'   => $row->transaction_type_id,
+                    'payment_type_name'   => $row->payment_type_name,
                     'lg_no'                 => $row->lg_no,
                     'receipt_by'            => $row->receipt_by,
-                    'supplier_code'         => $row->supplier_code,
+                    'supplier_name'         => $row->supplier_name,
                 );
                 $nomor++;
             endforeach;
@@ -118,7 +121,7 @@ class ModelPv extends CI_Model {
             $fields = array(
                 'pv_no',
                 'transaction_no',
-                'transaction_type_id',
+                'payment_type_id',
                 'transaction_date',
                 'due_date',               
                 'receipt_by',
@@ -134,7 +137,7 @@ class ModelPv extends CI_Model {
                     'pv_no'                 => $row->pv_no,
                     'transaction_no'          => $row->transaction_no,
                     'transaction_date'     => $row->transaction_date,
-                    'transaction_type_id'        => $row->transaction_type_id,                    
+                    'payment_type_id'        => $row->payment_type_id,                    
                     'receipt_by'            => $row->receipt_by,
                     'supplier_code'           => $row->supplier_code,
                 );
@@ -145,17 +148,20 @@ class ModelPv extends CI_Model {
         public function save($params)
 	{	
 		$log = $this->session->all_userdata();
-		$valid = false;
+                print_r($params);
                 
+		$valid = false;
+                $supplier_code = explode(' ',trim($params->supplier_code));
                 $fields = array(
-                    'transaction_date'      => $params->transaction_date,
-                    'transaction_type_id'   => $params->transaction_type_id,                    
+                    'transaction_date'      => date('Y-m-d', strtotime($params->transaction_date)),
+                    'due_date'              => date('Y-m-d', strtotime($params->due_date)),                    
+                    'payment_type_id'       => trim($params->payment_type_id),                    
+                    'payment_method_id'     => trim($params->payment_method_id),                                        
                     'receipt_by'            => $params->receipt_by,
-                    'supplier_code'         => $params->supplier_code,      
+                    'supplier_code'         => $supplier_code[0],      
                 );
 		
-                $this->db->set($fields);
-		if (!empty($params->pv_no)) {
+                if (!empty($params->pv_no)) {
                         $this->db->set($fields);
 			$this->db->where("pv_no", $params->pv_no);
 			$valid = $this->db->update("pv_transaction");                        
@@ -166,8 +172,7 @@ class ModelPv extends CI_Model {
                         $trasno = $this->get_transno();
                         $this->db->set($fields);
                         $this->db->set('pv_no', $pv_no);
-                        $this->db->set('transaction_no', $trasno);
-                        
+                        $this->db->set('transaction_no', $trasno);                        
 			$valid = $this->db->insert('pv_transaction');
 			
                         $valid = $this->logUpdate->addLog("insert", "pv_transaction", $params);
@@ -181,11 +186,13 @@ class ModelPv extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;		
-		$valid = $this->logUpdate->addLog("delete", "pv_transaction", array("pv_no" => $id));	
-		
+                $this->db->where('pv_no', $id);
+                $valid = $this->db->delete('pv_transaction');
+                echo $this->db->last_query();
+                        
 		if ($valid){
-			$this->db->where('pv_no', $id);
-			$valid = $this->db->delete('pv_transaction');
+			
+                        $valid = $this->logUpdate->addLog("delete", "pv_transaction", $id);	
 		}
 		
 		return $valid;		

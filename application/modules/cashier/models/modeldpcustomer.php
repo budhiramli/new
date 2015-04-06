@@ -161,7 +161,7 @@ class modeldpcustomer extends CI_Model {
                 $fields = array(
                     'dc_no'                     => trim($params->dc_no), 
                     'transaction_no'            => trim($params->transaction_no), 
-                    'transaction_date'          => $params->transaction_date,
+                    'transaction_date'          => date('Y-m-d', strtotime($params->transaction_date)),
                     'dept_id'                   => $params->dept_id,                     
                     'company_code'              => trim($params->company_code), 
                     'cp'                        => trim($params->cp), 

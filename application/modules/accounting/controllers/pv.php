@@ -36,7 +36,7 @@ class Pv extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_pv');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.id_dp_customer');
+        $this->twiggy->set('FORM_IDKEY', 'full.pv_no');
         $this->twiggy->set('FORM_LINK', site_url('accounting/pv/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -51,9 +51,15 @@ class Pv extends CI_Controller {
         $this->output->set_output($output);
     }
     
-    function form()
+    function form($id='')
     {
         $data = array();
+        if (!empty($id)){
+            $this->load->model('modelpv');
+            $data = $this->modelpv->getdataid($id);
+            
+            $this->twiggy->set('edit', $data); 
+        };
         
         // create content page fo dp supplier
         $content = $this->twiggy->template('form/form_pv')->render();        
@@ -72,6 +78,8 @@ class Pv extends CI_Controller {
         
         $window_page = $this->twiggy->template('window/window_vendor')->render();
         $window_page .= $this->twiggy->template('window/window_branch')->render();
+        $window_page .= $this->twiggy->template('window/window_payment_type')->render();
+        
         
         // end        
         $this->twiggy->set('window_page', $window_page);
@@ -79,6 +87,7 @@ class Pv extends CI_Controller {
         $script_page = $this->twiggy->template('script/form_pv')->render();         
         $script_page .= $this->twiggy->template('script/script_supplier')->render();
         $script_page .= $this->twiggy->template('script/script_branch')->render();
+        $script_page .= $this->twiggy->template('script/script_payment_type')->render();
         
         
         $this->twiggy->set('SCRIPTS', $script_page);
@@ -98,10 +107,9 @@ class Pv extends CI_Controller {
             redirect(site_url('accounting/pv/index'), "refresh");
     }   
     
-    public function delete()
+    public function delete($id)
 	{		
 		$valid = false;
-		$id = $this->input->get('id');
 		$valid = $this->modelpv->delete($id);
 		
 		if ($valid)

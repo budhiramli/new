@@ -81,7 +81,7 @@ class Journal_mdl extends CI_Model {
         $fields = array(
             'journal_no'        => $journal_no,
             'transaction_no'    => $trans_no,
-            'transaction_date'  => $params->transaction_date,
+            'transaction_date'  => date('Y-m-d', strtotime($params->transaction_date)),
             'dept_id'           => $params->dept_id,
             'journal_desc'      => $params->journal_desc,
             'amount_db'         => $params->amount_db,

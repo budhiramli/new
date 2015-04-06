@@ -1,4 +1,15 @@
 {% block content %}
+
+    var pvId = '{{ edit.pv_no}}';           
+    if (!!pvId){                
+        $('#btnupdate').removeClass('hide');
+        $('#btnsave').addClass('hide');
+    }
+    else {
+        $('#btnupdate').addClass('hide');
+        $('#btnsave').removeClass('hide');
+    }
+            
     var selected = [];
     
     $("#transaction_date").datepicker({ 

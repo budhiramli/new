@@ -54,7 +54,12 @@ class Debit_note extends CI_Controller {
     function form($id='')
     {
         $data = array();
-        
+        if (!empty($id)){
+            $this->load->model('modeldn');
+            $data = $this->modeldn->getdataid($id);
+            
+            $this->twiggy->set('edit', $data); 
+        };
         $content = $this->twiggy->template('form/form_debit_note')->render();        
         $this->twiggy->set('content_page', $content);
         

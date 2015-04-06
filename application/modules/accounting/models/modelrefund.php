@@ -76,8 +76,8 @@ class ModelRefund extends CI_Model {
                 $fields = array(
                     'refund_no'           => $params->refund_no,
                     'transaction_no'      => $params->transaction_no,
-                    'transaction_date'    => $params->transaction_date,
-                    'collect_date'        => $params->collect_date,
+                    'transaction_date'    => date('Y-m-d', strtotime($params->transaction_date)),
+                    'collect_date'        => date('Y-m-d', strtotime($params->collect_date)),
                                 
                 );
 		

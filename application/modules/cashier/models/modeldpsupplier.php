@@ -165,7 +165,7 @@ class modeldpsupplier extends CI_Model {
             $used_amount = str_replace(',','', $params->used_amount);
             $supplier_code = explode(' ',trim($params->supplier_code));
             $fields = array(
-                'transaction_date'      => $params->transaction_date,
+                'transaction_date'      => date('Y-m-d', strtotime($params->transaction_date)),
                 'dept_id'               => $params->dept_id,
                 'supplier_code'         => $supplier_code[0],
                 'cp'                    => strtoupper($params->cp),

@@ -48,10 +48,15 @@ class Credit_note extends CI_Controller {
         $this->output->set_output($output);
     }
     
-    function form()
+    function form($id)
     {
         $data = array();
-        
+        if (!empty($id)){
+            $this->load->model('modelcn');
+            $data = $this->modelcn->getdataid($id);
+            
+            $this->twiggy->set('edit', $data); 
+        };
         // create content page fo dp supplier
         $content = $this->twiggy->template('form/form_credit_note')->render();        
         // end        

@@ -1,0 +1,35 @@
+{% block content %}
+    
+            $('#payment_method_id.typeahead').typeahead({
+                name: 'payment_method_name',
+                prefetch: '{{ site_url() }}/ajax_master_data/payment_method',
+                limit: 20
+            })
+            
+    var table = $('#table_window_payment_method').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_payment_method',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "payment_method_name" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-payment-method-select btn btn-default btn-circle" data-payment-method-id=" ' + full.payment_method_id + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    
+    $('#table_window_payment_method tbody').on( 'click', '.btn-payment-method-select', function () {
+        var paytypeId      = $(this).data('payment-method-id');
+        $('#payment_method_id').val(paytypeId);
+    });
+    
+{% endblock %}

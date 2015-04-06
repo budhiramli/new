@@ -99,7 +99,7 @@ class modelcheque extends CI_Model {
 		$this->db->set("id_cabang", $params->id_cabang );
 		$this->db->set("ref_no", $params->ref_no );
 		$this->db->set("transaction_no", $params->transaction_no );
-		$this->db->set("transaction_date", $params->transaction_date );		
+		$this->db->set("transaction_date", date('Y-m-d', strtotime($params->transaction_date)) );		
 		$this->db->set("id_customer", $params->id_customer );
 		$this->db->set("cp", $params->cp );		
 		$this->db->set("nama_bank", $params->nama_bank );

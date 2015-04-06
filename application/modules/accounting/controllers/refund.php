@@ -49,10 +49,15 @@ class Refund extends CI_Controller {
         $this->output->set_output($output);
     }
     
-    function form()
+    function form($id='')
     {
         $data = array();
-        
+        if (!empty($id)){
+            $this->load->model('modelrefund');
+            $data = $this->modelrefund->getdataid($id);
+            
+            $this->twiggy->set('edit', $data); 
+        };
         // create content page fo dp supplier
         $content = $this->twiggy->template('form/form_refund')->render();        
         // end        

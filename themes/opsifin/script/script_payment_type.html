@@ -6,18 +6,17 @@
                 limit: 20
             })
             
-    var table = $('#table_window_account_code').dataTable( {    
+    var table = $('#table_window_payment_type').dataTable( {    
             "searching": true,
             "ordering": false,    
             "bLengthChange" : false,
             "ajax": '{{ site_url() }}/ajax_master_data/get_payment_type',
             "columns": [
                     { "data": "nomor" },
-                    { "data": "account_code" },
-                    { "data": "account_name" },                    
+                    { "data": "payment_type_name" },
                     { "mRender" : function ( data, type, full ) {
                         FullData = full;
-                        return ' <a href="#" data-dismiss="modal" class="btn-payment-type-select btn btn-default btn-circle" data-payment-type-id=" ' + full.payment-type_id + ' "><i class="fa fa-check"></i></a> ';
+                        return ' <a href="#" data-dismiss="modal" class="btn-payment-type-select btn btn-default btn-circle" data-payment-type-id=" ' + full.payment_type_id + ' "><i class="fa fa-check"></i></a> ';
                       }
                     },
                 ], 

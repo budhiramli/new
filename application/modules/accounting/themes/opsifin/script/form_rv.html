@@ -1,4 +1,16 @@
 {% block content %}
+
+    var rvId = '{{ edit.rv_no}}';           
+    
+    if (!!rvId){                
+        $('#btnupdate').removeClass('hide');
+        $('#btnsave').addClass('hide');
+    }
+    else {
+        $('#btnupdate').addClass('hide');
+        $('#btnsave').removeClass('hide');
+    }
+    
     var selected = [];
     
     $("#transaction_date").datepicker({ 

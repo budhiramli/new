@@ -89,7 +89,7 @@ class ModelDebitNote extends CI_Model {
                 $fields = array(
                     'dn_no'                 => $params->dn_no,
                     'transaction_no'          => $params->transaction_no,
-                    'transaction_date'     => $params->transaction_date,
+                    'transaction_date'     => date('Y-m-d', strtotime($params->transaction_date)),
                     'transaction_type_id'        => $params->transaction_type_id,
                     'branch_code'             => $params->branch_code,
                     'dept_id'               => $params->dept_id,

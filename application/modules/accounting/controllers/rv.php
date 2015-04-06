@@ -19,6 +19,7 @@ class Rv extends CI_Controller {
         $this->twiggy->set('BREADCRUMBS_TITLE', 'Receipt Voucher');
         $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Accounting');
         $this->twiggy->set('LIST_TITLE', 'Receipt Voucher');
+        $this->load->model('modelrv');
         
     }
     
@@ -36,7 +37,7 @@ class Rv extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_rv');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.id_dp_customer');
+        $this->twiggy->set('FORM_IDKEY', 'full.rv_no');
         $this->twiggy->set('FORM_LINK', site_url('accounting/rv/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -51,10 +52,15 @@ class Rv extends CI_Controller {
         $this->output->set_output($output);
     }
     
-    function form()
+    function form($id='')
     {
         $data = array();
-        
+        if (!empty($id)){
+            $this->load->model('modelrv');
+            $data = $this->modelrv->getdataid($id);
+            
+            $this->twiggy->set('edit', $data); 
+        };
         // create content page fo dp supplier
         $content = $this->twiggy->template('form/form_rv')->render();        
         // end        
@@ -63,7 +69,7 @@ class Rv extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_rv');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.id_dp_customer');
+        $this->twiggy->set('FORM_IDKEY', 'full.rv_detail_id');
         $this->twiggy->set('FORM_LINK', site_url('accounting/rv/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -90,23 +96,21 @@ class Rv extends CI_Controller {
     {
         $params = (object) $this->input->post();   
         
-        $valid = $this->modeldpcustomer->save($params);
+        $valid = $this->modelrv->save($params);
         echo $this->db->last_query();
         
-        die();
         if (empty($valid))
-            $this->owner->alert("Please complete the form", "../index.php/cashier/dp_customer/form");
+            $this->owner->alert("Please complete the form", site_url('accounting/rv/index'));
 	else
-            redirect("../index.php/cashier/dp_customer/form");
+            redirect(site_url('accounting/rv/index'), 'refresh');
     }   
     
-    public function delete()
+    public function delete($id)
 	{		
 		$valid = false;
-		$id = $this->input->get('id');
-		$valid = $this->modeldpcustomer->delete($id);
+		$valid = $this->modelrv->delete($id);
 		
 		if ($valid)
-			redirect("../index.php/cashier/dp_customer/form");	
+			redirect(site_url('accounting/rv/index'), 'refresh');	
 	}
 }
