@@ -130,7 +130,7 @@ class ModelCreditNote extends CI_Model {
                 'transaction_date',
                 'transaction_type_id',
                 'dept_id',
-                'supplier_code',
+                'company_code',
                 'cp',
                 'is_add_manual',
                 'used_amount',
@@ -147,7 +147,7 @@ class ModelCreditNote extends CI_Model {
                     'transaction_date'     => $row->transaction_date,
                     'transaction_type_id'  => $row->transaction_type_id,
                     'dept_id'              => $row->dept_id,
-                    'supplier_code'        => $row->supplier_code,
+                    'company_code'        => $row->company_code,
                     'cp'                   => $row->cp,
                     'is_add_manual'        => $row->is_add_manual,
                     'used_amount'          => $row->used_amount
@@ -165,7 +165,7 @@ class ModelCreditNote extends CI_Model {
                     'branch_code'           => $params->branch_code,
                     'transaction_date'      => date('Y-m-d', strtotime($params->transaction_date)),
                     'dept_id'               => $params->dept_id,
-                    'customer_code'         => $params->customer_code,
+                    'company_code'         => $params->company_code,
                     
                     //'transaction_type_id'   => $params->transaction_type_id,                    
                     //'cp'                    => $params->cp,
