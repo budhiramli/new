@@ -94,11 +94,8 @@ class Debit_note extends CI_Controller {
     function save()
     {
         $params = (object) $this->input->post();   
-        
         $valid = $this->modeldebitnote->save($params);
-        echo $this->db->last_query();
         
-        die();
         if (empty($valid))
             $this->owner->alert("Please complete the form", "../index.php/accounting/debit_note/form");
 	else

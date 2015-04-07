@@ -87,15 +87,18 @@ class ModelDebitNote extends CI_Model {
                 'transaction_no',
                 'transaction_date',
                 'transaction_type_id',
-                'branch_code',
-                'dept_id',
-                'supplier_code',                
+                'b.company_name as branch_name',
+                'dept_name',
+                'supplier_name',
                 'used_sap_amount',
                 'used_amount',
             );
             
             $this->db->select($fields);
-            $query = $this->db->get('dn_transaction');
+            $this->db->join('view_mst_branch b', 'b.company_code=a.branch_code', 'left');
+            $this->db->join('mst_dept c', 'c.dept_id=a.dept_id', 'left');
+            $this->db->join('mst_supplier d', 'd.supplier_code=a.supplier_code', 'left');
+            $query = $this->db->get('dn_transaction a');
             $nomor = 1;
             foreach($query->result() as $row):
                 $data[] = array(
@@ -104,9 +107,9 @@ class ModelDebitNote extends CI_Model {
                     'transaction_no'        => $row->transaction_no,
                     'transaction_date'      => $row->transaction_date,
                     'transaction_type_id'   => $row->transaction_type_id,
-                    'branch_code'           => 'nama cabang',
-                    'dept_id'               => 'nama dept',
-                    'supplier_code'         => 'nama vendor',
+                    'branch'                => $row->branch_name,
+                    'dept_name'             => $row->dept_name,
+                    'supplier_name'         => $row->supplier_name,
                     'used_sap_amount'       => $row->used_sap_amount,
                     'used_amount'           => $row->used_amount,                    
                 );
