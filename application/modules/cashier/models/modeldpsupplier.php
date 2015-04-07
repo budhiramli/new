@@ -197,10 +197,10 @@ class modeldpsupplier extends CI_Model {
         function delete($id)
         {
             // remove detail transaksi 1
-            $this->db->where('ds_transaction_id', $id);
+            $this->db->where('ds_no', $id);
             $valid = $this->db->delete('dp_supplier_detail');
             if ($valid) {
-                $this->db->where('ds_transaction_id', $id);
+                $this->db->where('ds_no', $id);
                 $valid = $this->db->delete('dp_supplier');
             }
             return $valid;

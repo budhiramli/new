@@ -44,8 +44,7 @@ $('#table_dp_supplier').on( 'click', 'a.del-btn', function (e) {
         e.preventDefault();
         if(confirm("Are you sure?")) {
                 var delId = $(this).data('delete-id');  
-                alert(delId);
-		window.location='{{ site_url() }}/cashier/dp_supplier/delete/' + delId;	
+                window.location='{{ site_url() }}/cashier/dp_supplier/delete/' + delId;	
 	}
 	else
 		return false;

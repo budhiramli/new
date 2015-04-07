@@ -36,7 +36,7 @@ class Dp_supplier extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_dp_supplier');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.ds_transaction_id');
+        $this->twiggy->set('FORM_IDKEY', 'full.ds_no');
         $this->twiggy->set('FORM_LINK', site_url('cashier/dp_supplier/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -69,7 +69,7 @@ class Dp_supplier extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_dp_supplier');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.id_dp_supplier');
+        $this->twiggy->set('FORM_IDKEY', 'full.ds_detail_id');
         $this->twiggy->set('FORM_LINK', site_url('cashier/dp_supplier/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         

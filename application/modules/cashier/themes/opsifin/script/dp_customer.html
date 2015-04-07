@@ -45,8 +45,8 @@ $('#table_dp_customer').on( 'click', 'a.edit-btn', function (e) {
 $('#table_dp_customer').on( 'click', 'a.del-btn', function (e) {
         e.preventDefault();
         if(confirm("Are you sure?")) {
-                var delId = $(this).data('delete-id');  
-		window.location='{{ site_url() }}/cashier/dp_customer/delete/' + delId;	
+                var delId = $(this).data('delete-id');
+                window.location='{{ site_url() }}/cashier/dp_customer/delete/' + delId;	
 	}
 	else
 		return false;
