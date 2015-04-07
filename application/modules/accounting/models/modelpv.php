@@ -148,7 +148,6 @@ class ModelPv extends CI_Model {
         public function save($params)
 	{	
 		$log = $this->session->all_userdata();
-                print_r($params);
                 
 		$valid = false;
                 $supplier_code = explode(' ',trim($params->supplier_code));
@@ -188,7 +187,6 @@ class ModelPv extends CI_Model {
 		$valid = false;		
                 $this->db->where('pv_no', $id);
                 $valid = $this->db->delete('pv_transaction');
-                echo $this->db->last_query();
                         
 		if ($valid){
 			

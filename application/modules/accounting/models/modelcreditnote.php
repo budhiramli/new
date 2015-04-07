@@ -86,27 +86,28 @@ class ModelCreditNote extends CI_Model {
                 'cn_no',
                 'transaction_no',                
                 'branch_code',
-                'transaction_date',
-                'transaction_type_id',
-                'dept_name',
-                'company_name',
+                'b.company_name as branch_name',
+                "(DATE_FORMAT(transaction_date, '%d-%m-%Y')) as transaction_date",
+                'c.dept_name',
+                'd.company_name',
                 'cp',
                 'is_add_manual',
                 'used_amount',
             );
             
             $this->db->select($fields);
-            $this->db->join('mst_company', 'mst_company.company_code=cn_transaction.company_code', 'left');
-            $this->db->join('mst_dept', 'mst_dept.dept_id=cn_transaction.dept_id', 'left');
-            
-            $query = $this->db->get('cn_transaction');
+            $this->db->join('view_mst_branch b', 'b.company_code=a.branch_code', 'left');
+            $this->db->join('mst_dept c', 'c.dept_id=a.dept_id', 'left');
+            $this->db->join('mst_company d', 'd.company_code=a.company_code', 'left');            
+            $query = $this->db->get('cn_transaction a');
+            //echo $this->db->last_query();
             $nomor = 1;
             foreach($query->result() as $row):
                 $data[] = array(
                     'nomor'              => $nomor,
                     'cn_no'              => $row->cn_no,
                     'transaction_no'     => $row->transaction_no,                    
-                    'branch'             => $row->company_name,                    
+                    'branch'             => $row->branch_name,                    
                     'transaction_date'   => $row->transaction_date,
                     'dept_id'            => $row->dept_name,
                     'company_code'       => $row->company_name,
