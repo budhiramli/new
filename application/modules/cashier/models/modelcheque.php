@@ -19,7 +19,6 @@ class modelcheque extends CI_Model {
             $fields = array(
                 'bg_prefix',
                 'bg_no',
-                'transaction_no', 
                 'transaction_date', 
                 'due_date',
                 'ref_prefix', 
@@ -38,7 +37,6 @@ class modelcheque extends CI_Model {
                     'nomor'                 => $nomor,
                     'branch'                => 'nama_cabang',
                     'bg_no'                 => $row->bg_no, 
-                    'transaction_no'          => $row->transaction_no, 
                     'transaction_date'     => $row->transaction_date,
                     'due_date'              => $row->due_date,
                     'ref_type'              => $row->ref_type, 
@@ -59,7 +57,6 @@ class modelcheque extends CI_Model {
             $fields = array(
                 'bg_prefix',
                 'bg_no',
-                'transaction_no', 
                 'transaction_date', 
                 'due_date',
                 'ref_prefix', 
@@ -78,7 +75,6 @@ class modelcheque extends CI_Model {
                 $data = array(
                     'branch'                => '',
                     'bg_no'                 => $row->bg_no, 
-                    'transaction_no'          => $row->transaction_no, 
                     'transaction_date'     => $row->transaction_date,
                     'due_date'              => $row->due_date,
                     'ref_type'              => $row->ref_type, 
@@ -95,27 +91,25 @@ class modelcheque extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;
+                $fields = array(
+                    'branch_code'       => $params->branch_code,
+                    'transaction_date'  => date('Y-m-d', strtotime($params->transaction_date)),
+                    'bg_no'             => $params->bg_no,
+                );
 		
-		$this->db->set("id_cabang", $params->id_cabang );
-		$this->db->set("ref_no", $params->ref_no );
-		$this->db->set("transaction_no", $params->transaction_no );
-		$this->db->set("transaction_date", date('Y-m-d', strtotime($params->transaction_date)) );		
-		$this->db->set("id_customer", $params->id_customer );
-		$this->db->set("cp", $params->cp );		
-		$this->db->set("nama_bank", $params->nama_bank );
-		$this->db->set("amount", $params->amount );
-		$this->db->set("note", $params->note );
-                
+		
 		if (!empty($params->id)) {
-			$this->db->where("id_cc", $params->id);
-			$valid = $this->db->update("cc_transaction");
+                        $this->db->set($fields);
+			$this->db->where("cheque_id", $params->cheque_id);
+			$valid = $this->db->update("cheque_transaction");
                         
-			$valid = $this->logUpdate->addLog("update", "cc_transaction", $params);
+			$valid = $this->logUpdate->addLog("update", "cheque_transaction", $params);
 		}
 		else {
-			$valid = $this->db->insert('cc_transaction');
+                        $this->db->set($fields);
+			$valid = $this->db->insert('cheque_transaction');
 			
-                        $valid = $this->logUpdate->addLog("insert", "cc_transaction", $params);
+                        $valid = $this->logUpdate->addLog("insert", "cheque_transaction", $params);
                         
 			//$valid = $this->modelNumbertrans->updatePVNumber();
 			
@@ -131,11 +125,11 @@ class modelcheque extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;		
-		$valid = $this->logUpdate->addLog("delete", "cc_transaction", array("id_cc_transaction" => $id));	
+		$valid = $this->logUpdate->addLog("delete", "cheque_transaction", array("cheque_id" => $id));	
 		
 		if ($valid){
-			$this->db->where('id_cc_transaction', $id);
-			$valid = $this->db->delete('cc_transaction');
+			$this->db->where('cheque_id', $id);
+			$valid = $this->db->delete('cheque_transaction');
 		}
 		
 		return $valid;		

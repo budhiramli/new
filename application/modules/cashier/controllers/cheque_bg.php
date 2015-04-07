@@ -20,6 +20,8 @@ class Cheque_bg extends CI_Controller {
         $this->twiggy->set('BREADCRUMBS_TITLE', 'Cheque B/G');
         $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Cashier');
         $this->twiggy->set('LIST_TITLE', 'Cheque B/G');
+        
+        $this->load->model('modelcheque');
     }
     
     function index()
@@ -36,7 +38,7 @@ class Cheque_bg extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_cheque_bg');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.id_cheque');
+        $this->twiggy->set('FORM_IDKEY', 'full.cheque_id');
         $this->twiggy->set('FORM_LINK', site_url('cashier/cheque_bg/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -69,7 +71,7 @@ class Cheque_bg extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_cheque_bg');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.id_cheque');
+        $this->twiggy->set('FORM_IDKEY', 'full.cheque_detail_id');
         $this->twiggy->set('FORM_LINK', site_url('cashier/cheque_bg/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -96,23 +98,21 @@ class Cheque_bg extends CI_Controller {
     {
         $params = (object) $this->input->post();   
         
-        $valid = $this->modeldpcustomer->save($params);
-        echo $this->db->last_query();
+        $valid = $this->modelcheque->save($params);
         
-        die();
         if (empty($valid))
             $this->owner->alert("Please complete the form", "../index.php/cashier/dp_customer/form");
 	else
-            redirect("../index.php/cashier/dp_customer/form");
+            redirect(site_url('cashier/cheque_bg/index'), "refresh");
     }   
     
     public function delete()
 	{		
 		$valid = false;
 		$id = $this->input->get('id');
-		$valid = $this->modeldpcustomer->delete($id);
+		$valid = $this->modelcheque->delete($id);
 		
 		if ($valid)
-			redirect("../index.php/cashier/dp_customer/form");	
+			redirect(site_url('cashier/cheque_bg/index'), "refresh");	
 	}
 }

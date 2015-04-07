@@ -17,8 +17,10 @@ class modelcc extends CI_Model {
         {
             $data = array();
             $fields = array(
+                'cc_id',
                 'cc_no', 
-                'transaction_no', 
+                'ref_id',
+                'transaction_date',
                 'company_code', 
                 'cp', 
                 'bank_name', 
@@ -34,10 +36,12 @@ class modelcc extends CI_Model {
             $nomor = 1;
             foreach($query->result() as $row):
                 $data[] = array(
-                    'nomor'              => $nomor,
-                    'branch'            => 'nama_cabang',
-                    'cc_no'            => $row->cc_no, 
-                    'transaction_no'      => $row->transaction_no, 
+                    'nomor'             => $nomor,
+                    'cc_id'             => $row->cc_id,                     
+                    'cc_no'             => $row->cc_no, 
+                    'ref_id'            => $row->ref_id,                     
+                    'transaction_date'  => $row->transaction_date,                     
+                    'branch'            => 'nama_cabang',                    
                     'customer'          => 'nama_customer', 
                     'cp'                => $row->cp, 
                     'bank_name'         => $row->bank_name,
@@ -56,8 +60,9 @@ class modelcc extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'ref_no', 
-                'transaction_no', 
+                'cc_id',
+                'cc_no',
+                'ref_id', 
                 'transaction_date', 
                 'company_code', 
                 'cp', 
@@ -75,8 +80,9 @@ class modelcc extends CI_Model {
                 $row = $query->row();
                 $data = array(
                     'branch'            => 'nama_cabang',
-                    'ref_no'            => $row->ref_no, 
-                    'transaction_no'      => $row->transaction_no, 
+                    'cc_id'            => $row->cc_id, 
+                    'cc_no'            => $row->cc_no,                     
+                    'ref_id'            => $row->ref_id, 
                     'transaction_date' => $row->transaction_date, 
                     'customer'          => 'nama_customer', 
                     'cp'                => $row->cp, 
@@ -131,10 +137,10 @@ class modelcc extends CI_Model {
 	{	
 		$log = $this->session->all_userdata();
 		$valid = false;		
-		$valid = $this->logUpdate->addLog("delete", "cc_transaction", array("id_cc" => $id));	
+		$valid = $this->logUpdate->addLog("delete", "cc_transaction", array("cc_id" => $id));	
 		
 		if ($valid){
-			$this->db->where('id_cc', $id);
+			$this->db->where('cc_id', $id);
 			$valid = $this->db->delete('cc_transaction');
 		}
 		

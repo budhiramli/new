@@ -98,18 +98,18 @@ class Credit_card extends CI_Controller {
         $valid = $this->modelcc->save($params);
         
         if (empty($valid))
-            $this->owner->alert("Please complete the form", "../index.php/cashier/dp_customer/form");
+            $this->owner->alert("Please complete the form", site_url("cashier/credit_card/index"));
 	else
-            redirect("../index.php/cashier/dp_customer/form");
+            redirect(site_url("cashier/credit_card/index"), 'refresh');
     }   
     
     public function delete()
 	{		
 		$valid = false;
 		$id = $this->input->get('id');
-		$valid = $this->modeldpcustomer->delete($id);
+		$valid = $this->modelcc->delete($id);
 		
 		if ($valid)
-			redirect("../index.php/cashier/dp_customer/form");	
+                    redirect(site_url("cashier/credit_card/index"), 'refresh');
 	}
 }
