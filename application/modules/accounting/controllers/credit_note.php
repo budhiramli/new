@@ -100,10 +100,9 @@ class Credit_note extends CI_Controller {
             redirect(site_url('accounting/credit_note/index'), "refresh");
     }   
     
-    public function delete()
+    public function delete($id)
 	{		
 		$valid = false;
-		$id = $this->input->get('id');
 		$valid = $this->modelcreditnote->delete($id);
 		
 		if ($valid)
