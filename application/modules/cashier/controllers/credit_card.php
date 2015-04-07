@@ -19,7 +19,7 @@ class Credit_card extends CI_Controller {
         $this->twiggy->set('BREADCRUMBS_TITLE', 'Credit Card');
         $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Cashier');
         $this->twiggy->set('LIST_TITLE', 'Credit Card');
-        
+        $this->load->model('modelcc');
     }
     
     function index()
@@ -35,7 +35,7 @@ class Credit_card extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_credit_card');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.id_cc');
+        $this->twiggy->set('FORM_IDKEY', 'full.cc_id');
         $this->twiggy->set('FORM_LINK', site_url('cashier/credit_card/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -64,7 +64,7 @@ class Credit_card extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_credit_card');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.id_cc');
+        $this->twiggy->set('FORM_IDKEY', 'full.cc_detail_id');
         $this->twiggy->set('FORM_LINK', site_url('cashier/credit_card/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -103,10 +103,9 @@ class Credit_card extends CI_Controller {
             redirect(site_url("cashier/credit_card/index"), 'refresh');
     }   
     
-    public function delete()
+    public function delete($id)
 	{		
 		$valid = false;
-		$id = $this->input->get('id');
 		$valid = $this->modelcc->delete($id);
 		
 		if ($valid)
