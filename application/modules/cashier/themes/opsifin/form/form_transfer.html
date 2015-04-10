@@ -13,73 +13,195 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-8">
                         <div class="form-group col-xs-12">
-                            <label for="billing_no" class="col-xs-3 control-label">Bill No</label>
+                            <label for="branch_code" class="col-xs-3 control-label">Branch</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="bill_no" name="bill_no" value="{{ edit.bill_no }}" placeholder="type or browse">
+                                    <input type="text" class="form-control typeahead tt-query" id="branch_code" name="branch_code" value="{{ edit.branch_code }}" placeholder="type or browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-branch"><span class="glyphicon glyphicon-search"></span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                    <div class="col-xs-12 col-md-8">
+                        
+                        
                         <div class="form-group col-xs-12">
-                            <label for="branch_code" class="col-xs-3 control-label">Date</label>
-                            <div class="col-xs-3">
+                            <label for="ref_no" class="col-xs-3 control-label">Reference No</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="ref_no" name="ref_no" value="{{ edit.ref_no }}" placeholder="type or browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-ref"><span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="trans_id" class="col-xs-3 control-label">Transaction ID</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="trans_id" name="trans_id" value="{{ edit.trans_id }}" placeholder="type or browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-trans"><span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="transaction_date" class="col-xs-3 control-label">Transaction Date</label>
+                            <div class="col-xs-7">
                                 <div class='input-group'>
                                     <input type="text" class="form-control typeahead tt-query" id="transaction_date" name="transaction_date" value="{{ edit.transaction_date }}" placeholder="type or browse">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
-                            
-                            <label for="due_date" class="col-xs-2 control-label">Due Date</label>
+                        </div>
+                        
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="ref_type" class="col-xs-3 control-label">Reference Type</label>
                             <div class="col-xs-4">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="due_date" name="due_date" value="{{ edit.due_date }}" placeholder="type or browse">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    <input type="text" class="form-control typeahead tt-query" id="bill_no" name="bill_no" value="{{ edit.bill_no }}" placeholder="type or browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-trans"><span class="glyphicon glyphicon-search"></span>
                                     </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-5">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="bill_no" name="bill_no" value="{{ edit.bill_no }}" placeholder="type or browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-trans"><span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="cp" class="col-xs-3 control-label">CP</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="bill_no" name="bill_no" value="{{ edit.bill_no }}" placeholder="type or browse">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="bank_name" class="col-xs-3 control-label">Bank Name</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="bank_name" name="bank_name" value="{{ edit.bank_name }}" placeholder="type or browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-bank"><span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="amount" class="col-xs-3 control-label">Amount</label>
+                            <div class="col-xs-3">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="currency_id" name="currency" value="{{ edit.currency }}" placeholder="type or browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-currency"><span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="amount" name="amount" value="{{ edit.amount }}" placeholder="xx.xxx">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="slip_no" class="col-xs-3 control-label">Slip No</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="bill_no" name="bill_no" value="{{ edit.bill_no }}" placeholder="type or browse">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="supplier_bank" class="col-xs-3 control-label">Supplier Bank</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="supplier_bank" name="supplier_bank" value="{{ edit.supplier_bank }}" placeholder="type or browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-bank"><span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="transfer_note" class="col-xs-3 control-label">Note</label>
+                            <div class="col-xs-9">
+                                <div class='input-group'>
+                                    <textarea id="transfer_note" name="transfer_note">{{ edit.bill_no }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div> 
+                    
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group col-xs-12">
+                            <label for="branch_code" class="col-xs-4 control-label">Status</label>
+                            <div class="col-xs-8">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" id="status" name="status" value="{{ edit.bill_no }}" placeholder="type or browse">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="branch_code" class="col-xs-4 control-label">User</label>
+                            <div class="col-xs-8">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" id="bill_no" name="bill_no" value="{{ edit.bill_no }}" placeholder="type or browse">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="branch_code" class="col-xs-4 control-label">Journal</label>
+                            <div class="col-xs-8">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" id="bill_no" name="bill_no" value="{{ edit.bill_no }}" placeholder="type or browse">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="used_amount" class="col-xs-4 control-label">Used Amount</label>
+                            <div class="col-xs-8">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" id="used_amount" name="used_amount" value="{{ edit.used_amount }}" placeholder="type or browse">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">    
+                            <label for="clearing_out" class="col-xs-4 control-label">Clearing Out</label>
+                            <div class="col-xs-8">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" id="clearing_out" name="clearing_out" value="{{ edit.clearing_out }}" placeholder="type or browse">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">    
+                            <label for="clearing_in" class="col-xs-4 control-label">Clearing In</label>
+                            <div class="col-xs-8">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" id="clearing_in" name="clearing_in" value="{{ edit.clearing_in }}" placeholder="type or browse">
                                 </div>
                             </div>
                         </div>
                     </div>    
-                    
-                    <div class="col-xs-12 col-md-8">
-                        <div class="form-group col-xs-12">
-                            <label for="company_code" class="col-xs-3 control-label">Customer</label>
-                            <div class="col-xs-7">
-                                <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="company_code" name="company_code" value="{{ edit.company_code }}" placeholder="type or browse">
-                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-customer"><span class="glyphicon glyphicon-search"></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-xs-12 col-md-8">
-                        <div class="form-group col-xs-12">
-                            <label for="branch_code" class="col-xs-3 control-label">Branch</label>
-                            <div class="col-xs-7">
-                                <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="branch_code" name="branch_code" value="{{ edit.id_branch }}" placeholder="type or browse">
-                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-branch"><span class="glyphicon glyphicon-search"></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    
-                    <div class="col-xs-12 col-md-8">
-                        <div class="form-group col-xs-12">
-                            <div class="col-xs-7">
-                                <div class="checkbox">
-                                    <input type="checkbox" class="form-control" id="" name="" value="{{ edit.id_branch }}">
-                                    <label for="branch_code" class="col-xs-3 control-label">Branch</label>
-                                </div>    
-                            </div>
-                        </div>
-                    </div> 
-                    
                 </div>               
                 <!-- end Row -->    
                 <!-- begin Row -->    
@@ -97,11 +219,12 @@
                                       <table id="table_dp_supplier_detail" class="table table-bordered table-hover table-striped">
                                           <thead>
                                               <tr>
-                                                   <th nowrap="nowrap">Ref No</th>
-                                                   <th nowrap="nowrap">Transaction</th>                                                   
+                                                   <th nowrap="nowrap">Ref ID</th>
+                                                   <th nowrap="nowrap">Reference No</th>                                                   
                                                    <th nowrap="nowrap">Ccy</th>
                                                    <th nowrap="nowrap">Amount</th>
-                                                   <th nowrap="nowrap">Paid</th>
+                                                   <th nowrap="nowrap">Name</th>
+                                                   <th nowrap="nowrap">Used Date</th>                                                   
                                                    <th nowrap="nowrap">Action</th>
                                               </tr>
                                           </thead>

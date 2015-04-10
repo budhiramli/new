@@ -20,8 +20,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                    <div class="col-xs-12 col-md-8">
+                        
                         <div class="form-group col-xs-12">
                             <label for="branch_code" class="col-xs-3 control-label">Date</label>
                             <div class="col-xs-3">
@@ -41,9 +40,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>    
-                    
-                    <div class="col-xs-12 col-md-8">
+                        
                         <div class="form-group col-xs-12">
                             <label for="company_code" class="col-xs-3 control-label">Customer</label>
                             <div class="col-xs-7">
@@ -54,9 +51,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="col-xs-12 col-md-8">
+                        
                         <div class="form-group col-xs-12">
                             <label for="branch_code" class="col-xs-3 control-label">Branch</label>
                             <div class="col-xs-7">
@@ -67,9 +62,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                    
-                    <div class="col-xs-12 col-md-8">
+                        
                         <div class="form-group col-xs-12">
                             <div class="col-xs-7">
                                 <div class="checkbox">
@@ -78,7 +71,38 @@
                                 </div>    
                             </div>
                         </div>
+                        
+                        
                     </div> 
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group col-xs-12">
+                            <label for="branch_code" class="col-xs-3 control-label">Status</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="branch_code" name="branch_code" value="{{ edit.id_branch }}" placeholder="type or browse">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="branch_code" class="col-xs-3 control-label">Print</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="branch_code" name="branch_code" value="{{ edit.id_branch }}" placeholder="type or browse">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="branch_code" class="col-xs-3 control-label">User</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="branch_code" name="branch_code" value="{{ edit.id_branch }}" placeholder="type or browse">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>    
                     
                 </div>               
                 <!-- end Row -->    
@@ -109,7 +133,26 @@
                                       </table>
                                     </div>    
                             </div> 
-        </div>  
+        </div>
+            
+        <div class="panel panel-default">        
+                            <div class="panel-body">
+                                    <div class="col-md-12">  
+                                      <table id="table_dp_supplier_detail" class="table table-bordered table-hover table-striped">
+                                          <thead>
+                                              <tr>
+                                                   <th nowrap="nowrap">Ccy</th>
+                                                   <th nowrap="nowrap">Amount</th>                                                   
+                                                   <th nowrap="nowrap">Less Amount</th>
+                                                   <th nowrap="nowrap">Balance</th>
+                                                   <th nowrap="nowrap">Balance IDR</th>
+                                              </tr>
+                                          </thead>
+
+                                      </table>
+                                    </div>    
+                            </div> 
+        </div>     
             
         <div class="panel panel-default">        
                 <div class="panel-body">
