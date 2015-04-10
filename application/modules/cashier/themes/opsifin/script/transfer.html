@@ -1,0 +1,30 @@
+{% block content %}
+
+var selected = [];
+var table = $('#table_billing').dataTable( {    
+        "searching": true,
+        "ordering": false,    
+        "bLengthChange" : false,
+        "ajax": '{{ site_url() }}/cashier/ajax_data/getrecord_billing',
+        "columns": [
+                { "data": "nomor" },
+                { "data": "bill_no" },
+                { "data": "transaction_date" },
+                { "data": "due_date" },
+                { "data": "company_name" },
+                { "data": "branch_name" },
+                { "mRender" : function ( data, type, full ) {
+                    FullData = full;
+                    return '{{ BUTTON_CRUD }} ';
+                  }
+                },
+            ], 
+            "rowCallback": function( row, data ) {
+                if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                    $(row).addClass('selected');
+                }
+            }   
+});
+
+
+{% endblock %}

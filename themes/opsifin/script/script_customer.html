@@ -30,5 +30,7 @@ var table = $('#table_window_customer').dataTable( {
 $('#table_window_customer tbody').on( 'click', '.btn-customer-select', function () {
         var customerId = $(this).data('customer-id');
         $('#company_code').val(customerId);
+        
+        // add function to get list invoice
 });
     

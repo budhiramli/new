@@ -1,0 +1,22 @@
+{% block content %}
+        
+        $("#transaction_date").datepicker({ 
+            dateFormat: 'dd-mm-yy'
+        });
+        
+        $("#due_date").datepicker({ 
+            dateFormat: 'dd-mm-yy'
+        });
+        
+        var billId = '{{ edit.bill_no }}';           
+        if (!!billId){                
+                $('#btnupdate').removeClass('hide');
+                $('#btnsave').addClass('hide');
+        }
+        else {
+                $('#btnupdate').addClass('hide');
+                $('#btnsave').removeClass('hide');
+        }
+        
+        var selected = [];
+{% endblock %}

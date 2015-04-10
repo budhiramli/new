@@ -5,7 +5,21 @@ class Ajax_data extends CI_Controller {
         parent::__construct();
     }
     
-    
+    function getrecord_billing()
+    {
+        $this->load->model('modelbilling');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->modelbilling->getdatalist();
+        $data['iTotalRecords']          = $this->modelbilling->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->modelbilling->getrecordcount();
+        echo json_encode($data);
+    }
     
     function getrecord_dpsupplier()
     {
