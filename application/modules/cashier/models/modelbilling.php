@@ -145,13 +145,17 @@ class modelbilling extends CI_Model {
         {
             $valid = true;
             
+            $branch_code        = explode(' ',trim($params->branch_code));
+            $customer_code      = explode(' ',trim($params->company_code));
+            
             $fields = array(
-                'transaction_date'      => date('Y-m-d', strtotime($params->transaction_date)),
+                'transaction_date'   => date('Y-m-d', strtotime($params->transaction_date)),
                 'due_date'              => date('Y-m-d', strtotime($params->due_date)),
+                'company_code'      => $customer_code,
+                'branch_code'         => $branch_code,
             );
             
             if (!empty($params->btnsave)){
-                print_r($params);
                 $billno  = $this->get_billno();
                 $this->db->set($fields);            
                 $this->db->set('bill_no', $billno);

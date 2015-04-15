@@ -18,5 +18,28 @@
                 $('#btnsave').removeClass('hide');
         }
         
+        var billid = '';
         var selected = [];
+        var table = $('#table_billing_detail').dataTable( {    
+                "searching": true,
+                "ordering": false,    
+                "bLengthChange" : false,
+                "ajax": '{{ site_url() }}/cashier/ajax_data/getrecord_billing_detail/' + billid,
+                "columns": [
+                        { "data": "nomor" },
+                        { "data": "currency" },
+                        { "data": "amount" },
+                        { "data": "is_paid" },
+                        { "mRender" : function ( data, type, full ) {
+                            FullData = full;
+                            return '{{ BUTTON_CRUD }} ';
+                          }
+                        },
+                    ], 
+                    "rowCallback": function( row, data ) {
+                        if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                            $(row).addClass('selected');
+                        }
+                    }   
+        });
 {% endblock %}

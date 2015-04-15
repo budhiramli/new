@@ -21,6 +21,22 @@ class Ajax_data extends CI_Controller {
         echo json_encode($data);
     }
     
+    function getrecord_billing_detail($id='')
+    {
+        $this->load->model('modelbillingdetail');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->modelbillingdetail->getdatalist($id);
+        $data['iTotalRecords']          = $this->modelbillingdetail->getrecordcount($id);
+        $data['iTotalDisplayRecords']   = $this->modelbillingdetail->getrecordcount($id);
+        echo json_encode($data);
+    }
+    
     function getrecord_dpsupplier()
     {
         $this->load->model('modeldpsupplier');
