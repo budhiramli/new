@@ -58,7 +58,7 @@
                             <label for="branch_code" class="col-xs-3 control-label">Branch</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="branch_code" name="branch_code" value="{{ edit.id_branch }}" placeholder="type or browse">
+                                    <input type="text" class="form-control typeahead tt-query" id="branch_code" name="branch_code" value="{{ edit.branch_code }}" placeholder="type or browse">
                                     <span class="input-group-addon" data-toggle="modal" data-target="#window-branch"><span class="glyphicon glyphicon-search"></span>
                                     </span>
                                 </div>
@@ -83,7 +83,7 @@
                             <label for="branch_code" class="col-xs-3 control-label">Status</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="branch_code" name="branch_code" value="{{ edit.id_branch }}" placeholder="type or browse">
+                                    <input type="text" class="form-control" id="status" name="status" value="{{ edit.status }}" placeholder="type or browse">
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                             <label for="branch_code" class="col-xs-3 control-label">Print</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="branch_code" name="branch_code" value="{{ edit.id_branch }}" placeholder="type or browse">
+                                    <input type="text" class="form-control" id="print" name="print" value="{{ edit.print }}" placeholder="type or browse">
                                 </div>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                             <label for="branch_code" class="col-xs-3 control-label">User</label>
                             <div class="col-xs-7">
                                 <div class='input-group'>
-                                    <input type="text" class="form-control typeahead tt-query" id="branch_code" name="branch_code" value="{{ edit.id_branch }}" placeholder="type or browse">
+                                    <input type="text" class="form-control" id="user" name="user" value="{{ edit.user }}" placeholder="type or browse">
                                 </div>
                             </div>
                         </div>
@@ -121,7 +121,8 @@
         </div>
         <div class="panel panel-default">        
                             <div class="panel-body">
-                                    <div class="col-md-12">  
+                                    <div class="col-md-12"> 
+                                      <button data-toggle="modal" data-target="#window-invoice">Add</button>  
                                       <table id="table_billing_detail" class="table table-bordered table-hover table-striped">
                                           <thead>
                                               <tr>

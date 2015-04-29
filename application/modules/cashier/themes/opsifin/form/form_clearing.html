@@ -1,0 +1,174 @@
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="header-row"></div>
+        
+        <form class="form-horizontal" action="{{ site_url('cashier/invoice_cashier_transaction/save') }}" method="post" role="form" name="form1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                    {{ BREADCRUMBS_TITLE }}
+            </div>
+            <div class="panel-body">
+                <!-- begin Row -->     
+                <div class="row">
+                    <div class="col-xs-12 col-md-9">
+                        <div class="form-group col-xs-12">
+                            <label for="cashier_no" class="col-xs-3 control-label">Cashier No</label>
+                            <div class="col-xs-7">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" id="cashier_no" name="cashier_no" value="{{ edit.cashier_no }}" placeholder="type or browse">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="trans_no" class="col-xs-3 control-label">Trans ID/Date</label>
+                            <div class="col-xs-3">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" id="trans_no" name="trans_no" value="{{ edit.trans_no }}" placeholder="type or browse">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" id="transaction_date" name="transaction_date" value="{{ edit.transaction_date }}" placeholder="type or browse">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="pv_no" class="col-xs-3 control-label">PV No/PV Date</label>
+                            <div class="col-xs-3">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" id="pv_no" name="pv_no" value="{{ edit.pv_no }}" placeholder="type or browse">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xs-4">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" id="transaction_date" name="transaction_date" value="{{ edit.transaction_date }}" placeholder="type or browse">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="dept_id" class="col-xs-3 control-label">Dept ID/Recieved By</label>
+                            <div class="col-xs-4">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="company_code" name="company_code" value="{{ edit.company_code }}" placeholder="type or browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-customer"><span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control typeahead tt-query" id="company_code" name="company_code" value="{{ edit.company_code }}" placeholder="type or browse">
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#window-customer"><span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div> 
+                    
+                    
+                    
+                    <div class="col-xs-12 col-md-3">
+                        <div class="form-group col-xs-12">
+                            <label for="status" class="col-xs-5 control-label">Status</label>
+                            <div class="col-xs-7">
+                                    <div class='input-group'>
+                                        <input type="text" class="form-control typeahead tt-query" id="company_code" name="company_code" value="{{ edit.company_code }}" placeholder="type or browse">
+
+                                    </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="print" class="col-xs-5 control-label">Print</label>
+                            <div class="col-xs-7">
+                                    <div class='input-group'>
+                                        <input type="text" class="form-control typeahead tt-query" id="company_code" name="company_code" value="{{ edit.company_code }}" placeholder="type or browse">
+
+                                    </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-xs-12">
+                            <label for="user" class="col-xs-5 control-label">user</label>
+                            <div class="col-xs-7">
+                                    <div class='input-group'>
+                                        <input type="text" class="form-control typeahead tt-query" id="company_code" name="company_code" value="{{ edit.company_code }}" placeholder="type or browse">
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>               
+                   
+            </div>    
+                
+                
+        </div>
+        
+        <div class="panel panel-default">        
+                            <div class="panel-body">
+                                    <div class="col-md-12">  
+                                      <table id="table_dp_supplier_detail" class="table table-bordered table-hover table-striped">
+                                          <thead>
+                                              <tr>
+                                                   <th nowrap="nowrap">Ccy</th>
+                                                   <th nowrap="nowrap">Amount</th>                                                   
+                                                   <th nowrap="nowrap">Less Amount</th>
+                                                   <th nowrap="nowrap">Balance</th>
+                                                   <th nowrap="nowrap">Balance IDR</th>
+                                              </tr>
+                                          </thead>
+
+                                      </table>
+                                    </div>    
+                            </div> 
+        </div>     
+            
+        <div class="panel panel-default">        
+                            <div class="panel-body">
+                                    <div class="col-md-12">  
+                                      <table id="table_dp_supplier_detail" class="table table-bordered table-hover table-striped">
+                                          <thead>
+                                              <tr>
+                                                   <th nowrap="nowrap">Ref No</th>
+                                                   <th nowrap="nowrap">Transaction</th>                                                   
+                                                   <th nowrap="nowrap">Ccy</th>
+                                                   <th nowrap="nowrap">Amount</th>
+                                                   <th nowrap="nowrap">Paid</th>
+                                                   <th nowrap="nowrap">Action</th>
+                                              </tr>
+                                          </thead>
+
+                                      </table>
+                                    </div>    
+                            </div> 
+        </div>  
+            
+        <div class="panel panel-default">        
+                <div class="panel-body">
+
+                    <div class="form-group col-xs-12">        
+                        <input type="submit" class="btn btn-default" name="btnsave" id="btnsave" value="Save">
+                        <input type="submit" class="btn btn-default" name="btnupdate" id="btnupdate" value="Update">
+                    </div>
+
+                </div>
+        </div>    
+                                        
+        </form>
+   </div>     
+</div>
+{% endblock %}

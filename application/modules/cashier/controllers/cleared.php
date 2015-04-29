@@ -12,16 +12,16 @@ class Cleared extends CI_Controller {
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
         
-        $this->twiggy->title('OPSIFIN')->prepend('Cheque B/G');;
+        $this->twiggy->title('OPSIFIN')->prepend('Cleared Cheque B/G');;
         $this->twiggy->meta('keywords', 'twiggy, twig, template, layout, codeigniter');
         $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
         
         // create content page fo dp supplier
-        $this->twiggy->set('BREADCRUMBS_TITLE', 'Cheque B/G');
+        $this->twiggy->set('BREADCRUMBS_TITLE', 'Cleared Cheque B/G');
         $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Cashier');
-        $this->twiggy->set('LIST_TITLE', 'Cheque B/G');
+        $this->twiggy->set('LIST_TITLE', 'Cleared Cheque B/G');
         
-        $this->load->model('modelclearing');
+        //$this->load->model('modelclearing');
     }
     
     function index()
@@ -35,11 +35,11 @@ class Cleared extends CI_Controller {
         // end        
         $this->twiggy->set('content_page', $content);
         
-        $this->twiggy->set('FORM_NAME', 'form_cheque_bg');
+        $this->twiggy->set('FORM_NAME', 'form_cleared');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
         $this->twiggy->set('FORM_IDKEY', 'full.cheque_id');
-        $this->twiggy->set('FORM_LINK', site_url('cashier/clearing/delete'));
+        $this->twiggy->set('FORM_LINK', site_url('cashier/cleared/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
@@ -65,14 +65,14 @@ class Cleared extends CI_Controller {
         
         // create content page fo dp supplier
         //$content = $this->twiggy->template('breadcrumbs')->render();
-        $content = $this->twiggy->template('form/form_clearing')->render();        
+        $content = $this->twiggy->template('form/form_cleared')->render();        
         // end        
         $this->twiggy->set('content_page', $content);        
         $this->twiggy->set('FORM_NAME', 'form_cheque_bg');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
         $this->twiggy->set('FORM_IDKEY', 'full.cheque_detail_id');
-        $this->twiggy->set('FORM_LINK', site_url('cashier/clearing/delete'));
+        $this->twiggy->set('FORM_LINK', site_url('cashier/cleared/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
@@ -103,7 +103,7 @@ class Cleared extends CI_Controller {
         if (empty($valid))
             $this->owner->alert("Please complete the form", "../index.php/cashier/clearing/form");
 	else
-            redirect(site_url('cashier/clearing/index'), "refresh");
+            redirect(site_url('cashier/cleared/index'), "refresh");
     }   
     
     public function delete()
@@ -113,6 +113,6 @@ class Cleared extends CI_Controller {
 		$valid = $this->modelclearing->delete($id);
 		
 		if ($valid)
-			redirect(site_url('cashier/clearing/index'), "refresh");	
+			redirect(site_url('cashier/cleared/index'), "refresh");	
 	}
 }

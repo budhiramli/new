@@ -1,0 +1,47 @@
+{% block content %}
+    
+    $('#invoice_no.typeahead').typeahead({
+                name: 'invoice_no',
+                prefetch: '{{ site_url() }}/ajax_master_data/invoice',
+                limit: 20
+    })
+            
+    var table = $('#table_window_invoice').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_invoice',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "invoice_no" },
+                    { "data": "customer_code" },                    
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' <a href="#" data-dismiss="modal" class="btn-invoice-select btn btn-default btn-circle" data-invoice-id=" ' + full.invoice_no + ' "><i class="fa fa-check"></i></a> ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    
+    $('#table_window_invoice tbody').on( 'click', '.btn-invoice-select', function () {
+        var invoiceId      = $(this).data('invoice-id');
+        
+        $.post("{{ site_url() }}/ajax_master_data/set_billing_detail",
+        {
+            invoice_no: invoiceId,
+            customer_code: custcode,
+            amount:amount
+        },
+        function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+        
+        
+    });
+    
+{% endblock %}

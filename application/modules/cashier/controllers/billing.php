@@ -54,9 +54,15 @@ class Billing extends CI_Controller {
         $this->output->set_output($output);
     }
     
-    function form()
+    function form($id='')
     {
         $data = array();
+        
+        if (!empty($id)){
+            $this->load->model('modelbilling');
+            $data = $this->modelbilling->getdataid($id);
+            $this->twiggy->set('edit', $data); 
+        };
         
         // create content page fo dp supplier
         $content = $this->twiggy->template('breadcrumbs')->render();
@@ -76,14 +82,15 @@ class Billing extends CI_Controller {
         
         $window_page = $this->twiggy->template('window/window_customer')->render();
         $window_page .= $this->twiggy->template('window/window_branch')->render();
+        $window_page .= $this->twiggy->template('window/window_invoice')->render();
         
         // end        
         $this->twiggy->set('window_page', $window_page);
         
         $script_page = $this->twiggy->template('script/form_billing')->render();         
         $script_page .= $this->twiggy->template('script/script_customer')->render();         
-        $script_page .= $this->twiggy->template('script/script_branch')->render();         
-        
+        $script_page .= $this->twiggy->template('script/script_branch')->render();   
+        $script_page .= $this->twiggy->template('script/script_invoice')->render();           
         
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();

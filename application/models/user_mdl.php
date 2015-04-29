@@ -15,10 +15,10 @@ class User_mdl extends CI_Model {
         if ($query->num_rows()==1){
             $row = $query->row();
             $data = array(
-                'valid'             => true,
-                'user_id'           => $row->user_id,                
-                'username'          => $row->user_login,
-                'nama_lengkap'      => $row->user_name,
+                'valid'                   => true,
+                'user_id'               => $row->user_id,                
+                'username'           => $row->user_login,
+                'nama_lengkap'     => $row->user_name,
                 'user_group_id'     => $row->user_group_id,                
             );
             $iduser = $row->user_id;

@@ -5,6 +5,43 @@ class Ajax_master_data extends CI_Controller {
         parent::__construct();
     }    
     
+    
+    function set_billing_detail($billno='')
+    {
+        $this->load->model('billing_detail_mdl');
+        $params = (object) $this->input->post();   
+        $this->billing_detail_mdl->save($params, $billno);
+    }
+    
+    function invoice()
+    {
+        //$this->db->like('currency', $currency);
+        $this->db->order_by('invoice_no asc');
+        $query = $this->db->get('invoice_transaction');
+        foreach($query->result() as $row):
+            $data[] = $row->invoice_no; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+    
+    
+    function get_invoice()
+    {
+        $this->load->model('invoice_all_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                     = $this->invoice_all_mdl->getdatalist();
+        $data['iTotalRecords']            = $this->invoice_all_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']  = $this->invoice_all_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+    
     function currency()
     {
         //$this->db->like('currency', $currency);

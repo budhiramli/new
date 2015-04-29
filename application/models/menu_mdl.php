@@ -15,6 +15,7 @@ class Menu_mdl extends CI_Model {
            'menu_link',
            'menu_position'
        );
+       
        $this->db->select($fields);
        $this->db->join('menu', 'menu.menu_id=user_permission.menu_id', 'left');
        $this->db->where('user_group_id', $groupid);

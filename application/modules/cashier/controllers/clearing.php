@@ -17,11 +17,11 @@ class Clearing extends CI_Controller {
         $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
         
         // create content page fo dp supplier
-        $this->twiggy->set('BREADCRUMBS_TITLE', 'Cheque B/G');
+        $this->twiggy->set('BREADCRUMBS_TITLE', 'Clearing Cheque B/G');
         $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Cashier');
-        $this->twiggy->set('LIST_TITLE', 'Cheque B/G');
+        $this->twiggy->set('LIST_TITLE', 'Clearing Cheque B/G');
         
-        $this->load->model('modelclearing');
+        //$this->load->model('modelclearing');
     }
     
     function index()
@@ -35,7 +35,7 @@ class Clearing extends CI_Controller {
         // end        
         $this->twiggy->set('content_page', $content);
         
-        $this->twiggy->set('FORM_NAME', 'form_cheque_bg');
+        $this->twiggy->set('FORM_NAME', 'form_clearing');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
         $this->twiggy->set('FORM_IDKEY', 'full.cheque_id');

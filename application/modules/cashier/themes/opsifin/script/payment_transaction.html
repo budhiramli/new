@@ -26,25 +26,5 @@ var table = $('#table_billing').dataTable( {
             }   
 });
 
-// Edit record
-$('#table_billing').on( 'click', 'a.edit-btn', function (e) {
-        e.preventDefault();    
-        var editId = $(this).data('edit-id');
-        window.location.href='{{ site_url() }}/cashier/billing/form/' + editId;	
-        
-} );
-
-
-// Delete a record
-$('#table_billing').on( 'click', 'a.del-btn', function (e) {
-        e.preventDefault();
-        if(confirm("Are you sure?")) {
-                var delId = $(this).data('delete-id');  
-                window.location='{{ site_url() }}/cashier/billing/delete/' + delId;	
-	}
-	else
-		return false;
-        
-} );
 
 {% endblock %}

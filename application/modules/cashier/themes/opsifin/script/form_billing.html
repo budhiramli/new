@@ -1,5 +1,7 @@
 {% block content %}
-        
+        var billno;
+        var custcode;
+
         $("#transaction_date").datepicker({ 
             dateFormat: 'dd-mm-yy'
         });
@@ -8,7 +10,6 @@
             dateFormat: 'dd-mm-yy'
         });
         
-        var billId = '{{ edit.bill_no }}';           
         if (!!billId){                
                 $('#btnupdate').removeClass('hide');
                 $('#btnsave').addClass('hide');
@@ -18,13 +19,13 @@
                 $('#btnsave').removeClass('hide');
         }
         
-        var billid = '';
+        
         var selected = [];
         var table = $('#table_billing_detail').dataTable( {    
                 "searching": true,
                 "ordering": false,    
                 "bLengthChange" : false,
-                "ajax": '{{ site_url() }}/cashier/ajax_data/getrecord_billing_detail/' + billid,
+                "ajax": '{{ site_url() }}/cashier/ajax_data/getrecord_billing_detail/' + billno,
                 "columns": [
                         { "data": "nomor" },
                         { "data": "currency" },
@@ -32,7 +33,7 @@
                         { "data": "is_paid" },
                         { "mRender" : function ( data, type, full ) {
                             FullData = full;
-                            return '{{ BUTTON_CRUD }} ';
+                            return '<a href="">Edit</a> <a href="">Delete</a>';
                           }
                         },
                     ], 
